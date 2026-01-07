@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Pros | Home Projects, Maintenance & Electrical Solutions</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        navy: '#001f3f',
+                        brandYellow: '#FFD700',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Open+Sans:wght@400;600&display=swap');
+        
+        body { 
+        overflow-x: hidden;
+        font-family: 'Open Sans', sans-serif; }
+        h1, h2, h3, .nav-link { font-family: 'Montserrat', sans-serif; font-weight: 700; }
+
+        .mega-menu {
+            display: none;
+            position: absolute;
+            left: 0;
+            width: 100vw;
+            background: white;
+            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1);
+            z-index: 50;
+            border-top: 4px solid #001f3f;
+        }
+        .services-hover:hover .mega-menu { display: block; }
+        
+        .hero-gradient {
+            background: linear-gradient(rgba(0, 31, 63, 0.85), rgba(0, 31, 63, 0.85)), url('https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&q=80&w=2000');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .card-hover:hover { transform: translateY(-5px); transition: all 0.3s ease; }
+        .bg-navy { background-color: #001f3f; }
+        .text-navy { color: #001f3f; }
+        .border-navy { border-color: #001f3f; }
+
+        /* NEW PROFESSIONAL MOBILE MENU STYLES */
+        #mobile-sidebar {
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .sidebar-open #mobile-sidebar {
+            transform: translateX(0);
+        }
+        .sidebar-closed #mobile-sidebar {
+            transform: translateX(-100%);
+        }
+        #sidebar-overlay {
+            transition: opacity 0.4s ease;
+            pointer-events: none;
+        }
+        .sidebar-open #sidebar-overlay {
+            opacity: 1;
+            pointer-events: auto;
+        }
+    </style>
+</head>
+<body class="bg-white text-navy sidebar-closed">
+
+    <div class="bg-navy sticky sticky top-0 z-50 shadow-md text-white py-2 px-4 text-sm hidden md:block border-b border-brandYellow/20">
+        <div class="container mx-auto flex justify-between">
+            <div class="flex space-x-6">
+                <span><i class="fas fa-phone mr-2 text-brandYellow"></i> 9391668</span>
+                <span><i class="fas fa-envelope mr-2 text-brandYellow"></i> homeproscayman@gmail.com</span>
+            </div>
+            <div class="flex space-x-4">
+                <span><i class="fas fa-warehouse mr-2 text-brandYellow"></i> Bodden Town & George Town</span>
+            </div>
+        </div>
+    </div>
+
+    <nav class="bg-white sticky top-0 z-50 shadow-md">
+        <div class="container mx-auto px-4 flex justify-between items-center h-20">
+            <div class="flex items-center">
+                <a href="#" class="flex items-center">
+                    <img src="logofinal.png" alt="Home Pros Logo" class="h-16 w-auto object-contain">
+                </a>
+            </div>
+            
+            <button id="mobile-toggle" class="lg:hidden text-navy p-2 rounded-md hover:bg-slate-100 transition-colors">
+                <i class="fas fa-bars text-2xl"></i>
+            </button>
+
+            <div class="hidden lg:flex space-x-8 items-center uppercase text-xs tracking-widest font-bold">
+                <a href="#" class="nav-link hover:text-brandYellow transition">Home</a>
+                <a href="#about" class="nav-link hover:text-brandYellow transition">About Us</a>
+                
+                <div class="services-hover h-20 flex items-center cursor-pointer">
+                    <span class="nav-link hover:text-brandYellow transition">Services <i class="fas fa-chevron-down text-[10px] ml-1"></i></span>
+                    <div class="mega-menu top-20">
+                        <div class="container mx-auto p-10 grid grid-cols-4 gap-10">
+                            <div>
+                                <h3 class="text-navy border-b-2 border-brandYellow pb-2 mb-4 text-sm uppercase">Home Services</h3>
+                                <ul class="space-y-2 text-xs text-slate-600 font-semibold uppercase tracking-tight">
+                                    <li class="hover:text-brandYellow transition"><a href="#services">Window Cleaning</a></li>
+                                    <li class="hover:text-brandYellow transition"><a href="#services">Solar Panel Cleaning</a></li>
+                                    <li class="hover:text-brandYellow transition"><a href="#services">Gutter & Eaves Cleaning</a></li>
+                                    <li class="hover:text-brandYellow transition"><a href="#services">Roof Cleaning</a></li>
+                                    <li class="hover:text-brandYellow transition"><a href="#services">Exterior Pressure Washing</a></li>
+                                    <li class="hover:text-brandYellow transition"><a href="#services">Interior & Exterior Painting</a></li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h3 class="text-navy border-b-2 border-brandYellow pb-2 mb-4 text-sm uppercase">Property Maintenance</h3>
+                                <ul class="space-y-2 text-xs text-slate-600 font-semibold uppercase tracking-tight">
+                                    <li class="hover:text-brandYellow transition"><a href="#services">Lawn Care</a></li>
+                                    <li class="hover:text-brandYellow transition"><a href="#services">Material Rearrangements</a></li>
+                                    <li class="hover:text-brandYellow transition"><a href="#services">Removals & Hauling</a></li>
+                                    <li class="hover:text-brandYellow transition"><a href="#services">General Laborer Services</a></li>
+                                    <li class="hover:text-brandYellow transition"><a href="#services">Property Cleanups</a></li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h3 class="text-navy border-b-2 border-brandYellow pb-2 mb-4 text-sm uppercase">Electrical Services</h3>
+                                <ul class="space-y-2 text-xs text-slate-600 font-semibold uppercase tracking-tight">
+                                    <li class="hover:text-brandYellow transition"><a href="#services">Residential Electrical</a></li>
+                                    <li class="hover:text-brandYellow transition"><a href="#services">Lighting Installation</a></li>
+                                    <li class="hover:text-brandYellow transition"><a href="#services">Small Electrical Repairs</a></li>
+                                    <li class="hover:text-brandYellow transition"><a href="#services">Troubleshooting</a></li>
+                                </ul>
+                            </div>
+                            <div class="bg-navy p-6 rounded text-white">
+                                <h3 class="text-brandYellow font-bold mb-2 text-sm uppercase">Car & Specialty</h3>
+                                <p class="text-[10px] text-slate-300 mb-4 leading-relaxed">CAR DETAILING, CUSTOM PROJECTS, AND ONE-TIME JOBS IN CAYMAN.</p>
+                                <a href="#quote" class="inline-block bg-brandYellow text-navy text-[10px] px-4 py-2 rounded font-black uppercase tracking-widest hover:bg-white transition">Request Quote</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <a href="#gallery" class="nav-link hover:text-brandYellow transition">Our Work</a>
+                <a href="#quote" class="bg-brandYellow text-navy px-8 py-3 rounded font-black hover:bg-navy hover:text-white border-2 border-brandYellow transition shadow-md">GET A FREE QUOTE</a>
+            </div>
+        </div>
+    </nav>
+
+    <div id="sidebar-overlay" class="fixed inset-0 bg-navy/80 backdrop-blur-sm z-[60] opacity-0"></div>
+    <div id="mobile-sidebar" class="fixed top-0 left-0 h-full w-[80%] max-w-[350px] bg-white z-[70] shadow-2xl p-6 flex flex-col sidebar-closed">
+        <div class="flex justify-between items-center mb-10">
+            <div class="text-xl font-bold text-navy">
+                HOME <span class="text-brandYellow">PROS</span>
+            </div>
+            <button id="mobile-close" class="text-navy p-2">
+                <i class="fas fa-times text-2xl"></i>
+            </button>
+        </div>
+        
+        <nav class="flex flex-col space-y-1">
+            <a href="#" class="mobile-link group flex items-center p-4 border-b border-slate-50 font-bold uppercase tracking-widest text-sm hover:bg-slate-50">
+                <i class="fas fa-home w-8 text-brandYellow"></i> Home
+            </a>
+            <a href="#about" class="mobile-link group flex items-center p-4 border-b border-slate-50 font-bold uppercase tracking-widest text-sm hover:bg-slate-50">
+                <i class="fas fa-info-circle w-8 text-brandYellow"></i> About Us
+            </a>
+            <a href="#services" class="mobile-link group flex items-center p-4 border-b border-slate-50 font-bold uppercase tracking-widest text-sm hover:bg-slate-50">
+                <i class="fas fa-cog w-8 text-brandYellow"></i> Services
+            </a>
+            <a href="#gallery" class="mobile-link group flex items-center p-4 border-b border-slate-50 font-bold uppercase tracking-widest text-sm hover:bg-slate-50">
+                <i class="fas fa-images w-8 text-brandYellow"></i> Our Work
+            </a>
+            <div class="pt-10">
+                <a href="#quote" class="block text-center bg-navy text-white font-black py-4 rounded-lg uppercase tracking-widest shadow-lg hover:bg-brandYellow hover:text-navy transition-all">
+                    Get Free Quote
+                </a>
+            </div>
+        </nav>
+
+        <div class="mt-auto pt-10 border-t border-brandYellow">
+            <p class="text-[10px] uppercase font-bold text-slate-400 tracking-widest mb-4">Contact Info</p>
+            <div class="space-y-3">
+                <a href="tel:9391668" class="flex items-center text-sm font-bold text-navy">
+                    <i class="fas fa-phone-alt mr-3 text-brandYellow"></i> 939-1668
+                </a>
+                <a href="mailto:homeproscayman@gmail.com" class="flex items-center text-sm font-bold text-navy">
+                    <i class="fas fa-envelope mr-3 text-brandYellow"></i> homeproscayman@gmail.com
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <section class="hero-gradient min-h-[85vh] flex items-center text-white px-4">
+        <div class="container mx-auto">
+            <div class="max-w-4xl">
+                <div class="flex items-center space-x-2 mb-6">
+                    <span class="bg-brandYellow text-navy px-3 py-1 text-xs font-black uppercase tracking-tighter">Licensed & Insured</span>
+                    <span class="w-12 h-[2px] bg-brandYellow"></span>
+                </div>
+                <h1 class="text-3xl md:text-xl mb-6 leading-tight uppercase">Your Go-To Experts for Home Projects, Maintenance & Electrical Solutions</h1>
+                <p class="text-xl text-slate-200 mb-10 max-w-2xl font-light">Dedicated property care, maintenance, and professional electrical work across all Grand Cayman districts.</p>
+                <div class="flex flex-col sm:flex-row gap-4">
+                    <a href="#quote" class="bg-brandYellow text-navy px-10 py-5 font-black text-lg uppercase transition hover:bg-white border-2 border-brandYellow">Get a Free Quote</a>
+                    <a href="tel:9391668" class="bg-transparent border-2 border-white text-white px-10 py-5 font-black text-lg uppercase transition hover:bg-brandYellow hover:text-navy hover:border-brandYellow flex items-center justify-center">
+                        <i class="fas fa-phone mr-3"></i> Call Now: 939-1668
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-24 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-4">
+                <div class="max-w-xl">
+                    <h2 class="text-4xl uppercase mb-4 text-navy">Why Choose <span class="text-brandYellow font-bold">HomePros?</span></h2>
+                                    <div class="hidden md:block h-[2px] flex-grow bg-brandYellow mb-4 mx-8 opacity-30"></div>
+
+                    <p class="text-slate-600">Reliable and professional service for both Residential and Commercial properties.</p>
+                    <br>
+                </div>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-0 border border-brandYellow shadow-xl">
+                <div class="p-10 border-r border-b border-brandYellow card-hover">
+                    <i class="fas fa-check-double text-4xl text-brandYellow mb-6"></i>
+                    <h3 class="text-lg uppercase mb-4 font-bold">Licensed & Insured</h3>
+                    <p class="text-sm text-slate-500 leading-relaxed">Fully qualified teams providing peace of mind for every project, small or large.</p>
+                </div>
+                <div class="p-10 border-r border-b border-brandYellow card-hover bg-navy text-white">
+                    <i class="fas fa-truck text-4xl text-brandYellow mb-6"></i>
+                    <h3 class="text-lg uppercase mb-4 font-bold">Owned Equipment</h3>
+                    <p class="text-sm text-slate-300 leading-relaxed">All equipment is owned and maintained by us. No rentals means zero delays for you.</p>
+                </div>
+                <div class="p-10 border-r border-b border-brandYellow card-hover">
+                    <i class="fas fa-map-marked-alt text-4xl text-brandYellow mb-6"></i>
+                    <h3 class="text-lg uppercase mb-4 font-bold">Local Hubs</h3>
+                    <p class="text-sm text-slate-500 leading-relaxed">Warehouses in Bodden Town and George Town for lightning-fast response times.</p>
+                </div>
+                <div class="p-10 border-b border-brandYellow card-hover">
+                    <i class="fas fa-star text-4xl text-brandYellow mb-6"></i>
+                    <h3 class="text-lg uppercase mb-4 font-bold">Pro & Reliable</h3>
+                    <p class="text-sm text-slate-500 leading-relaxed">Residential & Commercial experts dedicated to high-quality craftsmanship.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="py-24 bg-slate-50 overflow-hidden">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col lg:flex-row items-center gap-16">
+                <div class="lg:w-1/2 relative">
+                    <div class="absolute -top-10 -left-10 w-80 h-80 bg-brandYellow opacity-20 rounded-full"></div>
+                    <img src="https://images.squarespace-cdn.com/content/v1/62003a1304e9795287e0136d/0bb7e3e1-61da-418d-86df-c4f1b1a4e534/VanAtHome-Driveway.jpg?format=2500w" alt="Home Pros Team" class="relative z-10 rounded-lg shadow-2xl border-4 border-brandYellow">
+                    <div class="absolute -bottom-6 -right-6 bg-navy text-white p-8 z-20 rounded-lg shadow-xl">
+                        <p class="text-3xl font-bold text-brandYellow italic">100%</p>
+                        <p class="text-xs uppercase tracking-widest font-bold">Safety Commitment</p>
+                    </div>
+                </div>
+                <div class="lg:w-1/2">
+                    <span class="text-brandYellow font-bold uppercase tracking-widest text-sm mb-4 block">Building Trust Since Day One</span>
+                    <h2 class="text-4xl uppercase mb-4 font-bold">Who We Are</h2>
+                                                        <div class="hidden md:block h-[2px] flex-grow bg-brandYellow mb-4 mx-8 opacity-30"></div>
+
+                    <p class="text-slate-600 mb-12 leading-relaxed"><br>Home Pros is a dedicated team of professionals based in Grand Cayman, committed to providing top-tier maintenance and electrical solutions. Our mission is to protect and enhance your most valuable assets—your home and business.</p>
+                    <div class="grid grid-cols-2 gap-8 mb-10">
+                        <div>
+                            <h4 class="font-bold text-navy uppercase mb-2">Our Mission</h4>
+                            <p class="text-xs text-slate-500 italic">To provide reliable, high-quality maintenance that Cayman residents can trust every single time.</p>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-navy uppercase mb-2">Quality First</h4>
+                            <p class="text-xs text-slate-500 italic">We use only professional-grade materials and the latest safety protocols in all electrical work.</p>
+                        </div>
+                    </div>
+                    <a href="#quote" class="text-navy font-bold uppercase border-b-2 border-brandYellow pb-2 hover:text-brandYellow transition">Work With Us <i class="fas fa-arrow-right ml-2"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="services" class="py-24 bg-white">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-4xl uppercase mb-16 font-bold">All Our <span class="text-brandYellow">Services</span></h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+                <div class="text-left bg-slate-50 p-8 rounded border-t-8 border-brandYellow shadow-lg">
+                    <div class="w-12 h-12 bg-navy text-brandYellow flex items-center justify-center rounded mb-6">
+                        <i class="fas fa-home text-xl"></i>
+                    </div>
+                    <h3 class="text-xl uppercase mb-6">Home Services</h3>
+                    <ul class="space-y-4 text-sm font-bold text-slate-600">
+                        <li class="flex items-center"><i class="fas fa-chevron-right text-brandYellow mr-3"></i> Window & Solar Cleaning</li>
+                        <li class="flex items-center"><i class="fas fa-chevron-right text-brandYellow mr-3"></i> Gutter & Eaves Cleaning</li>
+                        <li class="flex items-center"><i class="fas fa-chevron-right text-brandYellow mr-3"></i> Roof Cleaning & Care</li>
+                        <li class="flex items-center"><i class="fas fa-chevron-right text-brandYellow mr-3"></i> Pressure Washing</li>
+                        <li class="flex items-center"><i class="fas fa-chevron-right text-brandYellow mr-3"></i> Driveway Sealing</li>
+                        <li class="flex items-center"><i class="fas fa-chevron-right text-brandYellow mr-3"></i> Interior & Exterior Painting</li>
+                    </ul>
+                </div>
+
+                <div class="text-left bg-navy text-white p-8 rounded border-t-8 border-brandYellow shadow-lg">
+                    <div class="w-12 h-12 bg-brandYellow text-navy flex items-center justify-center rounded mb-6">
+                        <i class="fas fa-seedling text-xl"></i>
+                    </div>
+                    <h3 class="text-xl uppercase mb-6 text-brandYellow">Property Maintenance</h3>
+                    <ul class="space-y-4 text-sm font-bold text-slate-200">
+                        <li class="flex items-center"><i class="fas fa-chevron-right text-brandYellow mr-3"></i> Lawn Care & Landscaping</li>
+                        <li class="flex items-center"><i class="fas fa-chevron-right text-brandYellow mr-3"></i> Material Rearrangements</li>
+                        <li class="flex items-center"><i class="fas fa-chevron-right text-brandYellow mr-3"></i> Removals & Hauling</li>
+                        <li class="flex items-center"><i class="fas fa-chevron-right text-brandYellow mr-3"></i> General Laborer Services</li>
+                        <li class="flex items-center"><i class="fas fa-chevron-right text-brandYellow mr-3"></i> Seasonal Maintenance</li>
+                        <li class="flex items-center"><i class="fas fa-chevron-right text-brandYellow mr-3"></i> Property Cleanups</li>
+                    </ul>
+                </div>
+
+                <div class="text-left bg-slate-50 p-8 rounded border-t-8 border-brandYellow shadow-lg">
+                    <div class="w-12 h-12 bg-navy text-brandYellow flex items-center justify-center rounded mb-6">
+                        <i class="fas fa-bolt text-xl"></i>
+                    </div>
+                    <h3 class="text-xl uppercase mb-6">Electrical Services</h3>
+                    <ul class="space-y-4 text-sm font-bold text-slate-600">
+                        <li class="flex items-center"><i class="fas fa-chevron-right text-brandYellow mr-3"></i> Residential Electrical Work</li>
+                        <li class="flex items-center"><i class="fas fa-chevron-right text-brandYellow mr-3"></i> Lighting Installation</li>
+                        <li class="flex items-center"><i class="fas fa-chevron-right text-brandYellow mr-3"></i> Lighting Replacements</li>
+
+                        <li class="flex items-center"><i class="fas fa-chevron-right text-brandYellow mr-3"></i> Small Electrical Repairs</li>
+                        <li class="flex items-center"><i class="fas fa-chevron-right text-brandYellow mr-3"></i> Troubleshooting & Maintenance</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-24 bg-navy text-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl uppercase mb-4 italic font-bold">"Real People, Real Results"</h2>
+                <p class="text-brandYellow uppercase tracking-widest text-sm font-bold">Feedback from our Cayman Customers</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                <div class="bg-white text-navy p-6 rounded-2xl shadow-xl relative card-hover">
+                    <div class="flex items-center mb-4">
+                        <div class="flex text-brandYellow text-xs">
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                        </div>
+                        <span class="ml-2 text-[10px] text-slate-400 font-bold uppercase">Verified WhatsApp</span>
+                    </div>
+                    <p class="text-sm font-semibold italic">"The team at Home Pros was incredible! My roof looks like new after the cleaning. Will definitely use them again for our electrical repairs."</p>
+                    <div class="mt-4 flex items-center justify-between">
+                        <span class="text-xs font-bold uppercase text-slate-400">— Sarah, Seven Mile Beach</span>
+                        <i class="fab fa-whatsapp text-green-500"></i>
+                    </div>
+                </div>
+
+                <div class="bg-white text-navy p-6 rounded-2xl shadow-xl relative card-hover">
+                    <div class="flex items-center mb-4">
+                        <div class="flex text-brandYellow text-xs">
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                        </div>
+                        <span class="ml-2 text-[10px] text-slate-400 font-bold uppercase">Verified WhatsApp</span>
+                    </div>
+                    <p class="text-sm font-semibold italic">"Prompt, professional, and they brought all their own equipment. The pressure washing on the driveway made a huge difference!"</p>
+                    <div class="mt-4 flex items-center justify-between">
+                        <span class="text-xs font-bold uppercase text-slate-400">— James, Bodden Town</span>
+                        <i class="fab fa-whatsapp text-green-500"></i>
+                    </div>
+                </div>
+
+                <div class="bg-white text-navy p-6 rounded-2xl shadow-xl relative card-hover">
+                    <div class="flex items-center mb-4">
+                        <div class="flex text-brandYellow text-xs">
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                        </div>
+                        <span class="ml-2 text-[10px] text-slate-400 font-bold uppercase">Verified WhatsApp</span>
+                    </div>
+                    <p class="text-sm font-semibold italic">"Highly recommend for electrical work. They found the issue fast and fixed it the same day. Great communication throughout."</p>
+                    <div class="mt-4 flex items-center justify-between">
+                        <span class="text-xs font-bold uppercase text-slate-400">— Michael, West Bay</span>
+                        <i class="fab fa-whatsapp text-green-500"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-24 bg-white">
+        <div class="container mx-auto px-4 max-w-6xl">
+            <h2 class="text-3xl text-center uppercase mb-16 font-bold">Frequently Asked <span class="text-brandYellow">Questions</span></h2>
+            <div class="space-y-4">
+                <details class="bg-slate-50 p-6 rounded group cursor-pointer border-l-4 border-brandYellow" open>
+                    <summary class="font-bold uppercase text-md list-none flex justify-between items-center">
+                        What areas do you serve?
+                        <i class="fas fa-plus text-xs transition group-open:rotate-45"></i>
+                    </summary>
+                    <p class="mt-4 text-sm text-slate-500 leading-relaxed">We serve all districts across Grand Cayman, including West Bay, George Town, South Sound, Prospect, Savanah, Bodden Town, North Side, and East End.</p>
+                </details>
+                <details class="bg-slate-50 p-6 rounded group cursor-pointer border-l-4 border-brandYellow">
+                    <summary class="font-bold uppercase text-md list-none flex justify-between items-center">
+                        Are you insured?
+                        <i class="fas fa-plus text-xs transition group-open:rotate-45"></i>
+                    </summary>
+                    <p class="mt-4 text-sm text-slate-500 leading-relaxed">Yes, Home Pros is fully licensed and insured to perform residential and commercial maintenance and electrical work throughout the Cayman Islands.</p>
+                </details>
+                <details class="bg-slate-50 p-6 rounded group cursor-pointer border-l-4 border-brandYellow">
+                    <summary class="font-bold uppercase text-md list-none flex justify-between items-center">
+                        Do you bring your own equipment?
+                        <i class="fas fa-plus text-xs transition group-open:rotate-45"></i>
+                    </summary>
+                    <p class="mt-4 text-sm text-slate-500 leading-relaxed">Absolutely. All equipment is owned and maintained by Home Pros. We do not rely on rentals, which ensures we arrive prepared for every job.</p>
+                </details>
+                <details class="bg-slate-50 p-6 rounded group cursor-pointer border-l-4 border-brandYellow">
+                    <summary class="font-bold uppercase text-md list-none flex justify-between items-center">
+                        Do you offer free estimates?
+                        <i class="fas fa-plus text-xs transition group-open:rotate-45"></i>
+                    </summary>
+                    <p class="mt-4 text-sm text-slate-500 leading-relaxed">Yes! We provide free, no-obligation quotes for all our services. You can call us or use the form below to get started.</p>
+                </details>
+            </div>
+        </div>
+    </section>
+
+    <section id="quote" class="py-24 bg-slate-50">
+                    <h2 class="text-3xl text-center uppercase mb-16 font-bold">Get In Touch  <span class="text-brandYellow">with Us</span></h2>
+
+        <div class="container mx-auto px-4">
+            <div class="bg-white shadow-2xl rounded-lg overflow-hidden flex flex-col lg:flex-row border border-brandYellow max-w-6l mx-auto">
+                <div class=" bg-navy text-white p-12">
+                    <h2 class="text-3xl uppercase mb-6 leading-tight">Have a project or issue in mind?</h2>
+                    <p class="text-slate-300 text-sm mb-10 leading-relaxed">Contact Home Pros today for professional, reliable service at your doorstep.</p>
+                    
+                    <div class="space-y-8">
+                        <div class="flex items-start">
+                            <i class="fas fa-phone-alt text-brandYellow mt-1 mr-4"></i>
+                            <div>
+                                <p class="text-[10px] uppercase font-bold text-brandYellow tracking-widest mb-1">Click to Call</p>
+                                <a href="tel:9391668" class="text-xl font-bold hover:text-brandYellow transition">939-1668</a>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <i class="fas fa-envelope text-brandYellow mt-1 mr-4"></i>
+                            <div>
+                                <p class="text-[10px] uppercase font-bold text-brandYellow tracking-widest mb-1">Email Us</p>
+                                <a href="mailto:homeproscayman@gmail.com" class="text-sm font-bold hover:text-brandYellow transition">homeproscayman@gmail.com</a>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <i class="fas fa-clock text-brandYellow mt-1 mr-4"></i>
+                            <div>
+                                <p class="text-[10px] uppercase font-bold text-brandYellow tracking-widest mb-1">Business Hours</p>
+                                <p class="text-sm font-bold">Mon - Sat: 8:00 AM - 6:00 PM</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="lg:w-2/3 p-12">
+                    <h3 class="text-2xl uppercase mb-8">Request Your <span class="text-brandYellow font-bold">Free Estimate</span></h3>
+                    <form id="contactForm" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="space-y-2">
+                            <label class="text-[10px] uppercase font-bold tracking-widest">Your Name</label>
+                            <input type="text" required class="w-full p-4 bg-slate-100 border-b-2 border-transparent focus:border-brandYellow outline-none transition font-bold text-sm">
+                        </div>
+                        <div class="space-y-2">
+                            <label class="text-[10px] uppercase font-bold tracking-widest">Phone / Email</label>
+                            <input type="text" required class="w-full p-4 bg-slate-100 border-b-2 border-transparent focus:border-brandYellow outline-none transition font-bold text-sm">
+                        </div>
+                        <div class="md:col-span-2 space-y-2">
+                            <label class="text-[10px] uppercase font-bold tracking-widest">Service Needed</label>
+                            <select class="w-full p-4 bg-brandYellow border-b-2 border-transparent focus:border-brandYellow outline-none transition font-bold text-sm appearance-none">
+                                <option>General Inquiry</option>
+                                <option>Home Services</option>
+                                <option>Property Maintenance</option>
+                                <option>Electrical Work</option>
+                                <option>Car Detailing / Specialty</option>
+                            </select>
+                        </div>
+                        <div class="md:col-span-2 space-y-2">
+                            <label class="text-[10px] uppercase font-bold tracking-widest">Your Message</label>
+                            <textarea rows="4" required class="w-full p-4 bg-slate-100 border-b-2 border-transparent focus:border-brandYellow outline-none transition font-bold text-sm"></textarea>
+                        </div>
+                        <div class="md:col-span-2">
+                            <button type="submit" class="w-full bg-navy text-white font-black py-5 uppercase tracking-widest hover:bg-brandYellow hover:text-navy transition shadow-lg">Submit Request</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-navy text-white pt-20 pb-10 px-4">
+        <div class="container mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 border-b border-brandYellow/20 pb-16">
+            <div>
+                <h3 class="text-2xl font-black mb-6 italic">HOME <span class="text-brandYellow">PROS</span></h3>
+                <p class="text-slate-400 text-xs leading-relaxed mb-6">Your go-to experts for professional home projects, property maintenance, and certified electrical work in Grand Cayman.</p>
+                <div class="flex space-x-4">
+                    <a href="#" class="w-8 h-8 rounded-full border border-brandYellow flex items-center justify-center text-brandYellow hover:bg-brandYellow hover:text-navy transition"><i class="fab fa-facebook-f text-xs"></i></a>
+                    <a href="#" class="w-8 h-8 rounded-full border border-brandYellow flex items-center justify-center text-brandYellow hover:bg-brandYellow hover:text-navy transition"><i class="fab fa-instagram text-xs"></i></a>
+                    <a href="#" class="w-8 h-8 rounded-full border border-brandYellow flex items-center justify-center text-brandYellow hover:bg-brandYellow hover:text-navy transition"><i class="fab fa-whatsapp text-xs"></i></a>
+                </div>
+            </div>
+            <div>
+                <h4 class="text-xs uppercase font-bold tracking-[0.2em] mb-8 text-brandYellow">Quick Links</h4>
+                <ul class="text-slate-400 text-xs space-y-4 font-bold uppercase tracking-tight">
+                    <li><a href="#" class="hover:text-brandYellow transition">- Home</a></li>
+                    <li><a href="#about" class="hover:text-brandYellow transition">- About Us</a></li>
+                    <li><a href="#services" class="hover:text-brandYellow transition">- Our Services</a></li>
+                    <li><a href="#gallery" class="hover:text-brandYellow transition">- Gallery</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="text-xs uppercase font-bold tracking-[0.2em] mb-8 text-brandYellow">Services</h4>
+                <ul class="text-slate-400 text-xs space-y-4 font-bold uppercase tracking-tight">
+                    <li>- Home & Solar Cleaning</li>
+                    <li>- Property Maintenance</li>
+                    <li>- Lawn Care & Hauling</li>
+                    <li>- Electrical Repairs</li>
+                    <li>- Car Detailing</li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="text-xs uppercase font-bold tracking-[0.2em] mb-8 text-brandYellow">Contact</h4>
+                <div class="space-y-4 text-xs font-bold uppercase">
+                   <a href="tel:9391668" class="flex items-center text-sm font-bold text-white">
+                    <i class="fas fa-phone-alt mr-3 text-brandYellow"></i> 939-1668
+                </a>
+                <a href="mailto:homeproscayman@gmail.com" class="flex items-center text-sm font-bold text-white">
+                    <i class="fas fa-envelope mr-3 text-brandYellow"></i> homeproscayman@gmail.com
+                </a>
+ <a href="https://maps.app.goo.gl/WQcrr1UrwEmiH9Wd9" class="flex items-center text-sm font-bold text-white">
+                    <i class="fas fa-warehouse mr-2 text-brandYellow"></i>  Bodden Town & George Town
+                </a>                </div>
+            </div>
+        </div>
+        <div class="container mx-auto mt-10 flex flex-col md:flex-row justify-between items-center text-[10px] text-slate-500 font-bold uppercase tracking-widest">
+            <p>&copy; <span id="year"></span> Home Pros. All rights reserved.</p>
+            <p class="mt-4 md:mt-0">Professional Home & Electrical Solutions</p>
+        </div>
+    </footer>
+
+    <div class="fixed bottom-6 right-6 lg:hidden flex flex-col space-y-3 z-50">
+        <a href="tel:9391668" class="bg-brandYellow text-navy w-12 h-12 rounded-full shadow-2xl flex items-center justify-center border-2 border-white">
+            <i class="fas fa-phone"></i>
+        </a>
+        <a href="#quote" class="bg-navy text-white w-12 h-12 rounded-full shadow-2xl flex items-center justify-center border-2 border-brandYellow">
+            <i class="fas fa-calendar-alt"></i>
+        </a>
+    </div>
+
+    <script>
+        document.getElementById('year').textContent = new Date().getFullYear();
+        
+        // Handle Form
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const btn = this.querySelector('button');
+            const originalText = btn.textContent;
+            btn.textContent = 'SENDING REQUEST...';
+            btn.disabled = true;
+
+            setTimeout(() => {
+                btn.textContent = 'REQUEST SENT SUCCESSFULLY!';
+                btn.classList.replace('bg-navy', 'bg-green-600');
+                btn.classList.replace('hover:bg-brandYellow', 'hover:bg-green-700');
+                this.reset();
+            }, 1800);
+        });
+
+        // Smooth Scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    window.scrollTo({
+                        top: target.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // NEW PROFESSIONAL MOBILE MENU LOGIC
+        const mobileToggle = document.getElementById('mobile-toggle');
+        const mobileClose = document.getElementById('mobile-close');
+        const overlay = document.getElementById('sidebar-overlay');
+        const body = document.body;
+
+        function toggleMenu() {
+            body.classList.toggle('sidebar-open');
+            body.classList.toggle('sidebar-closed');
+        }
+
+        mobileToggle.addEventListener('click', toggleMenu);
+        mobileClose.addEventListener('click', toggleMenu);
+        overlay.addEventListener('click', toggleMenu);
+
+        // Close menu when clicking links
+        document.querySelectorAll('.mobile-link').forEach(link => {
+            link.addEventListener('click', () => {
+                if(body.classList.contains('sidebar-open')) toggleMenu();
+            });
+        });
+    </script>
+</body>
+</html>
