@@ -64,13 +64,7 @@
         firebase.initializeApp(firebaseConfig);
         const auth = firebase.auth();
 
-    // STRICT SESSION GUARD
-    auth.onAuthStateChanged((user) => {
-        if (!user) {
-            // Replace history so the "Back" arrow won't work
-            window.location.replace("login.html");
-        }
-    });
+   
     </script>
 
     <script src="https://cdn.tailwindcss.com"></script>
