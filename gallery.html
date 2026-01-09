@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard | Project Gallery</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .animate-fade-in { animation: fadeIn 0.4s ease-out; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .project-image { transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1); }
+        .group:hover .project-image { transform: scale(1.05); }
+        .filter-btn.active { background-color: #1e293b; color: white; border-color: #1e293b; }
+        .image-container { aspect-ratio: 16/9; }
+    </style>
+ 
+</head>
+<body class="bg-slate-50 text-slate-900 font-sans min-h-screen">
+
+    <!-- Admin Navigation -->
+   <nav class="bg-white border-b border-slate-200 py-4 px-6">
+    <div class="max-w-6xl mx-auto flex justify-between items-center">
+        <a href="index.html" class="text-slate-500 hover:text-slate-900 flex items-center gap-2 transition-colors">
+            <i class="fas fa-home"></i> View Site
+        </a>
+        <div class="flex items-center gap-4">
+            <span class="bg-slate-100 text-slate-600 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider">Admin Panel</span>
+            <button onclick="adminLogout()" class="text-red-600 hover:text-red-800 text-xs font-bold uppercase">
+                <i class="fas fa-sign-out-alt"></i> Logout
+            </button>
+        </div>
+    </div>
+</nav>
+
+    <!-- Header -->
+    <header class="max-w-6xl mx-auto pt-12 px-6 mb-8 flex flex-col md:flex-row justify-between items-start md:items-end gap-4">
+        <div>
+            <h1 class="text-4xl font-bold text-slate-900 tracking-tight">Gallery Management</h1>
+            <p class="text-slate-500 mt-2">Add, edit, or remove projects from the public website.</p>
+        </div>
+        <button id="toggleFormBtn" class="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-xl font-semibold transition-all shadow-lg shadow-blue-200">
+            <i class="fas fa-plus"></i> New Project
+        </button>
+    </header>
+
+    <!-- Filters -->
+    <div class="max-w-6xl mx-auto px-6 mb-12 overflow-x-auto">
+        <div id="filterContainer" class="flex gap-2 min-w-max">
+            <button class="filter-btn active px-5 py-2 rounded-full border border-slate-300 text-sm font-medium transition-all hover:border-slate-900" onclick="window.setFilter('All')">All Projects</button>
+            <button class="filter-btn px-5 py-2 rounded-full border border-slate-300 text-sm font-medium transition-all hover:border-slate-900" onclick="window.setFilter('Electrical')">Electrical</button>
+            <button class="filter-btn px-5 py-2 rounded-full border border-slate-300 text-sm font-medium transition-all hover:border-slate-900" onclick="window.setFilter('Maintenance')">Maintenance</button>
+            <button class="filter-btn px-5 py-2 rounded-full border border-slate-300 text-sm font-medium transition-all hover:border-slate-900" onclick="window.setFilter('Plumbing')">Plumbing</button>
+            <button class="filter-btn px-5 py-2 rounded-full border border-slate-300 text-sm font-medium transition-all hover:border-slate-900" onclick="window.setFilter('Remodel')">Remodel</button>
+        </div>
+    </div>
+
+    <main class="max-w-6xl mx-auto px-6 pb-20">
+        <!-- Error Banner -->
+        <div id="authErrorBanner" class="hidden bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded-xl mb-6 flex items-center gap-3">
+            <i class="fas fa-exclamation-triangle"></i>
+            <p id="errorText">Auth error detected.</p>
+        </div>
+
+        <!-- Add Project Form (Admin Only View) -->
+        <div id="projectFormContainer" class="hidden bg-white p-8 rounded-2xl shadow-sm border border-slate-200 mb-12 animate-fade-in">
+            <h2 class="text-2xl font-bold mb-6 text-slate-800">Add Project to Public Gallery</h2>
+            <form id="projectForm" class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="space-y-4">
+                    <div>
+                        <label class="block text-sm font-semibold text-slate-700 mb-1">Title for the Complered Project</label>
+                        <input type="text" id="title" required class="w-full px-4 py-2 rounded-lg border border-slate-300 focus:ring-2 focus:ring-blue-500 outline-none" placeholder="e.g. Modern Kitchen Remodel">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-semibold text-slate-700 mb-1">Category</label>
+                        <select id="category" required class="w-full px-4 py-2 rounded-lg border border-slate-300 focus:ring-2 focus:ring-blue-500 outline-none bg-white">
+                            <option value="Electrical">Electrical</option>
+                            <option value="Maintenance">Maintenance</option>
+                            <option value="Plumbing">Plumbing</option>
+                            <option value="Remodel">Remodel</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-semibold text-slate-700 mb-1">Short Description</label>
+                        <textarea id="description" required class="w-full px-4 py-2 rounded-lg border border-slate-300 focus:ring-2 focus:ring-blue-500 outline-none h-24 resize-none" placeholder="Describe the work done..."></textarea>
+                    </div>
+                </div>
+                <div class="space-y-4">
+                    <div>
+                        <label class="block text-sm font-semibold text-slate-700 mb-1">Before Image URL</label>
+                        <input type="url" id="beforeUrl" required class="w-full px-4 py-2 rounded-lg border border-slate-300 focus:ring-2 focus:ring-blue-500 outline-none" placeholder="https://example.com/before.jpg">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-semibold text-slate-700 mb-1">After Image URL</label>
+                        <input type="url" id="afterUrl" required class="w-full px-4 py-2 rounded-lg border border-slate-300 focus:ring-2 focus:ring-blue-500 outline-none" placeholder="https://example.com/after.jpg">
+                    </div>
+                    <div class="pt-4">
+                        <button type="submit" id="submitBtn" class="w-full bg-slate-900 text-white py-4 rounded-xl font-bold hover:bg-slate-800 transition-all shadow-lg">
+                            Publish to Live Website
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <!-- Gallery Grid -->
+        <div id="galleryGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div id="loader" class="col-span-full flex flex-col items-center justify-center py-20">
+                <div class="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"></div>
+                <p class="mt-4 text-slate-500 font-medium">Connecting to project database...</p>
+            </div>
+        </div>
+    </main>
+
+    <!-- Firebase SDKs -->
+   <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-app.js";
+    import { initializeFirestore, collection, addDoc, onSnapshot, doc, deleteDoc, persistentLocalCache, persistentMultipleTabManager } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-firestore.js";
+    import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-auth.js";
+
+    const firebaseConfig = {
+        apiKey: "AIzaSyDnqS3uT0TAwzxNUySLqvu5Ue6xGupoxUo",
+        authDomain: "homepros-b4889.firebaseapp.com",
+        projectId: "homepros-b4889",
+        storageBucket: "homepros-b4889.firebasestorage.app",
+        messagingSenderId: "841597604762",
+        appId: "1:841597604762:web:477a5eacc09294feeda023"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db = initializeFirestore(app, {
+        localCache: persistentLocalCache({ tabManager: persistentMultipleTabManager() })
+    });
+
+    const appId = 'home-pros-app';
+    let currentUser = null;
+
+    // --- THE SECURITY GUARD ---
+    onAuthStateChanged(auth, (user) => {
+        if (!user) {
+            // If no user is found, redirect to login immediately
+            console.log("Unauthorized access, redirecting...");
+            window.location.replace("login.html");
+        } else {
+            // User is authenticated, allow them to see the data
+            currentUser = user;
+            loadProjects();
+        }
+    });
+
+    // Add a Logout Function for the Admin
+    window.adminLogout = () => {
+        signOut(auth).then(() => {
+            window.location.replace("index.html");
+        });
+    };
+    // Inside your <script type="module"> in gallery.html
+
+// 1. Make setFilter global
+window.setFilter = (filter) => {
+    currentFilter = filter;
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.innerText === filter || btn.innerText.includes(filter));
+    });
+    renderProjects();
+};
+let allProjects = []; // Add this line
+let currentFilter = 'All';
+// 2. Define loadProjects so it can be called
+function loadProjects() {
+    const projectsRef = collection(db, 'artifacts', appId, 'public', 'data', 'projects');
+    onSnapshot(projectsRef, (snapshot) => {
+        allProjects = snapshot.docs.map(d => ({ id: d.id, ...d.data() }));
+        renderProjects();
+    });
+}
+// Add this inside the main module script
+document.getElementById('projectForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const btn = document.getElementById('submitBtn');
+    btn.disabled = true;
+    btn.innerText = "Publishing...";
+
+    try {
+        const newData = {
+            title: document.getElementById('title').value,
+            category: document.getElementById('category').value,
+            description: document.getElementById('description').value,
+            beforeUrl: document.getElementById('beforeUrl').value,
+            afterUrl: document.getElementById('afterUrl').value,
+            createdAt: new Date().toISOString()
+        };
+
+        // Pointing to your specific database path
+        const projectsRef = collection(db, 'artifacts', appId, 'public', 'data', 'projects');
+        await addDoc(projectsRef, newData);
+        
+        document.getElementById('projectForm').reset();
+        document.getElementById('projectFormContainer').classList.add('hidden');
+        alert("Project saved permanently!");
+    } catch (error) {
+        console.error("Save failed:", error);
+        alert("Error: Check your Firebase Database Rules.");
+    } finally {
+        btn.disabled = false;
+        btn.innerText = "Publish to Live Website";
+    }
+});
+// --- RENDER PROJECTS TO THE GRID ---
+function renderProjects() {
+    const grid = document.getElementById('galleryGrid');
+    grid.innerHTML = ''; // Clear the loader or old projects
+
+    const filtered = currentFilter === 'All' 
+        ? allProjects 
+        : allProjects.filter(p => p.category === currentFilter);
+
+    if (filtered.length === 0) {
+        grid.innerHTML = `<div class="col-span-full text-center py-20 text-slate-500">No projects found in this category.</div>`;
+        return;
+    }
+
+filtered.forEach(data => {
+    const card = document.createElement('div');
+    card.className = "bg-white rounded-2xl overflow-hidden shadow-sm border border-slate-200 group animate-fade-in";
+    card.innerHTML = `
+        <div class="relative image-container overflow-hidden bg-slate-100">
+            <img src="${data.afterUrl}" class="project-image w-full h-full object-cover">
+            <button onclick="window.deleteProject('${data.id}')" class="absolute top-4 right-4 bg-red-500 hover:bg-red-600 text-white w-8 h-8 rounded-full flex items-center justify-center transition-colors shadow-lg z-10">
+                <i class="fas fa-trash-alt text-xs"></i>
+            </button>
+        </div>
+        <div class="p-6 space-y-3">
+            <div>
+                <span class="text-slate-400 text-[10px] uppercase font-bold block mb-1">Category:</span>
+                <span class="bg-slate-900 text-white px-2 py-0.5 rounded text-[10px] font-bold uppercase">${data.category}</span>
+            </div>
+            <div>
+                <span class="text-slate-400 text-[10px] uppercase font-bold block mb-1">Title of Completed Project:</span>
+                <h3 class="text-lg font-bold text-slate-900">${data.title}</h3>
+            </div>
+            <div>
+                <span class="text-slate-400 text-[10px] uppercase font-bold block mb-1">Description:</span>
+                <p class="text-slate-500 text-sm line-clamp-2">${data.description}</p>
+            </div>
+        </div>
+    `;
+    grid.appendChild(card);
+});}
+
+// --- DELETE FUNCTION ---
+window.deleteProject = async (id) => {
+    if (confirm("Are you sure you want to delete this project from the live site?")) {
+        try {
+            await deleteDoc(doc(db, 'artifacts', appId, 'public', 'data', 'projects', id));
+            alert("Project removed.");
+        } catch (error) {
+            console.error("Delete failed:", error);
+            alert("Delete failed. Check permissions.");
+        }
+    }
+};
+
+// --- TOGGLE FORM VISIBILITY ---
+document.getElementById('toggleFormBtn').addEventListener('click', () => {
+    const container = document.getElementById('projectFormContainer');
+    container.classList.toggle('hidden');
+});
+</script>
+
+</body>
+</html>

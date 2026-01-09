@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secure Access | Home Pros Cayman</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+    <script>
+        tailwind.config = {
+            theme: { extend: { colors: { brandBlue: '#007BFF', brandDark: '#0056b3' } } }
+        }
+    </script>
+</head>
+
+<body class="bg-brandBlue min-h-screen flex items-center justify-center p-4">
+    <div class="bg-white w-full max-w-md rounded-2xl shadow-2xl overflow-hidden border-b-8 border-brandDark">
+        <div class="p-4 text-center bg-white">
+            <div class="flex justify-center">
+                <img src="logo.png" alt="Home Pros Logo" class="h-32 w-auto object-contain">
+            </div>
+        </div>
+
+        <form id="login-form" class="p-4 space-y-5">
+            <input type="email" id="email" placeholder="Admin Email" required
+                class="w-full p-4 bg-slate-50 border border-slate-200 rounded-lg outline-none focus:ring-2 focus:ring-brandBlue font-semibold">
+            <input type="password" id="password" placeholder="Password" required
+                class="w-full p-4 bg-slate-50 border border-slate-200 rounded-lg outline-none focus:ring-2 focus:ring-brandBlue font-semibold">
+
+            <button type="submit" id="submit-btn"
+                class="w-full bg-brandBlue text-white font-black py-4 rounded-lg uppercase tracking-widest hover:bg-brandDark transition-all shadow-lg">
+                Enter Portal
+            </button>
+        </form>
+    </div>
+    <script>
+        const firebaseConfig = {
+            apiKey: "AIzaSyDnqS3uT0TAwzxNUySLqvu5Ue6xGupoxUo",
+            authDomain: "homepros-b4889.firebaseapp.com",
+            projectId: "homepros-b4889",
+            storageBucket: "homepros-b4889.firebasestorage.app",
+            messagingSenderId: "841597604762",
+            appId: "1:841597604762:web:477a5eacc09294feeda023"
+        };
+        firebase.initializeApp(firebaseConfig);
+        const auth = firebase.auth();
+
+        document.getElementById('login-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            // FIX: Define the email and password variables from the form
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+
+            const btn = document.getElementById('submit-btn');
+            btn.textContent = 'VERIFYING...';
+            btn.disabled = true;
+
+          // Inside login.html script
+auth.signInWithEmailAndPassword(email, password)
+    .then(() => {
+        // This line ensures that AFTER logging in, you arrive at the Admin Portal
+        window.location.replace("gallery.html"); 
+    })
+    .catch((error) => {
+        alert("Access Denied: " + error.message);
+        btn.textContent = 'ENTER PORTAL';
+        btn.disabled = false;
+    });
+        });
+    </script>
+</body>
+
+</html>
