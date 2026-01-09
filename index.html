@@ -776,12 +776,7 @@
         }
     });
     // Add this inside your existing <script> tag in index.html
-function secureLogout() {
-    auth.signOut().then(() => {
-        // Clear history and force return to login
-        window.location.replace("login.html");
-    });
-}
+
 </script>
    <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-app.js";
