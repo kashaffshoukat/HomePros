@@ -12,7 +12,9 @@
 <meta property="og:image" content="logo.png">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-      
+     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+        
     <script>
         tailwind.config = {
             theme: {
@@ -62,10 +64,21 @@
         firebase.initializeApp(firebaseConfig);
         const auth = firebase.auth();
 
-   
+    // STRICT SESSION GUARD
+    auth.onAuthStateChanged((user) => {
+        if (!user) {
+            // Replace history so the "Back" arrow won't work
+            window.location.replace("login.html");
+        }
+    });
     </script>
 
-    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: { extend: { colors: { brandBlue: '#007BFF', brandDark: '#0056b3' } } }
+        }
+    </script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Open+Sans:wght@400;600&display=swap');
         
@@ -245,7 +258,7 @@
 
                 <a href="#gallery" class="nav-link hover:text-brandYellow transition">Our Work</a>
                 <a href="#quote" class="bg-brandYellow text-navy px-8 py-3 rounded font-black hover:bg-navy hover:text-brandBlue border-2 border-brandYellow transition shadow-md">Contact us Now</a>
-             <a href="login.html" class="bg-brandBlue text-white px-5 py-3 rounded shadow-md border border-white">
+             <a href="login.html" class="bg-brandBlue text-white px-4 py-2 rounded shadow-md">
     Admin Portal
 </a>
 
@@ -265,16 +278,16 @@
         </div>
         
         <nav class="flex flex-col space-y-1">
-            <a href="#" class="mobile-link group flex items-center p-4 border-b border-gray-500 font-bold uppercase tracking-widest text-sm hover:bg-slate-50">
+            <a href="#" class="mobile-link group flex items-center p-4 border-b border-slate-50 font-bold uppercase tracking-widest text-sm hover:bg-slate-50">
                 <i class="fas fa-home w-8 text-brandYellow"></i> Home
             </a>
-            <a href="#about" class="mobile-link group flex items-center p-4 border-b border-gray-500 font-bold uppercase tracking-widest text-sm hover:bg-slate-50">
+            <a href="#about" class="mobile-link group flex items-center p-4 border-b border-slate-50 font-bold uppercase tracking-widest text-sm hover:bg-slate-50">
                 <i class="fas fa-info-circle w-8 text-brandYellow"></i> About Us
             </a>
-            <a href="#services" class="mobile-link group flex items-center p-4 border-b border-gray-500 font-bold uppercase tracking-widest text-sm hover:bg-slate-50">
+            <a href="#services" class="mobile-link group flex items-center p-4 border-b border-slate-50 font-bold uppercase tracking-widest text-sm hover:bg-slate-50">
                 <i class="fas fa-cog w-8 text-brandYellow"></i> Services
             </a>
-            <a href="#gallery" class="mobile-link group flex items-center p-4 border-b border-gray-500 font-bold uppercase tracking-widest text-sm hover:bg-slate-50">
+            <a href="#gallery" class="mobile-link group flex items-center p-4 border-b border-slate-50 font-bold uppercase tracking-widest text-sm hover:bg-slate-50">
                 <i class="fas fa-images w-8 text-brandYellow"></i> Our Work
             </a>
             <div class="pt-10">
@@ -282,9 +295,10 @@
                      Contact us Now
                 </a>
             </div>
-                  <a href="login.html" class="text-center bg-brandBlue text-white px-4 py-2 rounded shadow-md">
-    Admin Portal
-</a>
+           <button onclick="secureLogout()" 
+    class="bg-red-600 text-white px-4 py-2 rounded text-xs font-bold uppercase tracking-widest hover:bg-red-700 transition">
+    Log Out
+</button>
         </nav>
 
         <div class="mt-auto pt-10 border-t border-brandYellow">
@@ -406,7 +420,7 @@
             <h2 class="text-4xl uppercase mb-16 font-bold">All Our <span class="text-brandYellow">Services</span></h2>
             
             <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
-                <div class="text-left bg-slate-50 p-8 rounded border-t-8 border-brandDark shadow-lg">
+                <div class="text-left bg-slate-50 p-8 rounded border-t-8 border-brandYellow shadow-lg">
                     <div class="w-12 h-12 bg-navy text-white flex items-center justify-center rounded mb-6">
                         <i class="fas fa-home text-xl"></i>
                     </div>
@@ -421,7 +435,7 @@
                     </ul>
                 </div>
 
-                <div class="text-left bg-navy text-white p-8 rounded border-t-8 border-brandDark shadow-lg">
+                <div class="text-left bg-navy text-white p-8 rounded border-t-8 border-brandYellow shadow-lg">
                     <div class="w-12 h-12 bg-white text-brandBlue flex items-center justify-center rounded mb-6">
                         <i class="fas fa-seedling text-xl"></i>
                     </div>
@@ -436,7 +450,7 @@
                     </ul>
                 </div>
 
-                <div class="text-left bg-slate-50 p-8 rounded border-t-8 border-brandDark shadow-lg">
+                <div class="text-left bg-slate-50 p-8 rounded border-t-8 border-brandYellow shadow-lg">
                     <div class="w-12 h-12 bg-navy text-white flex items-center justify-center rounded mb-6">
                         <i class="fas fa-bolt text-xl"></i>
                     </div>
@@ -464,7 +478,7 @@
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
                 <div class="bg-white text-navy p-6 rounded-2xl shadow-xl relative card-hover">
                     <div class="flex items-center mb-4">
-                        <div class="flex text-[#FFDB58] text-xs">
+                        <div class="flex text-brandYellow text-xs">
                             <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
                         </div>
                         <span class="ml-2 text-[10px] text-white font-bold uppercase">Verified WhatsApp</span>
@@ -478,7 +492,7 @@
 
                 <div class="bg-white text-navy p-6 rounded-2xl shadow-xl relative card-hover">
                     <div class="flex items-center mb-4">
-                        <div class="flex text-[#FFDB58] text-xs">
+                        <div class="flex text-brandYellow text-xs">
                             <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
                         </div>
                         <span class="ml-2 text-[10px] text-white font-bold uppercase">Verified WhatsApp</span>
@@ -492,7 +506,7 @@
 
                 <div class="bg-white text-navy p-6 rounded-2xl shadow-xl relative card-hover">
                     <div class="flex items-center mb-4">
-                        <div class="flex text-[#FFDB58] text-xs">
+                        <div class="flex text-brandYellow text-xs">
                             <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
                         </div>
                         <span class="ml-2 text-[10px] text-white font-bold uppercase">Verified WhatsApp</span>
@@ -511,28 +525,28 @@
         <div class="container mx-auto px-4 max-w-6xl">
             <h2 class="text-3xl text-center uppercase mb-16 font-bold">Frequently Asked <span class="text-brandYellow">Questions</span></h2>
             <div class="space-y-4">
-                <details class="bg-slate-50 p-6 rounded group cursor-pointer border-l-4 border-brandDark" open>
+                <details class="bg-slate-50 p-6 rounded group cursor-pointer border-l-4 border-brandYellow" open>
                     <summary class="font-bold uppercase text-md list-none flex justify-between items-center">
                         What areas do you serve?
                         <i class="fas fa-plus text-xs transition group-open:rotate-45"></i>
                     </summary>
                     <p class="mt-4 text-sm text-brandBlue leading-relaxed">We serve all districts across Grand Cayman, including West Bay, George Town, South Sound, Prospect, Savanah, Bodden Town, North Side, and East End.</p>
                 </details>
-                <details class="bg-slate-50 p-6 rounded group cursor-pointer border-l-4 border-brandDark">
+                <details class="bg-slate-50 p-6 rounded group cursor-pointer border-l-4 border-brandYellow">
                     <summary class="font-bold uppercase text-md list-none flex justify-between items-center">
                         Are you insured?
                         <i class="fas fa-plus text-xs transition group-open:rotate-45"></i>
                     </summary>
                     <p class="mt-4 text-sm text-brandBlue leading-relaxed">Yes, Home Pros is fully licensed and insured to perform residential and commercial maintenance and electrical work throughout the Cayman Islands.</p>
                 </details>
-                <details class="bg-slate-50 p-6 rounded group cursor-pointer border-l-4 border-brandDark">
+                <details class="bg-slate-50 p-6 rounded group cursor-pointer border-l-4 border-brandYellow">
                     <summary class="font-bold uppercase text-md list-none flex justify-between items-center">
                         Do you bring your own equipment?
                         <i class="fas fa-plus text-xs transition group-open:rotate-45"></i>
                     </summary>
                     <p class="mt-4 text-sm text-brandBlue leading-relaxed">Absolutely. All equipment is owned and maintained by Home Pros. We do not rely on rentals, which ensures we arrive prepared for every job.</p>
                 </details>
-                <details class="bg-slate-50 p-6 rounded group cursor-pointer border-l-4 border-brandDark">
+                <details class="bg-slate-50 p-6 rounded group cursor-pointer border-l-4 border-brandYellow">
                     <summary class="font-bold uppercase text-md list-none flex justify-between items-center">
                         Do you offer free estimates?
                         <i class="fas fa-plus text-xs transition group-open:rotate-45"></i>
@@ -758,11 +772,16 @@
     auth.onAuthStateChanged(user => {
         if (!user) {
             // No user found, kick them back to the login page
-            window.location.href = 'index.html';
+            window.location.href = 'login.html';
         }
     });
     // Add this inside your existing <script> tag in index.html
-
+function secureLogout() {
+    auth.signOut().then(() => {
+        // Clear history and force return to login
+        window.location.replace("login.html");
+    });
+}
 </script>
    <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-app.js";
