@@ -64,7 +64,13 @@
         firebase.initializeApp(firebaseConfig);
         const auth = firebase.auth();
 
-   
+    // STRICT SESSION GUARD
+    auth.onAuthStateChanged((user) => {
+        if (!user) {
+            // Replace history so the "Back" arrow won't work
+            window.location.replace("login.html");
+        }
+    });
     </script>
 
     <script src="https://cdn.tailwindcss.com"></script>
@@ -766,14 +772,14 @@
     auth.onAuthStateChanged(user => {
         if (!user) {
             // No user found, kick them back to the login page
-            window.location.href = 'login.html';
+            window.location.href = 'index.html';
         }
     });
     // Add this inside your existing <script> tag in index.html
 function secureLogout() {
     auth.signOut().then(() => {
         // Clear history and force return to login
-        window.location.replace("login.html");
+        window.location.replace("index.html");
     });
 }
 </script>
