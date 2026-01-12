@@ -109,10 +109,37 @@
         }
 
         .hero-gradient {
-            background: linear-gradient(rgba(6, 85, 164, 0.8), rgba(96, 96, 97, 0.9)),
+            /* The Blue Overlay (#007BFF at 60% opacity) */
+            background:
+                linear-gradient(rgba(0, 123, 255, 0.6),
+                    rgba(0, 123, 255, 0.6)),
                 url('background.jpeg');
+
+            /* Background Scaling */
             background-size: cover;
+            /* Ensures image covers the area without stretching */
             background-position: center;
+            /* Keeps the focus of the image in the middle */
+            background-repeat: no-repeat;
+            background-attachment: scroll;
+            /* Best for mobile performance */
+
+            /* Responsive Height */
+            width: 100%;
+            min-height: 60vh;
+            /* 60% of the screen height on all devices */
+            display: flex;
+            /* Helps center text inside later */
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Mobile Specific Adjustments */
+        @media (max-width: 768px) {
+            .hero-gradient {
+                min-height: 50vh;
+                /* Slightly shorter on mobile phones */
+            }
         }
 
         .card-hover:hover {
@@ -630,54 +657,81 @@
                     <i class="fas fa-broom text-blue-500 text-3xl mb-4"></i>
                     <h3 class="text-xl font-bold mb-2">Window Cleaning</h3>
                     <p class="text-gray-500">Sparkling clean windows for a brighter view.</p>
+                     <a href="#" class="flex items-center text-sm font-bold text-gray-400">
+                        <br>Click to See our work
+                    </a>
                 </div>
                 <div class="service-card bg-white p-6 rounded-2xl shadow-sm border border-brandDark"
                     onclick="openModal('Solar Panel Cleaning', 'solar.jpeg')">
                     <i class="fas fa-sun text-orange-500 text-3xl mb-4"></i>
                     <h3 class="text-xl font-bold mb-2">Solar Panel Cleaning</h3>
                     <p class="text-gray-500">Maximize energy efficiency with clean panels.</p>
+                     <a href="#" class="flex items-center text-sm font-bold text-gray-400">
+                        <br>Click to See our work
+                    </a>
                 </div>
                 <div class="service-card bg-white p-6 rounded-2xl shadow-sm border border-brandDark"
                     onclick="openModal('Gutter & Eaves', 'eaves.jpeg')">
                     <i class="fas fa-house-flood-water text-blue-500 text-3xl mb-4"></i>
                     <h3 class="text-xl font-bold mb-2">Gutter & Eaves</h3>
                     <p class="text-gray-500">Protect your foundation from water damage.</p>
+                     <a href="#" class="flex items-center text-sm font-bold text-gray-400">
+                        <br>Click to See our work
+                    </a>
                 </div>
                 <div class="service-card bg-white p-6 rounded-2xl shadow-sm border border-brandDark"
                     onclick="openModal('Roof Cleaning', 'roofs.jpeg')">
                     <i class="fas fa-home text-[green] text-3xl mb-4"></i>
                     <h3 class="text-xl font-bold mb-2">Roof Cleaning</h3>
                     <p class="text-gray-500">Soft wash techniques to extend roof life.</p>
+                     <a href="#" class="flex items-center text-sm font-bold text-gray-400">
+                        <br>Click to See our work
+                    </a>
                 </div>
                 <div class="service-card bg-white p-6 rounded-2xl shadow-sm border border-brandDark"
                     onclick="openModal('Pressure Washing', 'pressue.jpeg')">
                     <i class="fas fa-faucet-drip text-blue-400 text-3xl mb-4"></i>
                     <h3 class="text-xl font-bold mb-2">Pressure Washing</h3>
                     <p class="text-gray-500">Powerful cleaning for siding and decks.</p>
+                     <a href="#" class="flex items-center text-sm font-bold text-gray-400">
+                        <br>Click to See our work
+                    </a>
                 </div>
                 <div class="service-card bg-white p-6 rounded-2xl shadow-sm border border-brandDark"
                     onclick="openModal('Driveway Sealing', 'drive.jpeg')">
                     <i class="fas fa-road text-gray-800 text-3xl mb-4"></i>
                     <h3 class="text-xl font-bold mb-2">Driveway Sealing</h3>
                     <p class="text-gray-500">Long-lasting protection for your driveway.</p>
+                     <a href="#" class="flex items-center text-sm font-bold text-gray-400">
+                        <br>Click to See our work
+                    </a>
                 </div>
                 <div class="service-card bg-white p-6 rounded-2xl shadow-sm border border-brandDark"
                     onclick="openModal('Painting', 'paint.jpeg')">
                     <i class="fas fa-paint-brush icon text-gary-500 text-3xl mb-4"></i>
                     <h3 class="text-xl font-bold mb-2">Painting</h3>
                     <p class="text-gray-500">Interior and exterior professional painting.</p>
+                     <a href="#" class="flex items-center text-sm font-bold text-gray-400">
+                        <br>Click to See our work
+                    </a>
                 </div>
                 <div class="service-card bg-white p-6 rounded-2xl shadow-sm border border-brandDark"
                     onclick="openModal('Painting', 'expaint.jpeg')">
                     <i class="fas fa-pencil text-[green] text-3xl mb-4"></i>
                     <h3 class="text-xl font-bold mb-2">Exterior Painting</h3>
                     <p class="text-gray-500">Exterior professional painting.</p>
+                     <a href="#" class="flex items-center text-sm font-bold text-gray-400">
+                        <br>Click to See our work
+                    </a>
                 </div>
                 <div class="service-card bg-white p-6 rounded-2xl shadow-sm border border-brandDark"
                     onclick="openModal('Painting', 'interior.jpeg')">
                     <i class="fas fa-paint-roller text-pink-500 text-3xl mb-4"></i>
                     <h3 class="text-xl font-bold mb-2">Interior Painting</h3>
                     <p class="text-gray-500">Interior professional painting.</p>
+                     <a href="#" class="flex items-center text-sm font-bold text-gray-400">
+                        <br>Click to See our work
+                    </a>
                 </div>
             </div>
         </section>
@@ -694,19 +748,28 @@
                     onclick="openModal('Lawn Care', 'lawn.jpeg')">
                     <i class="fas fa-leaf text-green-500 text-3xl mb-4"></i>
                     <h3 class="text-xl font-bold mb-2">Lawn Care</h3>
-                    <p class="text-gray-500">Precise mowing and professional landscape care.</p>
+                    <p class="text-gray-500">Precise mowing and professional care.</p>
+                     <a href="#" class="flex items-center text-sm font-bold text-gray-400">
+                        <br>Click to See our work
+                    </a>
                 </div>
                 <div class="service-card bg-white p-6 rounded-2xl shadow-sm border border-brandDark"
                     onclick="openModal('Material Removal', 'remove.jpeg')">
                     <i class="fas fa-truck-ramp-box text-orange-600 text-3xl mb-4"></i>
                     <h3 class="text-xl font-bold mb-2">Removals & Hauling</h3>
                     <p class="text-gray-500">Clutter removal and heavy hauling services.</p>
+                    <a href="#" class="flex items-center text-sm font-bold text-gray-400">
+                        <br>Click to See our work
+                    </a>
                 </div>
                 <div class="service-card bg-white p-6 rounded-2xl shadow-sm border border-brandDark"
                     onclick="openModal('General Labor', 'labor.jpeg')">
                     <i class="fas fa-hard-hat text-yellow-500 text-3xl mb-4"></i>
                     <h3 class="text-xl font-bold mb-2">General Laborer</h3>
                     <p class="text-gray-500">Reliable help for any heavy-duty task.</p>
+                     <a href="#" class="flex items-center text-sm font-bold text-gray-400">
+                        <br>Click to See our work
+                    </a>
                 </div>
             </div>
         </section>
@@ -724,12 +787,18 @@
                     <i class="fas fa-lightbulb text-yellow-400 text-3xl mb-4"></i>
                     <h3 class="text-xl font-bold mb-2">Lighting Installation</h3>
                     <p class="text-gray-500">Fixture replacement and new installations.</p>
+                     <a href="#" class="flex items-center text-sm font-bold text-gray-400">
+                        <br>Click to See our work
+                    </a>
                 </div>
                 <div class="service-card bg-white p-6 rounded-2xl shadow-sm border border-brandDark"
                     onclick="openModal('Repairs', 'electrical.jpeg')">
                     <i class="fas fa-bolt text-yellow-600 text-3xl mb-4"></i>
                     <h3 class="text-xl font-bold mb-2">Small Repairs</h3>
-                    <p class="text-gray-500">Professional troubleshooting and maintenance.</p>
+                    <p class="text-gray-500">Professional Maintenance.</p>
+                     <a href="#" class="flex items-center text-sm font-bold text-gray-400">
+                        <br>Click to See our work
+                    </a>
                 </div>
             </div>
         </section>
