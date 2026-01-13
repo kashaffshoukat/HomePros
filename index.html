@@ -107,32 +107,26 @@
         .services-hover:hover .mega-menu {
             display: block;
         }
+.hero-gradient {
+    /* Layer 1: Dark Overlay (Black at 50% opacity) */
+    /* Layer 2: The Image */
+    background: 
+        linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), 
+        url('background.jpeg');
 
-        .hero-gradient {
-            /* The Blue Overlay (#007BFF at 60% opacity) */
-            background:
-                linear-gradient(rgba(0, 123, 255, 0.6),
-                    rgba(0, 123, 255, 0.6)),
-                url('background.jpeg');
+    /* Background Scaling */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: scroll;
 
-            /* Background Scaling */
-            background-size: cover;
-            /* Ensures image covers the area without stretching */
-            background-position: center;
-            /* Keeps the focus of the image in the middle */
-            background-repeat: no-repeat;
-            background-attachment: scroll;
-            /* Best for mobile performance */
-
-            /* Responsive Height */
-            width: 100%;
-            min-height: 60vh;
-            /* 60% of the screen height on all devices */
-            display: flex;
-            /* Helps center text inside later */
-            align-items: center;
-            justify-content: center;
-        }
+    /* Layout */
+    width: 100%;
+    min-height: 60vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 
         /* Mobile Specific Adjustments */
         @media (max-width: 768px) {
@@ -315,6 +309,47 @@
                 opacity: 1;
             }
         }
+
+        /* Animation Base States */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Stagger delay for grids */
+        .reveal-delay-1 {
+            transition-delay: 0.1s;
+        }
+
+        .reveal-delay-2 {
+            transition-delay: 0.2s;
+        }
+
+        .reveal-delay-3 {
+            transition-delay: 0.3s;
+        }
+
+        /* Slide from Left for images */
+        .reveal-left {
+            opacity: 0;
+            transform: translateX(-50px);
+            transition: all 0.8s ease-out;
+        }
+
+        .reveal-left.active {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        .text-outline {
+    -webkit-text-stroke: 1px white;
+    color: transparent;
+}
     </style>
 
 </head>
@@ -322,7 +357,7 @@
 <body class="bg-white text-navy sidebar-closed">
 
     <div
-        class="bg-navy sticky sticky top-0 z-50 shadow-md text-white py-2 px-4 text-sm hidden md:block border-b border-brandDark/20">
+        class="bg-navy sticky top-0 z-50 shadow-md text-white py-2 px-4 text-sm hidden md:block border-b border-brandDark/20">
         <div class="container mx-auto flex justify-between">
             <div class="flex space-x-6">
                 <span><i class="fas fa-phone mr-2 text-brandYellow"></i> 9391668</span>
@@ -432,6 +467,7 @@
     <div id="sidebar-overlay" class="fixed inset-0 bg-navy/80 backdrop-blur-sm z-[60] opacity-0"></div>
     <div id="mobile-sidebar"
         class="fixed top-0 left-0 h-full w-[80%] max-w-[350px] bg-white z-[70] shadow-2xl p-6 flex flex-col sidebar-closed">
+        
         <div class="flex justify-between items-center mb-10">
             <div class="text-xl font-bold text-navy">
                 HOME <span class="text-brandYellow">PROS</span>
@@ -470,7 +506,7 @@
             </a>
         </nav>
 
-        <div class="mt-auto pt-10 border-t border-brandDark">
+        <div class="mt-auto pt-5 border-t border-brandDark">
             <p class="text-[10px] uppercase font-bold text-white tracking-widest mb-4">Contact Info</p>
             <div class="space-y-3">
                 <a href="tel:9391668" class="flex items-center text-sm font-bold text-navy">
@@ -486,22 +522,25 @@
     <section class="hero-gradient min-h-[85vh] flex items-center text-white px-4">
         <div class="container mx-auto">
             <div class="max-w-4xl">
-                <div class="flex items-center space-x-2 mb-6">
-                    <span
-                        class="bg-brandYellow text-white px-3 py-1 text-xs font-black uppercase tracking-tighter">Licensed
-                        & Insured</span>
+                <div class="flex items-center space-x-2 mt-8 mb-4">
+                    <span class="bg-brandYellow/90 backdrop-blur-sm text-white px-4 py-2 text-sm font-black uppercase tracking-widest shadow-lg">
+    Licensed & Insured
+</span>
                     <span class="w-12 h-[2px] bg-white"></span>
                 </div>
-                <h1 class="text-3xl md:text-xl mb-6 leading-tight uppercase">Your Go-To Experts for Home Projects,
-                    Maintenance & Electrical Solutions</h1>
-                <p class="text-xl text-slate-200 mb-10 max-w-2xl font-light">Dedicated property care, maintenance, and
-                    professional electrical work across all Grand Cayman districts.</p>
-                <div class="flex flex-col sm:flex-row gap-4">
+               <h1 class="text-3xl md:text-3xl lg:text-3xl mb-6 leading-[1.1] uppercase font-black tracking-tight">
+    Your Go-To Experts for <span class="text-brandYellow">Home Projects</span>, Maintenance & Electrical
+</h1>
+
+<p class="text-lg md:text-2xl text-slate-100 mb-10 max-w-2xl font-medium leading-relaxed drop-shadow-md">
+    Dedicated Property Care, Maintenance, and Professional Electrical work across all Grand Cayman districts.
+</p>
+                <div class="flex flex-col sm:flex-row gap-1">
                     <a href="#quote"
-                        class="bg-brandYellow text-white px-10 py-5 font-black text-lg uppercase transition hover:bg-brandBlue border-2 border-white">Contact
+                        class="bg-brandYellow text-white px-5 py-3 font-black text-lg uppercase transition hover:bg-brandBlue border-2 border-white">Contact
                         us Now</a>
                     <a href="tel:9391668"
-                        class="bg-transparent border-2 border-white text-white px-10 py-5 font-black text-lg uppercase transition hover:bg-brandYellow hover:text-navy hover:border-brandDark justify-center">
+                        class="bg-navy border-2 border-white text-white px-5 py-3 font-black text-lg uppercase transition hover:bg-brandYellow  hover:text-navy hover:border-brandDark justify-center">
                         <i class="fas fa-phone mr-3"></i> Call Now: 939-1668
                     </a>
                 </div>
@@ -657,7 +696,7 @@
                     <i class="fas fa-broom text-blue-500 text-3xl mb-4"></i>
                     <h3 class="text-xl font-bold mb-2">Window Cleaning</h3>
                     <p class="text-gray-500">Sparkling clean windows for a brighter view.</p>
-                     <a href="#" class="flex items-center text-sm font-bold text-gray-400">
+                    <a href="#" class="flex items-center text-sm font-bold text-gray-400">
                         <br>Click to See our work
                     </a>
                 </div>
@@ -666,7 +705,7 @@
                     <i class="fas fa-sun text-orange-500 text-3xl mb-4"></i>
                     <h3 class="text-xl font-bold mb-2">Solar Panel Cleaning</h3>
                     <p class="text-gray-500">Maximize energy efficiency with clean panels.</p>
-                     <a href="#" class="flex items-center text-sm font-bold text-gray-400">
+                    <a href="#" class="flex items-center text-sm font-bold text-gray-400">
                         <br>Click to See our work
                     </a>
                 </div>
@@ -675,7 +714,7 @@
                     <i class="fas fa-house-flood-water text-blue-500 text-3xl mb-4"></i>
                     <h3 class="text-xl font-bold mb-2">Gutter & Eaves</h3>
                     <p class="text-gray-500">Protect your foundation from water damage.</p>
-                     <a href="#" class="flex items-center text-sm font-bold text-gray-400">
+                    <a href="#" class="flex items-center text-sm font-bold text-gray-400">
                         <br>Click to See our work
                     </a>
                 </div>
@@ -684,7 +723,7 @@
                     <i class="fas fa-home text-[green] text-3xl mb-4"></i>
                     <h3 class="text-xl font-bold mb-2">Roof Cleaning</h3>
                     <p class="text-gray-500">Soft wash techniques to extend roof life.</p>
-                     <a href="#" class="flex items-center text-sm font-bold text-gray-400">
+                    <a href="#" class="flex items-center text-sm font-bold text-gray-400">
                         <br>Click to See our work
                     </a>
                 </div>
@@ -693,7 +732,7 @@
                     <i class="fas fa-faucet-drip text-blue-400 text-3xl mb-4"></i>
                     <h3 class="text-xl font-bold mb-2">Pressure Washing</h3>
                     <p class="text-gray-500">Powerful cleaning for siding and decks.</p>
-                     <a href="#" class="flex items-center text-sm font-bold text-gray-400">
+                    <a href="#" class="flex items-center text-sm font-bold text-gray-400">
                         <br>Click to See our work
                     </a>
                 </div>
@@ -702,7 +741,7 @@
                     <i class="fas fa-road text-gray-800 text-3xl mb-4"></i>
                     <h3 class="text-xl font-bold mb-2">Driveway Sealing</h3>
                     <p class="text-gray-500">Long-lasting protection for your driveway.</p>
-                     <a href="#" class="flex items-center text-sm font-bold text-gray-400">
+                    <a href="#" class="flex items-center text-sm font-bold text-gray-400">
                         <br>Click to See our work
                     </a>
                 </div>
@@ -711,7 +750,7 @@
                     <i class="fas fa-paint-brush icon text-gary-500 text-3xl mb-4"></i>
                     <h3 class="text-xl font-bold mb-2">Painting</h3>
                     <p class="text-gray-500">Interior and exterior professional painting.</p>
-                     <a href="#" class="flex items-center text-sm font-bold text-gray-400">
+                    <a href="#" class="flex items-center text-sm font-bold text-gray-400">
                         <br>Click to See our work
                     </a>
                 </div>
@@ -720,7 +759,7 @@
                     <i class="fas fa-pencil text-[green] text-3xl mb-4"></i>
                     <h3 class="text-xl font-bold mb-2">Exterior Painting</h3>
                     <p class="text-gray-500">Exterior professional painting.</p>
-                     <a href="#" class="flex items-center text-sm font-bold text-gray-400">
+                    <a href="#" class="flex items-center text-sm font-bold text-gray-400">
                         <br>Click to See our work
                     </a>
                 </div>
@@ -729,7 +768,7 @@
                     <i class="fas fa-paint-roller text-pink-500 text-3xl mb-4"></i>
                     <h3 class="text-xl font-bold mb-2">Interior Painting</h3>
                     <p class="text-gray-500">Interior professional painting.</p>
-                     <a href="#" class="flex items-center text-sm font-bold text-gray-400">
+                    <a href="#" class="flex items-center text-sm font-bold text-gray-400">
                         <br>Click to See our work
                     </a>
                 </div>
@@ -749,7 +788,7 @@
                     <i class="fas fa-leaf text-green-500 text-3xl mb-4"></i>
                     <h3 class="text-xl font-bold mb-2">Lawn Care</h3>
                     <p class="text-gray-500">Precise mowing and professional care.</p>
-                     <a href="#" class="flex items-center text-sm font-bold text-gray-400">
+                    <a href="#" class="flex items-center text-sm font-bold text-gray-400">
                         <br>Click to See our work
                     </a>
                 </div>
@@ -767,7 +806,7 @@
                     <i class="fas fa-hard-hat text-yellow-500 text-3xl mb-4"></i>
                     <h3 class="text-xl font-bold mb-2">General Laborer</h3>
                     <p class="text-gray-500">Reliable help for any heavy-duty task.</p>
-                     <a href="#" class="flex items-center text-sm font-bold text-gray-400">
+                    <a href="#" class="flex items-center text-sm font-bold text-gray-400">
                         <br>Click to See our work
                     </a>
                 </div>
@@ -787,7 +826,7 @@
                     <i class="fas fa-lightbulb text-yellow-400 text-3xl mb-4"></i>
                     <h3 class="text-xl font-bold mb-2">Lighting Installation</h3>
                     <p class="text-gray-500">Fixture replacement and new installations.</p>
-                     <a href="#" class="flex items-center text-sm font-bold text-gray-400">
+                    <a href="#" class="flex items-center text-sm font-bold text-gray-400">
                         <br>Click to See our work
                     </a>
                 </div>
@@ -796,7 +835,7 @@
                     <i class="fas fa-bolt text-yellow-600 text-3xl mb-4"></i>
                     <h3 class="text-xl font-bold mb-2">Small Repairs</h3>
                     <p class="text-gray-500">Professional Maintenance.</p>
-                     <a href="#" class="flex items-center text-sm font-bold text-gray-400">
+                    <a href="#" class="flex items-center text-sm font-bold text-gray-400">
                         <br>Click to See our work
                     </a>
                 </div>
@@ -1037,7 +1076,7 @@
 
     <footer class="bg-navy text-white pt-20 pb-10 px-4">
         <div
-            class="container mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 border-b border-brandDark/20 pb-16">
+            class="container max-w-5xl mx-auto grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-12 border-b border-brandDark/20 pb-16">
             <div>
                 <h3 class="text-2xl font-black mb-6 italic">HOME <span class="text-brandYellow">PROS</span></h3>
                 <p class="text-white text-xs leading-relaxed mb-6">Your go-to experts for professional home projects,
@@ -1079,11 +1118,11 @@
                     <a href="tel:9391668" class="flex items-center text-sm font-bold text-white">
                         <i class="fas fa-phone-alt mr-3 text-brandYellow"></i> 939-1668
                     </a>
-                    <a href="mailto:homeproscayman@gmail.com" class="flex items-center text-sm font-bold text-white">
+                    <a href="mailto:homeproscayman@gmail.com" class="flex items-center text-[10px] font-bold text-white">
                         <i class="fas fa-envelope mr-3 text-brandYellow"></i> homeproscayman@gmail.com
                     </a>
                     <a href="https://maps.app.goo.gl/WQcrr1UrwEmiH9Wd9"
-                        class="flex items-center text-sm font-bold text-white">
+                        class="flex items-center text-[10px] font-bold text-white">
                         <i class="fas fa-warehouse mr-2 text-brandYellow"></i> Bodden Town & George Town
                     </a>
                 </div>
@@ -1106,6 +1145,27 @@
             <i class="fas fa-calendar-alt"></i>
         </a>
     </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const observerOptions = {
+                threshold: 0.15 // Triggers when 15% of the element is visible
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                        // Optional: stop observing after animation is done
+                        // observer.unobserve(entry.target); 
+                    }
+                });
+            }, observerOptions);
+
+            // Target all elements with reveal classes
+            const revealElements = document.querySelectorAll('.reveal, .reveal-left');
+            revealElements.forEach((el) => observer.observe(el));
+        });
+    </script>
     <script>
         const modal = document.getElementById('serviceModal');
         const modalTitle = document.getElementById('modalTitle');
