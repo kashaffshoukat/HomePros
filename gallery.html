@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard | Project Gallery</title>
+    <link rel="icon" href="logo.png" type="image/png">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -12,26 +13,27 @@
         .project-image { transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1); }
         .group:hover .project-image { transform: scale(1.05); }
         .filter-btn.active { background-color: #1e293b; color: white; border-color: #1e293b; }
-        .image-container { aspect-ratio: 16/9; }
+        .image-container { aspect-ratio: 16/9; position: relative; overflow: hidden; }
+        .image-slide { display: none; width: 100%; height: 100%; }
+        .image-slide.active { display: block; }
     </style>
- 
 </head>
 <body class="bg-slate-50 text-slate-900 font-sans min-h-screen">
 
     <!-- Admin Navigation -->
-   <nav class="bg-white border-b border-slate-200 py-4 px-6">
-    <div class="max-w-6xl mx-auto flex justify-between items-center">
-        <a href="index.html" class="text-slate-500 hover:text-slate-900 flex items-center gap-2 transition-colors">
-            <i class="fas fa-home"></i> Go Back to Visitors Page
-        </a>
-        <div class="flex items-center gap-4">
-            <span class="bg-slate-100 text-slate-600 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider">Admin Panel</span>
-            <button onclick="adminLogout()" class="text-red-600 hover:text-red-800 text-xs font-bold uppercase">
-                <i class="fas fa-sign-out-alt"></i> Logout
-            </button>
+    <nav class="bg-white border-b border-slate-200 py-4 px-6">
+        <div class="max-w-6xl mx-auto flex justify-between items-center">
+            <a href="./index.html" class="text-slate-500 hover:text-slate-900 flex items-center gap-2 transition-colors">
+                <i class="fas fa-home"></i> Back to Home Page
+            </a>
+            <div class="flex items-center gap-4">
+                <span class="bg-slate-100 text-slate-600 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider">Admin Panel</span>
+                <button onclick="adminLogout()" class="text-red-600 hover:text-red-800 text-xs font-bold uppercase">
+                    <i class="fas fa-sign-out-alt"></i> Logout
+                </button>
+            </div>
         </div>
-    </div>
-</nav>
+    </nav>
 
     <!-- Header -->
     <header class="max-w-6xl mx-auto pt-12 px-6 mb-8 flex flex-col md:flex-row justify-between items-start md:items-end gap-4">
@@ -68,7 +70,7 @@
             <form id="projectForm" class="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <div class="space-y-4">
                     <div>
-                        <label class="block text-sm font-semibold text-slate-700 mb-1">Title for the Complered Project</label>
+                        <label class="block text-sm font-semibold text-slate-700 mb-1">Title for the Completed Project</label>
                         <input type="text" id="title" required class="w-full px-4 py-2 rounded-lg border border-slate-300 focus:ring-2 focus:ring-blue-500 outline-none" placeholder="e.g. Modern Kitchen Remodel">
                     </div>
                     <div>
@@ -86,14 +88,32 @@
                     </div>
                 </div>
                 <div class="space-y-4">
+                    <!-- Before Images Section -->
                     <div>
-                        <label class="block text-sm font-semibold text-slate-700 mb-1">Before Image URL</label>
-                        <input type="url" id="beforeUrl" required class="w-full px-4 py-2 rounded-lg border border-slate-300 focus:ring-2 focus:ring-blue-500 outline-none" placeholder="https://example.com/before.jpg">
+                        <div class="flex justify-between items-center mb-1">
+                            <label class="block text-sm font-semibold text-slate-700">Before Image URLs</label>
+                            <button type="button" onclick="addUrlInput('beforeInputsContainer')" class="text-blue-600 hover:text-blue-800 text-xs font-bold">
+                                <i class="fas fa-plus-circle"></i> Click to Add Another Photo
+                            </button>
+                        </div>
+                        <div id="beforeInputsContainer" class="space-y-2">
+                            <input type="text" name="beforeUrl" required class="url-input w-full px-4 py-2 rounded-lg border border-slate-300 focus:ring-2 focus:ring-blue-500 outline-none" placeholder="Paste URL here...">
+                        </div>
                     </div>
+
+                    <!-- After Images Section -->
                     <div>
-                        <label class="block text-sm font-semibold text-slate-700 mb-1">After Image URL</label>
-                        <input type="url" id="afterUrl" required class="w-full px-4 py-2 rounded-lg border border-slate-300 focus:ring-2 focus:ring-blue-500 outline-none" placeholder="https://example.com/after.jpg">
+                        <div class="flex justify-between items-center mb-1">
+                            <label class="block text-sm font-semibold text-slate-700">After Image URLs</label>
+                            <button type="button" onclick="addUrlInput('afterInputsContainer')" class="text-blue-600 hover:text-blue-800 text-xs font-bold">
+                                <i class="fas fa-plus-circle"></i> Click to Add Another Photo
+                            </button>
+                        </div>
+                        <div id="afterInputsContainer" class="space-y-2">
+                            <input type="text" name="afterUrl" required class="url-input w-full px-4 py-2 rounded-lg border border-slate-300 focus:ring-2 focus:ring-blue-500 outline-none" placeholder="Paste URL here...">
+                        </div>
                     </div>
+
                     <div class="pt-4">
                         <button type="submit" id="submitBtn" class="w-full bg-slate-900 text-white py-4 rounded-xl font-bold hover:bg-slate-800 transition-all shadow-lg">
                             Publish to Live Website
@@ -112,163 +132,225 @@
         </div>
     </main>
 
-    <!-- Firebase SDKs -->
-   <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-app.js";
-    import { initializeFirestore, collection, addDoc, onSnapshot, doc, deleteDoc, persistentLocalCache, persistentMultipleTabManager } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-firestore.js";
-    import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-auth.js";
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-app.js";
+        import { initializeFirestore, collection, addDoc, onSnapshot, doc, deleteDoc, persistentLocalCache, persistentMultipleTabManager } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-firestore.js";
+        import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-auth.js";
 
-    const firebaseConfig = {
-        apiKey: "AIzaSyDnqS3uT0TAwzxNUySLqvu5Ue6xGupoxUo",
-        authDomain: "homepros-b4889.firebaseapp.com",
-        projectId: "homepros-b4889",
-        storageBucket: "homepros-b4889.firebasestorage.app",
-        messagingSenderId: "841597604762",
-        appId: "1:841597604762:web:477a5eacc09294feeda023"
-    };
-
-    const app = initializeApp(firebaseConfig);
-    const auth = getAuth(app);
-    const db = initializeFirestore(app, {
-        localCache: persistentLocalCache({ tabManager: persistentMultipleTabManager() })
-    });
-
-    const appId = 'home-pros-app';
-    let currentUser = null;
-
-    // --- THE SECURITY GUARD ---
-    onAuthStateChanged(auth, (user) => {
-        if (!user) {
-            // If no user is found, redirect to login immediately
-            console.log("Unauthorized access, redirecting...");
-            window.location.replace("login.html");
-        } else {
-            // User is authenticated, allow them to see the data
-            currentUser = user;
-            loadProjects();
-        }
-    });
-
-    // Add a Logout Function for the Admin
-    window.adminLogout = () => {
-        signOut(auth).then(() => {
-            window.location.replace("index.html");
-        });
-    };
-    // Inside your <script type="module"> in gallery.html
-
-// 1. Make setFilter global
-window.setFilter = (filter) => {
-    currentFilter = filter;
-    document.querySelectorAll('.filter-btn').forEach(btn => {
-        btn.classList.toggle('active', btn.innerText === filter || btn.innerText.includes(filter));
-    });
-    renderProjects();
-};
-let allProjects = []; // Add this line
-let currentFilter = 'All';
-// 2. Define loadProjects so it can be called
-function loadProjects() {
-    const projectsRef = collection(db, 'artifacts', appId, 'public', 'data', 'projects');
-    onSnapshot(projectsRef, (snapshot) => {
-        allProjects = snapshot.docs.map(d => ({ id: d.id, ...d.data() }));
-        renderProjects();
-    });
-}
-// Add this inside the main module script
-document.getElementById('projectForm').addEventListener('submit', async (e) => {
-    e.preventDefault();
-    const btn = document.getElementById('submitBtn');
-    btn.disabled = true;
-    btn.innerText = "Publishing...";
-
-    try {
-        const newData = {
-            title: document.getElementById('title').value,
-            category: document.getElementById('category').value,
-            description: document.getElementById('description').value,
-            beforeUrl: document.getElementById('beforeUrl').value,
-            afterUrl: document.getElementById('afterUrl').value,
-            createdAt: new Date().toISOString()
+        const firebaseConfig = {
+            apiKey: "AIzaSyDnqS3uT0TAwzxNUySLqvu5Ue6xGupoxUo",
+            authDomain: "homepros-b4889.firebaseapp.com",
+            projectId: "homepros-b4889",
+            storageBucket: "homepros-b4889.firebasestorage.app",
+            messagingSenderId: "841597604762",
+            appId: "1:841597604762:web:477a5eacc09294feeda023"
         };
 
-        // Pointing to your specific database path
-        const projectsRef = collection(db, 'artifacts', appId, 'public', 'data', 'projects');
-        await addDoc(projectsRef, newData);
-        
-        document.getElementById('projectForm').reset();
-        document.getElementById('projectFormContainer').classList.add('hidden');
-        alert("Project saved permanently!");
-    } catch (error) {
-        console.error("Save failed:", error);
-        alert("Error: Check your Firebase Database Rules.");
-    } finally {
-        btn.disabled = false;
-        btn.innerText = "Publish to Live Website";
-    }
-});
-// --- RENDER PROJECTS TO THE GRID ---
-function renderProjects() {
-    const grid = document.getElementById('galleryGrid');
-    grid.innerHTML = ''; // Clear the loader or old projects
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = initializeFirestore(app, {
+            localCache: persistentLocalCache({ tabManager: persistentMultipleTabManager() })
+        });
 
-    const filtered = currentFilter === 'All' 
-        ? allProjects 
-        : allProjects.filter(p => p.category === currentFilter);
+        const appId = 'home-pros-app';
+        let allProjects = [];
+        let currentFilter = 'All';
 
-    if (filtered.length === 0) {
-        grid.innerHTML = `<div class="col-span-full text-center py-20 text-slate-500">No projects found in this category.</div>`;
-        return;
-    }
+        // Helper to add more URL inputs
+        window.addUrlInput = (containerId) => {
+            const container = document.getElementById(containerId);
+            const wrapper = document.createElement('div');
+            wrapper.className = 'flex gap-2 animate-fade-in';
+            
+            const inputName = containerId.includes('before') ? 'beforeUrl' : 'afterUrl';
+            
+            wrapper.innerHTML = `
+                <input type="text" name="${inputName}" class="url-input w-full px-4 py-2 rounded-lg border border-slate-300 focus:ring-2 focus:ring-blue-500 outline-none" placeholder="Paste URL here...">
+                <button type="button" onclick="this.parentElement.remove()" class="text-red-500 hover:text-red-700 p-2">
+                    <i class="fas fa-times"></i>
+                </button>
+            `;
+            container.appendChild(wrapper);
+        };
 
-filtered.forEach(data => {
-    const card = document.createElement('div');
-    card.className = "bg-white rounded-2xl overflow-hidden shadow-sm border border-slate-200 group animate-fade-in";
-    card.innerHTML = `
-        <div class="relative image-container overflow-hidden bg-slate-100">
-            <img src="${data.afterUrl}" class="project-image w-full h-full object-cover">
-            <button onclick="window.deleteProject('${data.id}')" class="absolute top-4 right-4 bg-red-500 hover:bg-red-600 text-white w-8 h-8 rounded-full flex items-center justify-center transition-colors shadow-lg z-10">
-                <i class="fas fa-trash-alt text-xs"></i>
-            </button>
-        </div>
-        <div class="p-6 space-y-3">
-            <div>
-                <span class="text-slate-400 text-[10px] uppercase font-bold block mb-1">Category:</span>
-                <span class="bg-slate-900 text-white px-2 py-0.5 rounded text-[10px] font-bold uppercase">${data.category}</span>
-            </div>
-            <div>
-                <span class="text-slate-400 text-[10px] uppercase font-bold block mb-1">Title of Completed Project:</span>
-                <h3 class="text-lg font-bold text-slate-900">${data.title}</h3>
-            </div>
-            <div>
-                <span class="text-slate-400 text-[10px] uppercase font-bold block mb-1">Description:</span>
-                <p class="text-slate-500 text-sm line-clamp-2">${data.description}</p>
-            </div>
-        </div>
-    `;
-    grid.appendChild(card);
-});}
+        // Reliable redirect helper
+        const safeRedirect = (page) => {
+            const url = new URL(page, window.location.href).href;
+            window.location.assign(url);
+        };
 
-// --- DELETE FUNCTION ---
-window.deleteProject = async (id) => {
-    if (confirm("Are you sure you want to delete this project from the live site?")) {
-        try {
-            await deleteDoc(doc(db, 'artifacts', appId, 'public', 'data', 'projects', id));
-            alert("Project removed.");
-        } catch (error) {
-            console.error("Delete failed:", error);
-            alert("Delete failed. Check permissions.");
+        onAuthStateChanged(auth, (user) => {
+            if (!user) {
+                // Use a standard relative path but ensure it's treated as a string literal
+                window.location.href = './login.html';
+            } else {
+                loadProjects();
+            }
+        });
+
+        window.adminLogout = () => {
+            signOut(auth).then(() => {
+                window.location.href = './index.html';
+            });
+        };
+
+        window.setFilter = (filter) => {
+            currentFilter = filter;
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.innerText === filter || btn.innerText.includes(filter));
+            });
+            renderProjects();
+        };
+
+        function loadProjects() {
+            const projectsRef = collection(db, 'artifacts', appId, 'public', 'data', 'projects');
+            onSnapshot(projectsRef, (snapshot) => {
+                allProjects = snapshot.docs.map(d => ({ id: d.id, ...d.data() }));
+                renderProjects();
+            });
         }
-    }
-};
 
-// --- TOGGLE FORM VISIBILITY ---
-document.getElementById('toggleFormBtn').addEventListener('click', () => {
-    const container = document.getElementById('projectFormContainer');
-    container.classList.toggle('hidden');
-});
-</script>
+        document.getElementById('projectForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const btn = document.getElementById('submitBtn');
+            btn.disabled = true;
+            btn.innerText = "Publishing...";
 
+            // Gather all URL inputs
+            const beforeInputs = document.querySelectorAll('input[name="beforeUrl"]');
+            const afterInputs = document.querySelectorAll('input[name="afterUrl"]');
+            
+            const beforeUrls = Array.from(beforeInputs)
+                .map(input => input.value.split(',')) 
+                .flat()
+                .map(u => u.trim())
+                .filter(u => u !== "");
+
+            const afterUrls = Array.from(afterInputs)
+                .map(input => input.value.split(','))
+                .flat()
+                .map(u => u.trim())
+                .filter(u => u !== "");
+
+            try {
+                const newData = {
+                    title: document.getElementById('title').value,
+                    category: document.getElementById('category').value,
+                    description: document.getElementById('description').value,
+                    beforeUrl: beforeUrls,
+                    afterUrl: afterUrls,
+                    createdAt: new Date().toISOString()
+                };
+
+                const projectsRef = collection(db, 'artifacts', appId, 'public', 'data', 'projects');
+                await addDoc(projectsRef, newData);
+                
+                // Reset form and UI
+                document.getElementById('projectForm').reset();
+                document.getElementById('beforeInputsContainer').innerHTML = `<input type="text" name="beforeUrl" required class="url-input w-full px-4 py-2 rounded-lg border border-slate-300 focus:ring-2 focus:ring-blue-500 outline-none" placeholder="Paste URL here...">`;
+                document.getElementById('afterInputsContainer').innerHTML = `<input type="text" name="afterUrl" required class="url-input w-full px-4 py-2 rounded-lg border border-slate-300 focus:ring-2 focus:ring-blue-500 outline-none" placeholder="Paste URL here...">`;
+                document.getElementById('projectFormContainer').classList.add('hidden');
+            } catch (error) {
+                console.error("Save failed:", error);
+                alert("Error: Check your Firebase Database Rules.");
+            } finally {
+                btn.disabled = false;
+                btn.innerText = "Publish to Live Website";
+            }
+        });
+
+        function renderProjects() {
+            const grid = document.getElementById('galleryGrid');
+            grid.innerHTML = '';
+
+            const filtered = currentFilter === 'All' 
+                ? allProjects 
+                : allProjects.filter(p => p.category === currentFilter);
+
+            if (filtered.length === 0) {
+                grid.innerHTML = `<div class="col-span-full text-center py-20 text-slate-500">No projects found in this category.</div>`;
+                return;
+            }
+
+            filtered.forEach(data => {
+                const card = document.createElement('div');
+                card.className = "bg-white rounded-2xl overflow-hidden shadow-sm border border-slate-200 group animate-fade-in flex flex-col";
+                
+                const afterImages = Array.isArray(data.afterUrl) ? data.afterUrl : [data.afterUrl];
+                const totalImages = afterImages.length;
+
+                card.innerHTML = `
+                    <div class="relative image-container overflow-hidden bg-slate-100" id="slider-${data.id}">
+                        ${afterImages.map((img, idx) => `
+                            <img src="${img}" class="image-slide project-image w-full h-full object-cover ${idx === 0 ? 'active' : ''}" data-index="${idx}">
+                        `).join('')}
+                        
+                        <div class="absolute inset-0 flex items-center justify-between px-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                            ${totalImages > 1 ? `
+                                <button onclick="window.changeSlide('${data.id}', -1)" class="bg-white/80 hover:bg-white text-slate-900 w-8 h-8 rounded-full flex items-center justify-center shadow-md">
+                                    <i class="fas fa-chevron-left text-xs"></i>
+                                </button>
+                                <button onclick="window.changeSlide('${data.id}', 1)" class="bg-white/80 hover:bg-white text-slate-900 w-8 h-8 rounded-full flex items-center justify-center shadow-md">
+                                    <i class="fas fa-chevron-right text-xs"></i>
+                                </button>
+                            ` : ''}
+                        </div>
+
+                        <button onclick="window.deleteProject('${data.id}')" class="absolute top-4 right-4 bg-red-500 hover:bg-red-600 text-white w-8 h-8 rounded-full flex items-center justify-center transition-colors shadow-lg z-10">
+                            <i class="fas fa-trash-alt text-xs"></i>
+                        </button>
+                        
+                        ${totalImages > 1 ? `
+                            <div class="absolute bottom-2 left-1/2 -translate-x-1/2 bg-black/40 text-white text-[10px] px-2 py-0.5 rounded-full backdrop-blur-sm">
+                                <span class="current-indicator">1</span> / ${totalImages}
+                            </div>
+                        ` : ''}
+                    </div>
+                    <div class="p-6 space-y-3 flex-grow">
+                        <div>
+                            <span class="text-slate-400 text-[10px] uppercase font-bold block mb-1">Category:</span>
+                            <span class="bg-slate-900 text-white px-2 py-0.5 rounded text-[10px] font-bold uppercase">${data.category}</span>
+                        </div>
+                        <div>
+                            <span class="text-slate-400 text-[10px] uppercase font-bold block mb-1">Title of Completed Project:</span>
+                            <h3 class="text-lg font-bold text-slate-900">${data.title}</h3>
+                        </div>
+                        <div>
+                            <span class="text-slate-400 text-[10px] uppercase font-bold block mb-1">Description:</span>
+                            <p class="text-slate-500 text-sm line-clamp-2">${data.description}</p>
+                        </div>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        window.changeSlide = (projectId, direction) => {
+            const container = document.getElementById(`slider-${projectId}`);
+            const slides = container.querySelectorAll('.image-slide');
+            const indicator = container.querySelector('.current-indicator');
+            let activeIdx = Array.from(slides).findIndex(s => s.classList.contains('active'));
+            
+            slides[activeIdx].classList.remove('active');
+            activeIdx = (activeIdx + direction + slides.length) % slides.length;
+            slides[activeIdx].classList.add('active');
+            
+            if (indicator) indicator.innerText = activeIdx + 1;
+        };
+
+        window.deleteProject = async (id) => {
+            if (confirm("Are you sure you want to delete this project?")) {
+                try {
+                    await deleteDoc(doc(db, 'artifacts', appId, 'public', 'data', 'projects', id));
+                } catch (error) {
+                    console.error("Delete failed:", error);
+                }
+            }
+        };
+
+        document.getElementById('toggleFormBtn').addEventListener('click', () => {
+            document.getElementById('projectFormContainer').classList.toggle('hidden');
+        });
+    </script>
 </body>
-
 </html>
