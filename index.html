@@ -1057,47 +1057,51 @@
                 <div class="lg:w-2/3 p-12">
                     <h3 class="text-2xl uppercase mb-8">Request Your <span class="text-brandYellow font-bold">Free
                             Estimate</span></h3>
-                    <form id="contactForm" class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div class="space-y-2">
-                            <label class="text-[10px] uppercase font-bold tracking-widest">Your Name</label>
-                            <input type="text" required
-                                class="w-full p-4 bg-slate-100 border-b-2 border-transparent focus:border-brandDark outline-none transition font-bold text-sm">
-                        </div>
-                        <div class="space-y-2">
+                       <form action="https://formspree.io/f/maqjlypj" method="POST" id="contactForm" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+    
+    <div class="space-y-2">
+        <label class="text-[10px] uppercase font-bold tracking-widest">Your Name</label>
+        <input type="text" name="name" required
+            class="w-full p-4 bg-slate-100 border-b-2 border-transparent focus:border-brandDark outline-none transition font-bold text-sm">
+    </div>
+
+    <div class="space-y-2">
         <label class="text-[10px] uppercase font-bold tracking-widest">Email Address</label>
-        <input type="email" required
-            placeholder="example@mail.com"
+        <input type="email" name="email" required placeholder="example@mail.com"
             class="w-full p-4 bg-slate-100 border-b-2 border-transparent focus:border-brandDark outline-none transition font-bold text-sm">
     </div>
 
     <div class="space-y-2">
         <label class="text-[10px] uppercase font-bold tracking-widest">Phone Number</label>
-        <input type="tel" required
-            placeholder="+1 (555) 000-0000"
+        <input type="tel" name="phone" required placeholder="+1 (555) 000-0000"
             class="w-full p-4 bg-slate-100 border-b-2 border-transparent focus:border-brandDark outline-none transition font-bold text-sm">
     </div>
-                        <div class="md:col-span-2 space-y-2">
-                            <label class="text-[10px] uppercase font-bold tracking-widest">Service Needed</label>
-                            <select
-                                class="w-full p-4 bg-gray-100 hover:bg-gray-300 border-b-2 border-transparent focus:border-brandDark outline-none transition font-bold text-sm appearance-none">
-                                <option>General Inquiry</option>
-                                <option>Home Services</option>
-                                <option>Property Maintenance</option>
-                                <option>Electrical Work</option>
-                                <option>Car Detailing / Specialty</option>
-                            </select>
-                        </div>
-                        <div class="md:col-span-2 space-y-2">
-                            <label class="text-[10px] uppercase font-bold tracking-widest">Your Message</label>
-                            <textarea rows="4" required
-                                class="w-full p-4 bg-slate-100 border-b-2 border-transparent focus:border-brandDark outline-none transition font-bold text-sm"></textarea>
-                        </div>
-                        <div class="md:col-span-2">
-                            <button type="submit"
-                                class="w-full bg-navy text-white font-black py-5 uppercase tracking-widest hover:bg-brandYellow hover:text-navy transition shadow-lg">Submit
-                                Request</button>
-                        </div>
-                    </form>
+
+    <div class="md:col-span-2 space-y-2">
+        <label class="text-[10px] uppercase font-bold tracking-widest">Service Needed</label>
+        <select name="service"
+            class="w-full p-4 bg-gray-100 hover:bg-gray-300 border-b-2 border-transparent focus:border-brandDark outline-none transition font-bold text-sm appearance-none">
+            <option value="General Inquiry">General Inquiry</option>
+            <option value="Home Services">Home Services</option>
+            <option value="Property Maintenance">Property Maintenance</option>
+            <option value="Electrical Work">Electrical Work</option>
+            <option value="Car Detailing">Car Detailing / Specialty</option>
+        </select>
+    </div>
+
+    <div class="md:col-span-2 space-y-2">
+        <label class="text-[10px] uppercase font-bold tracking-widest">Your Message</label>
+        <textarea name="message" rows="4" required
+            class="w-full p-4 bg-slate-100 border-b-2 border-transparent focus:border-brandDark outline-none transition font-bold text-sm"></textarea>
+    </div>
+
+    <div class="md:col-span-2">
+        <button type="submit"
+            class="w-full bg-navy text-white font-black py-5 uppercase tracking-widest hover:bg-brandYellow hover:text-navy transition shadow-lg">
+            Submit Request
+        </button>
+    </div>
+</form>
                 </div>
             </div>
         </div>
