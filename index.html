@@ -1316,6 +1316,34 @@ input:hover, select:hover, textarea:hover {
         </a>
     </div>
     <script>
+    const mobileToggle = document.getElementById('mobile-toggle');
+    const mobileClose = document.getElementById('mobile-close');
+    const mobileSidebar = document.getElementById('mobile-sidebar');
+    const sidebarOverlay = document.getElementById('sidebar-overlay');
+    const body = document.body;
+
+    // Function to open sidebar
+    mobileToggle.addEventListener('click', () => {
+        body.classList.remove('sidebar-closed');
+        body.classList.add('sidebar-open');
+        mobileSidebar.classList.remove('sidebar-closed');
+    });
+
+    // Function to close sidebar
+    const closeSidebar = () => {
+        body.classList.remove('sidebar-open');
+        body.classList.add('sidebar-closed');
+        mobileSidebar.classList.add('sidebar-closed');
+    };
+
+    mobileClose.addEventListener('click', closeSidebar);
+    sidebarOverlay.addEventListener('click', closeSidebar);
+
+    // Close sidebar when clicking a link
+    const mobileLinks = document.querySelectorAll('.mobile-link');
+    mobileLinks.forEach(link => {
+        link.addEventListener('click', closeSidebar);
+    });
     const form = document.getElementById('estimate-form');
 const submitBtn = document.getElementById('submit-btn');
 const statusMsg = document.getElementById('status-message');
