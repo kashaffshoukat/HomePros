@@ -154,11 +154,11 @@
                 <div class="relative h-48 overflow-hidden group" id="container-${id}">
                     ${slidesHtml}
                     
-                    <div class="absolute inset-0 flex items-center justify-between px-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                        <button onclick="changeSlide('${id}', -1)" class="bg-black/50 text-white w-8 h-8 rounded-full flex items-center justify-center hover:bg-black/70">
+                    <div class="absolute inset-0 flex items-center justify-between px-2  transition-opacity">
+                        <button onclick="changeSlide('${id}', -1)" class="bg-black/40 text-white w-8 h-8 rounded-full flex items-center justify-center hover:bg-black/70">
                             <i class="fas fa-chevron-left text-xs"></i>
                         </button>
-                        <button onclick="changeSlide('${id}', 1)" class="bg-black/50 text-white w-8 h-8 rounded-full flex items-center justify-center hover:bg-black/70">
+                        <button onclick="changeSlide('${id}', 1)" class="bg-black/40 text-white w-8 h-8 rounded-full flex items-center justify-center hover:bg-black/70">
                             <i class="fas fa-chevron-right text-xs"></i>
                         </button>
                     </div>
@@ -175,6 +175,7 @@
                     <p class="text-sm text-slate-500 line-clamp-2 mt-1">${data.description}</p>
                 </div>
             `;
+          
             grid.appendChild(card);
         });
     });
