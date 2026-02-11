@@ -58,7 +58,8 @@
                         <label class="block text-sm font-semibold text-slate-700 mb-1">Category</label>
                         <select id="category" required class="w-full px-4 py-2 rounded-lg border border-slate-300 outline-none bg-white">
                             <option value="Electrical">Electrical</option>
-                            <option value="Maintenance">Maintenance</option>
+                            <option value="Construction">Construction</option>
+                            <option value="Maintenance">Home Maintenance</option>
                             <option value="Plumbing">Plumbing</option>
                             <option value="Remodel">Remodel</option>
                         </select>
@@ -131,34 +132,73 @@
         else loadProjects();
     });
 
-    function loadProjects() {
-        onSnapshot(collection(db, 'artifacts', appId, 'public', 'data', 'projects'), (snap) => {
-            const grid = document.getElementById('galleryGrid');
-            grid.innerHTML = '';
-            snap.docs.forEach(docSnap => {
-                const data = docSnap.data();
-                const id = docSnap.id;
-                const allImgs = [...(data.beforeUrl || []), ...(data.afterUrl || [])];
-                
-                const card = document.createElement('div');
-                card.className = "bg-white rounded-2xl overflow-hidden shadow-sm border border-slate-200";
-                card.innerHTML = `
-                    <div class="relative h-48 overflow-hidden">
-                        <img src="${allImgs[0]}" class="w-full h-full object-cover">
-                        <button onclick="window.deleteProject('${id}')" class="absolute top-2 right-2 bg-red-500 text-white p-2 rounded-full"><i class="fas fa-trash"></i></button>
-                    </div>
-                    <div class="p-4">
-                        <h3 class="font-bold text-lg">${data.title}</h3>
-                        <p class="text-sm text-slate-500 line-clamp-2">${data.description}</p>
-                    </div>
-                `;
-                grid.appendChild(card);
+  function loadProjects() {
+    onSnapshot(collection(db, 'artifacts', appId, 'public', 'data', 'projects'), (snap) => {
+        const grid = document.getElementById('galleryGrid');
+        grid.innerHTML = '';
+        snap.docs.forEach(docSnap => {
+            const data = docSnap.data();
+            const id = docSnap.id;
+            const allImgs = [...(data.beforeUrl || []), ...(data.afterUrl || [])];
+            
+            const card = document.createElement('div');
+            card.className = "bg-white rounded-2xl overflow-hidden shadow-sm border border-slate-200";
+            
+            // Create the slides HTML
+            let slidesHtml = '';
+            allImgs.forEach((img, index) => {
+                slidesHtml += `<img src="${img}" class="image-slide ${index === 0 ? 'active' : ''} w-full h-full object-cover">`;
             });
-        });
-    }
 
+            card.innerHTML = `
+                <div class="relative h-48 overflow-hidden group" id="container-${id}">
+                    ${slidesHtml}
+                    
+                    <div class="absolute inset-0 flex items-center justify-between px-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                        <button onclick="changeSlide('${id}', -1)" class="bg-black/50 text-white w-8 h-8 rounded-full flex items-center justify-center hover:bg-black/70">
+                            <i class="fas fa-chevron-left text-xs"></i>
+                        </button>
+                        <button onclick="changeSlide('${id}', 1)" class="bg-black/50 text-white w-8 h-8 rounded-full flex items-center justify-center hover:bg-black/70">
+                            <i class="fas fa-chevron-right text-xs"></i>
+                        </button>
+                    </div>
+
+                    <button onclick="window.deleteProject('${id}')" class="absolute top-2 right-2 bg-red-500 text-white p-2 rounded-full z-10 hover:bg-red-600 transition-colors">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                </div>
+                <div class="p-4">
+                    <div class="flex justify-between items-start">
+                        <h3 class="font-bold text-lg">${data.title}</h3>
+                        <span class="text-[10px] bg-slate-100 px-2 py-1 rounded-md font-bold text-slate-500 uppercase">${data.category}</span>
+                    </div>
+                    <p class="text-sm text-slate-500 line-clamp-2 mt-1">${data.description}</p>
+                </div>
+            `;
+            grid.appendChild(card);
+        });
+    });
+}
+window.changeSlide = (projectId, direction) => {
+    const container = document.getElementById(`container-${projectId}`);
+    const slides = container.querySelectorAll('.image-slide');
+    let activeIndex = Array.from(slides).findIndex(s => s.classList.contains('active'));
+    
+    // Remove active class from current
+    slides[activeIndex].classList.remove('active');
+    
+    // Calculate new index
+    activeIndex += direction;
+    
+    // Loop back to start or end
+    if (activeIndex >= slides.length) activeIndex = 0;
+    if (activeIndex < 0) activeIndex = slides.length - 1;
+    
+    // Add active class to new slide
+    slides[activeIndex].classList.add('active');
+};
     window.deleteProject = async (id) => {
-        if(confirm("Pakka delete kerna hai?")) {
+        if(confirm("Are you sure you want to delete this project?")) {
             await deleteDoc(doc(db, 'artifacts', appId, 'public', 'data', 'projects', id));
         }
     }
@@ -194,9 +234,9 @@
 
             document.getElementById('projectForm').reset();
             document.getElementById('projectFormContainer').classList.add('hidden');
-            alert("Mubarak ho! Project uploaded.");
+            alert("Your Project is uploaded successfully.");
         } catch (err) {
-            alert("Upload fail hogaya. Check API Key or Internet.");
+            alert("Upload failed. Check API Key or Internet.");
         } finally {
             btn.disabled = false;
             btn.innerText = "Publish to Live Website";
