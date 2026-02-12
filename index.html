@@ -589,6 +589,32 @@ input:hover, select:hover, textarea:hover {
     scrollbar-color: #64748b #e2e8f0; /* For Firefox */
     padding-bottom: 12px; 
 }
+        .star-rating {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: flex-end;
+}
+.star-rating input { display: none; }
+.star-rating label {
+    font-size: 2rem;
+    color: #ddd;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+.star-rating input:checked ~ label,
+.star-rating label:hover,
+.star-rating label:hover ~ label {
+    color: #f59e0b;
+}
+.review-card {
+    transition: transform 0.2s;
+    border: 1px solid #e5e7eb;
+    padding: 1.5rem;
+    border-radius: 0.75rem;
+    background: white;
+    margin-bottom: 1rem;
+}
+
     </style>
 
 </head>
@@ -1167,6 +1193,29 @@ input:hover, select:hover, textarea:hover {
             </div>
         </div>
     </section>
+    ​<div id="review-app-container" class="max-w-3xl mx-auto p-4">
+<div class="bg-white rounded-xl shadow-sm p-6 mb-8 border border-gray-100">
+<h2 class="text-xl font-bold mb-4">Leave a Review</h2>
+<form id="reviewForm" class="space-y-4">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<input type="text" id="userName" placeholder="Your Name" required class="w-full px-4 py-2 border rounded-lg outline-none">
+<div class="flex items-center space-x-2">
+<div class="star-rating">
+<input type="radio" id="star5" name="rating" value="5" required /><label for="star5">★</label>
+<input type="radio" id="star4" name="rating" value="4" /><label for="star4">★</label>
+<input type="radio" id="star3" name="rating" value="3" /><label for="star3">★</label>
+<input type="radio" id="star2" name="rating" value="2" /><label for="star2">★</label>
+<input type="radio" id="star1" name="rating" value="1" /><label for="star1">★</label>
+</div>
+</div>
+</div>
+<textarea id="reviewText" rows="3" placeholder="Write your review..." required class="w-full px-4 py-2 border rounded-lg outline-none"></textarea>
+<div class="flex justify-between items-center">
+<span id="statusMsg" class="text-sm"></span>
+<button type="submit" id="submitBtn" class="bg-blue-600 text-white px-6 py-2 rounded-lg font-medium hover:bg-blue-700 transition">Post Review</button>
+</div>
+</form>
+</div>
 
    <div id="quote" class="contact-container">
     <div class="sidebar">
@@ -1315,7 +1364,146 @@ input:hover, select:hover, textarea:hover {
             class="bg-navy text-white w-12 h-12 rounded-full shadow-2xl flex items-center justify-center border-2 border-brandDark">
             <i class="fas fa-calendar-alt"></i>
         </a>
+        
     </div>
+    <script type="module">
+    // Using clean CDN URLs for the Firebase SDK
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+    import { getAuth, signInAnonymously, onAuthStateChanged, signInWithCustomToken } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+    import { getFirestore, collection, addDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+    // These values are provided by your environment
+    const firebaseConfig = JSON.parse(__firebase_config);
+    const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
+
+    // Initialize Firebase Services
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db = getFirestore(app);
+
+    const reviewsContainer = document.getElementById('reviewsContainer');
+    const reviewForm = document.getElementById('reviewForm');
+    const statusMsg = document.getElementById('statusMsg');
+    const reviewCountBadge = document.getElementById('reviewCount');
+
+    let currentUser = null;
+
+    // Authentication Setup
+    async function initAuth() {
+        try {
+            if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
+                await signInWithCustomToken(auth, __initial_auth_token);
+            } else {
+                await signInAnonymously(auth);
+            }
+        } catch (error) {
+            console.error("Auth failed:", error);
+            statusMsg.textContent = "Connection error. Please refresh.";
+        }
+    }
+
+    onAuthStateChanged(auth, (user) => {
+        currentUser = user;
+        if (user) {
+            loadReviews();
+        }
+    });
+
+    // Fetch and Sync Reviews
+    function loadReviews() {
+        const reviewsRef = collection(db, 'artifacts', appId, 'public', 'data', 'visitor_reviews');
+        
+        onSnapshot(reviewsRef, (snapshot) => {
+            const reviews = [];
+            snapshot.forEach(doc => {
+                reviews.push({ id: doc.id, ...doc.data() });
+            });
+            
+            // Sort reviews by newest first in memory
+            reviews.sort((a, b) => (b.timestamp || 0) - (a.timestamp || 0));
+            
+            renderReviews(reviews);
+        }, (err) => {
+            console.error("Database error:", err);
+            reviewsContainer.innerHTML = `<p class="text-red-500 text-center">Error loading reviews.</p>`;
+        });
+    }
+
+    function renderReviews(reviews) {
+        reviewCountBadge.textContent = `${reviews.length} Review${reviews.length === 1 ? '' : 's'}`;
+        
+        if (reviews.length === 0) {
+            reviewsContainer.innerHTML = `<div class="text-center py-10 text-gray-400">Be the first to leave a review!</div>`;
+            return;
+        }
+
+        reviewsContainer.innerHTML = reviews.map(r => `
+            <div class="review-card bg-white p-6 rounded-2xl border border-gray-100 shadow-sm">
+                <div class="flex justify-between items-start mb-3">
+                    <div>
+                        <h3 class="font-bold text-gray-900">${escapeHtml(r.name)}</h3>
+                        <div class="text-yellow-500 text-sm">
+                            ${'★'.repeat(r.rating)}${'☆'.repeat(5 - r.rating)}
+                        </div>
+                    </div>
+                    <span class="text-xs text-gray-400">
+                        ${r.timestamp ? new Date(r.timestamp).toLocaleDateString() : 'Just now'}
+                    </span>
+                </div>
+                <p class="text-gray-600 text-sm leading-relaxed">${escapeHtml(r.text)}</p>
+            </div>
+        `).join('');
+    }
+
+    // Submit New Review
+    reviewForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        if (!currentUser) return;
+        
+        const ratingInput = document.querySelector('input[name="rating"]:checked');
+        if (!ratingInput) {
+            alert("Please select a rating.");
+            return;
+        }
+
+        const submitBtn = document.getElementById('submitBtn');
+        submitBtn.disabled = true;
+        statusMsg.textContent = "Posting...";
+        statusMsg.className = "text-sm text-blue-500";
+
+        try {
+            const reviewsRef = collection(db, 'artifacts', appId, 'public', 'data', 'visitor_reviews');
+            await addDoc(reviewsRef, {
+                name: document.getElementById('userName').value,
+                text: document.getElementById('reviewText').value,
+                rating: parseInt(ratingInput.value),
+                timestamp: Date.now(),
+                userId: currentUser.uid
+            });
+            
+            reviewForm.reset();
+            statusMsg.textContent = "Success!";
+            statusMsg.className = "text-sm text-green-500";
+            setTimeout(() => { statusMsg.textContent = ""; }, 3000);
+        } catch (err) {
+            console.error(err);
+            statusMsg.textContent = "Error saving review.";
+            statusMsg.className = "text-sm text-red-500";
+        } finally {
+            submitBtn.disabled = false;
+        }
+    });
+
+    // Helper to prevent XSS
+    function escapeHtml(str) {
+        const p = document.createElement('p');
+        p.textContent = str;
+        return p.innerHTML;
+    }
+
+    initAuth();
+</script>
+
     <script>
     const mobileToggle = document.getElementById('mobile-toggle');
     const mobileClose = document.getElementById('mobile-close');
@@ -1611,3 +1799,4 @@ window.changeSlide = (projectId, direction) => {
 </body>
 
 </html>
+
