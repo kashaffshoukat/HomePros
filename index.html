@@ -1366,17 +1366,15 @@ input:hover, select:hover, textarea:hover {
         </a>
         
     </div>
-    <script type="module">
-    // Using clean CDN URLs for the Firebase SDK
+<!-- Replace the review script at the bottom of your index.html with this -->
+<script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
     import { getAuth, signInAnonymously, onAuthStateChanged, signInWithCustomToken } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
     import { getFirestore, collection, addDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
-    // These values are provided by your environment
+    // 1. INITIALIZATION: These must be present for the database to work
     const firebaseConfig = JSON.parse(__firebase_config);
     const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
-
-    // Initialize Firebase Services
     const app = initializeApp(firebaseConfig);
     const auth = getAuth(app);
     const db = getFirestore(app);
@@ -1388,7 +1386,7 @@ input:hover, select:hover, textarea:hover {
 
     let currentUser = null;
 
-    // Authentication Setup
+    // 2. AUTHENTICATION: Every Firestore call needs an authenticated user
     async function initAuth() {
         try {
             if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
@@ -1398,19 +1396,19 @@ input:hover, select:hover, textarea:hover {
             }
         } catch (error) {
             console.error("Auth failed:", error);
-            statusMsg.textContent = "Connection error. Please refresh.";
+            statusMsg.textContent = "Database connection error.";
         }
     }
 
     onAuthStateChanged(auth, (user) => {
         currentUser = user;
         if (user) {
-            loadReviews();
+            loadReviews(); // Only load reviews after user is authenticated
         }
     });
 
-    // Fetch and Sync Reviews
     function loadReviews() {
+        // Path must strictly follow Rule 1
         const reviewsRef = collection(db, 'artifacts', appId, 'public', 'data', 'visitor_reviews');
         
         onSnapshot(reviewsRef, (snapshot) => {
@@ -1419,9 +1417,8 @@ input:hover, select:hover, textarea:hover {
                 reviews.push({ id: doc.id, ...doc.data() });
             });
             
-            // Sort reviews by newest first in memory
+            // Sort in memory (Rule 2)
             reviews.sort((a, b) => (b.timestamp || 0) - (a.timestamp || 0));
-            
             renderReviews(reviews);
         }, (err) => {
             console.error("Database error:", err);
@@ -1430,20 +1427,20 @@ input:hover, select:hover, textarea:hover {
     }
 
     function renderReviews(reviews) {
-        reviewCountBadge.textContent = `${reviews.length} Review${reviews.length === 1 ? '' : 's'}`;
+        if (reviewCountBadge) reviewCountBadge.textContent = `${reviews.length} Review${reviews.length === 1 ? '' : 's'}`;
         
         if (reviews.length === 0) {
-            reviewsContainer.innerHTML = `<div class="text-center py-10 text-gray-400">Be the first to leave a review!</div>`;
+            reviewsContainer.innerHTML = `<div class="text-center py-10 text-gray-400">No reviews yet. Be the first!</div>`;
             return;
         }
 
         reviewsContainer.innerHTML = reviews.map(r => `
-            <div class="review-card bg-white p-6 rounded-2xl border border-gray-100 shadow-sm">
+            <div class="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm mb-4">
                 <div class="flex justify-between items-start mb-3">
                     <div>
                         <h3 class="font-bold text-gray-900">${escapeHtml(r.name)}</h3>
                         <div class="text-yellow-500 text-sm">
-                            ${'★'.repeat(r.rating)}${'☆'.repeat(5 - r.rating)}
+                            ${'★'.repeat(r.rating || 5)}${'☆'.repeat(5 - (r.rating || 5))}
                         </div>
                     </div>
                     <span class="text-xs text-gray-400">
@@ -1455,46 +1452,37 @@ input:hover, select:hover, textarea:hover {
         `).join('');
     }
 
-    // Submit New Review
     reviewForm.addEventListener('submit', async (e) => {
         e.preventDefault();
         if (!currentUser) return;
         
         const ratingInput = document.querySelector('input[name="rating"]:checked');
-        if (!ratingInput) {
-            alert("Please select a rating.");
-            return;
-        }
-
         const submitBtn = document.getElementById('submitBtn');
+        
         submitBtn.disabled = true;
         statusMsg.textContent = "Posting...";
-        statusMsg.className = "text-sm text-blue-500";
 
         try {
             const reviewsRef = collection(db, 'artifacts', appId, 'public', 'data', 'visitor_reviews');
             await addDoc(reviewsRef, {
                 name: document.getElementById('userName').value,
                 text: document.getElementById('reviewText').value,
-                rating: parseInt(ratingInput.value),
+                rating: parseInt(ratingInput ? ratingInput.value : 5),
                 timestamp: Date.now(),
                 userId: currentUser.uid
             });
             
             reviewForm.reset();
             statusMsg.textContent = "Success!";
-            statusMsg.className = "text-sm text-green-500";
             setTimeout(() => { statusMsg.textContent = ""; }, 3000);
         } catch (err) {
             console.error(err);
-            statusMsg.textContent = "Error saving review.";
-            statusMsg.className = "text-sm text-red-500";
+            statusMsg.textContent = "Error saving.";
         } finally {
             submitBtn.disabled = false;
         }
     });
 
-    // Helper to prevent XSS
     function escapeHtml(str) {
         const p = document.createElement('p');
         p.textContent = str;
@@ -1503,6 +1491,8 @@ input:hover, select:hover, textarea:hover {
 
     initAuth();
 </script>
+
+
 
     <script>
     const mobileToggle = document.getElementById('mobile-toggle');
@@ -1799,4 +1789,5 @@ window.changeSlide = (projectId, direction) => {
 </body>
 
 </html>
+
 
