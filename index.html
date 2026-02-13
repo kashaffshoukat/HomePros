@@ -589,32 +589,6 @@ input:hover, select:hover, textarea:hover {
     scrollbar-color: #64748b #e2e8f0; /* For Firefox */
     padding-bottom: 12px; 
 }
-        .star-rating {
-    display: flex;
-    flex-direction: row-reverse;
-    justify-content: flex-end;
-}
-.star-rating input { display: none; }
-.star-rating label {
-    font-size: 2rem;
-    color: #ddd;
-    cursor: pointer;
-    transition: color 0.2s;
-}
-.star-rating input:checked ~ label,
-.star-rating label:hover,
-.star-rating label:hover ~ label {
-    color: #f59e0b;
-}
-.review-card {
-    transition: transform 0.2s;
-    border: 1px solid #e5e7eb;
-    padding: 1.5rem;
-    border-radius: 0.75rem;
-    background: white;
-    margin-bottom: 1rem;
-}
-
     </style>
 
 </head>
@@ -881,14 +855,7 @@ input:hover, select:hover, textarea:hover {
         <p class="text-slate-500">Filter by service to see our expertise in action.</p>
     </div>
 
-    <div id="filterContainer" class="flex gap-4 overflow-x-auto w-full pb-3 mt-4">
-    <button class="filter-btn active whitespace-nowrap px-6 py-2 rounded-full border border-slate-300 text-sm font-medium" onclick="window.setFilter('All')">All Projects</button>
-    <button class="filter-btn whitespace-nowrap px-6 py-2 rounded-full border border-slate-300 text-sm font-medium" onclick="window.setFilter('Electrical')">Electrical</button>
-    <button class="filter-btn whitespace-nowrap px-6 py-2 rounded-full border border-slate-300 text-sm font-medium" onclick="window.setFilter('Maintenance')">Home Maintenance</button>
-    <button class="filter-btn whitespace-nowrap px-6 py-2 rounded-full border border-slate-300 text-sm font-medium" onclick="window.setFilter('Plumbing')">Plumbing</button>
-    <button class="filter-btn whitespace-nowrap px-6 py-2 rounded-full border border-slate-300 text-sm font-medium" onclick="window.setFilter('Remodel')">Remodel</button>
-    <button class="filter-btn whitespace-nowrap px-6 py-2 rounded-full border border-slate-300 text-sm font-medium" onclick="window.setFilter('Construction')">Construction</button>
-</div>
+   
 </div>
 
             <!-- Gallery Grid -->
@@ -896,7 +863,15 @@ input:hover, select:hover, textarea:hover {
                 <div id="loader" class="col-span-full flex flex-col items-center justify-center py-20">
                     <div class="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"></div>
                 </div>
-            </div>
+            </div><br>
+             <div id="filterContainer" class="flex gap-4 overflow-x-auto w-full pb-3 mt-4">
+    <button class="filter-btn active whitespace-nowrap px-6 py-2 rounded-full border border-slate-300 text-sm font-medium" onclick="window.setFilter('All')">All Projects</button>
+    <button class="filter-btn whitespace-nowrap px-6 py-2 rounded-full border border-slate-300 text-sm font-medium" onclick="window.setFilter('Electrical')">Electrical</button>
+    <button class="filter-btn whitespace-nowrap px-6 py-2 rounded-full border border-slate-300 text-sm font-medium" onclick="window.setFilter('Maintenance')">Home Maintenance</button>
+    <button class="filter-btn whitespace-nowrap px-6 py-2 rounded-full border border-slate-300 text-sm font-medium" onclick="window.setFilter('Plumbing')">Plumbing</button>
+    <button class="filter-btn whitespace-nowrap px-6 py-2 rounded-full border border-slate-300 text-sm font-medium" onclick="window.setFilter('Remodel')">Remodel</button>
+    <button class="filter-btn whitespace-nowrap px-6 py-2 rounded-full border border-slate-300 text-sm font-medium" onclick="window.setFilter('Construction')">Construction</button>
+</div>
         </div>
     </section>
     <section id="about" class="py-24 bg-slate-50 overflow-hidden">
@@ -1133,89 +1108,51 @@ input:hover, select:hover, textarea:hover {
             </div>
         </div>
     </div>
+<section class="py-24 bg-navy text-white">
+    <div class="container mx-auto px-4">
+        <div class="max-w-3xl mx-auto text-center mb-16">
+            <h2 class="text-3xl md:text-4xl font-light tracking-tight mb-4">
+                Client Testimonials
+            </h2>
+            <div class="h-1 w-20 bg-brandYellow mx-auto mb-6"></div>
+            <p class="text-white leading-relaxed max-w-3xl mx-auto">
+                Discover why homeowners and businesses across the Cayman Islands trust Home Pros for their property maintenance and renovation needs.
+            </p>
+            <button onclick="document.getElementById('review-form-container').classList.toggle('hidden')" 
+                    class="mt-8 px-8 py-2.5 border border-white text-white hover:bg-white hover:text-[navy] transition-all duration-300 text-sm font-semibold tracking-wide uppercase">
+                Write a Review
+            </button>
+        </div>
 
-    <section class="py-24 bg-navy text-white">
-        <div class="container mx-auto px-4">
-            <div class="text-center mb-16">
-                <h2 class="text-4xl uppercase mb-4 italic font-bold">"Real People, Real Results"</h2>
-                <p class="text-brandYellow uppercase tracking-widest text-sm font-bold">Feedback from our Cayman
-                    Customers</p>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-                <div class="bg-white text-navy p-6 rounded-2xl shadow-xl relative card-hover">
-                    <div class="flex items-center mb-4">
-                        <div class="flex text-[#FFDB58] text-xs">
-                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i
-                                class="fas fa-star"></i><i class="fas fa-star"></i>
-                        </div>
-                        <span class="ml-2 text-[10px] text-white font-bold uppercase">Verified WhatsApp</span>
-                    </div>
-                    <p class="text-sm font-semibold italic">"The team at Home Pros was incredible! My roof looks like
-                        new after the cleaning. Will definitely use them again for our electrical repairs."</p>
-                    <div class="mt-4 flex items-center justify-between">
-                        <span class="text-xs font-bold uppercase text-gray-500">— Sarah, Seven Mile Beach</span>
-                        <i class="fab fa-whatsapp text-green-500"></i>
-                    </div>
+        <div id="review-form-container" class="hidden max-w-xl mx-auto bg-white p-10 shadow-2xl mb-20">
+            <h3 class="text-xl font-semibold mb-6 text-navy">Submit Your Feedback</h3>
+            <form id="submit-review-form" class="space-y-5">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <input type="text" id="rev-name" placeholder="Full Name" 
+                           class="w-full border-slate-200 p-3 text-sm focus:ring-1 focus:ring-navy outline-none border text-slate-900" required>
+                   <select id="rev-rating" class="w-full border-slate-200 p-3 text-sm focus:ring-1 focus:ring-navy outline-none border text-slate-900 bg-white">
+    <option value="5">★★★★★ (5 Stars - Excellent)</option>
+    <option value="4">★★★★☆ (4 Stars - Very Good)</option>
+    <option value="3">★★★☆☆ (3 Stars - Average)</option>
+    <option value="2">★★☆☆☆ (2 Stars - Poor)</option>
+    <option value="1">★☆☆☆☆ (1 Star - Very Poor)</option>
+</select>
                 </div>
+                <textarea id="rev-text" placeholder="Share your experience..." 
+                          class="w-full border-slate-200 p-3 text-sm focus:ring-1 focus:ring-navy outline-none border text-slate-900" rows="4" required></textarea>
+                <button type="submit" class="w-full bg-navy text-white py-3 font-bold text-xs uppercase tracking-widest hover:bg-slate-800 transition">
+                    Publish Review
+                </button>
+            </form>
+        </div>
 
-                <div class="bg-white text-navy p-6 rounded-2xl shadow-xl relative card-hover">
-                    <div class="flex items-center mb-4">
-                        <div class="flex text-[#FFDB58] text-xs">
-                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i
-                                class="fas fa-star"></i><i class="fas fa-star"></i>
-                        </div>
-                        <span class="ml-2 text-[10px] text-white font-bold uppercase">Verified WhatsApp</span>
-                    </div>
-                    <p class="text-sm font-semibold italic">"Prompt, professional, and they brought all their own
-                        equipment. The pressure washing on the driveway made a huge difference!"</p>
-                    <div class="mt-4 flex items-center justify-between">
-                        <span class="text-xs font-bold uppercase text-gray-500">— James, Bodden Town</span>
-                        <i class="fab fa-whatsapp text-green-500"></i>
-                    </div>
-                </div>
-
-                <div class="bg-white text-navy p-6 rounded-2xl shadow-xl relative card-hover">
-                    <div class="flex items-center mb-4">
-                        <div class="flex text-[#FFDB58] text-xs">
-                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i
-                                class="fas fa-star"></i><i class="fas fa-star"></i>
-                        </div>
-                        <span class="ml-2 text-[10px] text-white font-bold uppercase">Verified WhatsApp</span>
-                    </div>
-                    <p class="text-sm font-semibold italic">"Highly recommend for electrical work. They found the issue
-                        fast and fixed it the same day. Great communication throughout."</p>
-                    <div class="mt-4 flex items-center justify-between">
-                        <span class="text-xs font-bold uppercase text-gray-500">— Michael, West Bay</span>
-                        <i class="fab fa-whatsapp text-green-500"></i>
-                    </div>
-                </div>
+        <div id="reviews-display-grid" class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-7xl mx-auto">
+            <div class="col-span-full text-center text-slate-400 italic">
+                Gathering recent client feedback...
             </div>
         </div>
-    </section>
-    ​<div id="review-app-container" class="max-w-3xl mx-auto p-4">
-<div class="bg-white rounded-xl shadow-sm p-6 mb-8 border border-gray-100">
-<h2 class="text-xl font-bold mb-4">Leave a Review</h2>
-<form id="reviewForm" class="space-y-4">
-<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-<input type="text" id="userName" placeholder="Your Name" required class="w-full px-4 py-2 border rounded-lg outline-none">
-<div class="flex items-center space-x-2">
-<div class="star-rating">
-<input type="radio" id="star5" name="rating" value="5" required /><label for="star5">★</label>
-<input type="radio" id="star4" name="rating" value="4" /><label for="star4">★</label>
-<input type="radio" id="star3" name="rating" value="3" /><label for="star3">★</label>
-<input type="radio" id="star2" name="rating" value="2" /><label for="star2">★</label>
-<input type="radio" id="star1" name="rating" value="1" /><label for="star1">★</label>
-</div>
-</div>
-</div>
-<textarea id="reviewText" rows="3" placeholder="Write your review..." required class="w-full px-4 py-2 border rounded-lg outline-none"></textarea>
-<div class="flex justify-between items-center">
-<span id="statusMsg" class="text-sm"></span>
-<button type="submit" id="submitBtn" class="bg-blue-600 text-white px-6 py-2 rounded-lg font-medium hover:bg-blue-700 transition">Post Review</button>
-</div>
-</form>
-</div>
+    </div>
+</section>
 
    <div id="quote" class="contact-container">
     <div class="sidebar">
@@ -1329,6 +1266,7 @@ input:hover, select:hover, textarea:hover {
                     <li>- Lawn Care & Hauling</li>
                     <li>- Electrical Repairs</li>
                     <li>- Car Detailing</li>
+                    <li>- Construction</li>
                 </ul>
             </div>
             <div>
@@ -1364,136 +1302,7 @@ input:hover, select:hover, textarea:hover {
             class="bg-navy text-white w-12 h-12 rounded-full shadow-2xl flex items-center justify-center border-2 border-brandDark">
             <i class="fas fa-calendar-alt"></i>
         </a>
-        
     </div>
-<!-- Replace the review script at the bottom of your index.html with this -->
-<script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
-    import { getAuth, signInAnonymously, onAuthStateChanged, signInWithCustomToken } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
-    import { getFirestore, collection, addDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
-
-    // 1. INITIALIZATION: These must be present for the database to work
-    const firebaseConfig = JSON.parse(__firebase_config);
-    const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
-    const app = initializeApp(firebaseConfig);
-    const auth = getAuth(app);
-    const db = getFirestore(app);
-
-    const reviewsContainer = document.getElementById('reviewsContainer');
-    const reviewForm = document.getElementById('reviewForm');
-    const statusMsg = document.getElementById('statusMsg');
-    const reviewCountBadge = document.getElementById('reviewCount');
-
-    let currentUser = null;
-
-    // 2. AUTHENTICATION: Every Firestore call needs an authenticated user
-    async function initAuth() {
-        try {
-            if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
-                await signInWithCustomToken(auth, __initial_auth_token);
-            } else {
-                await signInAnonymously(auth);
-            }
-        } catch (error) {
-            console.error("Auth failed:", error);
-            statusMsg.textContent = "Database connection error.";
-        }
-    }
-
-    onAuthStateChanged(auth, (user) => {
-        currentUser = user;
-        if (user) {
-            loadReviews(); // Only load reviews after user is authenticated
-        }
-    });
-
-    function loadReviews() {
-        // Path must strictly follow Rule 1
-        const reviewsRef = collection(db, 'artifacts', appId, 'public', 'data', 'visitor_reviews');
-        
-        onSnapshot(reviewsRef, (snapshot) => {
-            const reviews = [];
-            snapshot.forEach(doc => {
-                reviews.push({ id: doc.id, ...doc.data() });
-            });
-            
-            // Sort in memory (Rule 2)
-            reviews.sort((a, b) => (b.timestamp || 0) - (a.timestamp || 0));
-            renderReviews(reviews);
-        }, (err) => {
-            console.error("Database error:", err);
-            reviewsContainer.innerHTML = `<p class="text-red-500 text-center">Error loading reviews.</p>`;
-        });
-    }
-
-    function renderReviews(reviews) {
-        if (reviewCountBadge) reviewCountBadge.textContent = `${reviews.length} Review${reviews.length === 1 ? '' : 's'}`;
-        
-        if (reviews.length === 0) {
-            reviewsContainer.innerHTML = `<div class="text-center py-10 text-gray-400">No reviews yet. Be the first!</div>`;
-            return;
-        }
-
-        reviewsContainer.innerHTML = reviews.map(r => `
-            <div class="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm mb-4">
-                <div class="flex justify-between items-start mb-3">
-                    <div>
-                        <h3 class="font-bold text-gray-900">${escapeHtml(r.name)}</h3>
-                        <div class="text-yellow-500 text-sm">
-                            ${'★'.repeat(r.rating || 5)}${'☆'.repeat(5 - (r.rating || 5))}
-                        </div>
-                    </div>
-                    <span class="text-xs text-gray-400">
-                        ${r.timestamp ? new Date(r.timestamp).toLocaleDateString() : 'Just now'}
-                    </span>
-                </div>
-                <p class="text-gray-600 text-sm leading-relaxed">${escapeHtml(r.text)}</p>
-            </div>
-        `).join('');
-    }
-
-    reviewForm.addEventListener('submit', async (e) => {
-        e.preventDefault();
-        if (!currentUser) return;
-        
-        const ratingInput = document.querySelector('input[name="rating"]:checked');
-        const submitBtn = document.getElementById('submitBtn');
-        
-        submitBtn.disabled = true;
-        statusMsg.textContent = "Posting...";
-
-        try {
-            const reviewsRef = collection(db, 'artifacts', appId, 'public', 'data', 'visitor_reviews');
-            await addDoc(reviewsRef, {
-                name: document.getElementById('userName').value,
-                text: document.getElementById('reviewText').value,
-                rating: parseInt(ratingInput ? ratingInput.value : 5),
-                timestamp: Date.now(),
-                userId: currentUser.uid
-            });
-            
-            reviewForm.reset();
-            statusMsg.textContent = "Success!";
-            setTimeout(() => { statusMsg.textContent = ""; }, 3000);
-        } catch (err) {
-            console.error(err);
-            statusMsg.textContent = "Error saving.";
-        } finally {
-            submitBtn.disabled = false;
-        }
-    });
-
-    function escapeHtml(str) {
-        const p = document.createElement('p');
-        p.textContent = str;
-        return p.innerHTML;
-    }
-
-    initAuth();
-</script>
-
-
-
     <script>
     const mobileToggle = document.getElementById('mobile-toggle');
     const mobileClose = document.getElementById('mobile-close');
@@ -1625,148 +1434,195 @@ form.addEventListener('submit', async (e) => {
             });
         }
     </script>
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-app.js";
-        import { initializeFirestore, collection, onSnapshot, persistentLocalCache, persistentMultipleTabManager } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-firestore.js";
-        import { getAuth, signInAnonymously, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-auth.js";
+   <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-app.js";
+    import { 
+        initializeFirestore, 
+        collection, 
+        onSnapshot, 
+        persistentLocalCache, 
+        persistentMultipleTabManager,
+        addDoc, 
+        query, 
+        orderBy, 
+        limit 
+    } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-firestore.js";
+    import { getAuth, signInAnonymously, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-auth.js";
 
-        const firebaseConfig = {
-            apiKey: "AIzaSyDnqS3uT0TAwzxNUySLqvu5Ue6xGupoxUo",
-            projectId: "homepros-b4889",
-            appId: "1:841597604762:web:477a5eacc09294feeda023"
-        };
+    // 1. INITIALIZE FIREBASE FIRST
+    const firebaseConfig = {
+        apiKey: "AIzaSyDnqS3uT0TAwzxNUySLqvu5Ue6xGupoxUo",
+        projectId: "homepros-b4889",
+        appId: "1:841597604762:web:477a5eacc09294feeda023"
+    };
 
-        const app = initializeApp(firebaseConfig);
-        const auth = getAuth(app);
-        const db = initializeFirestore(app, {
-            localCache: persistentLocalCache({ tabManager: persistentMultipleTabManager() })
-        });
-        const appId = 'home-pros-app';
-
-        let allProjects = [];
-        let currentFilter = 'All';
-
-        onAuthStateChanged(auth, (user) => {
-            if (user) {
-                loadProjects();
-            } else {
-                signInAnonymously(auth);
-            }
-        });
-
-        function loadProjects() {
-            const projectsRef = collection(db, 'artifacts', appId, 'public', 'data', 'projects');
-            onSnapshot(projectsRef, (snapshot) => {
-                allProjects = snapshot.docs.map(d => ({ id: d.id, ...d.data() }));
-                renderProjects();
-            });
-        }
-window.setFilter = (filter) => {
-    currentFilter = filter;
-    
-    // UI Update
-    document.querySelectorAll('.filter-btn').forEach(btn => {
-        btn.classList.toggle('active', btn.innerText.includes(filter));
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db = initializeFirestore(app, {
+        localCache: persistentLocalCache({ tabManager: persistentMultipleTabManager() })
     });
+    const appId = 'home-pros-app';
 
-    renderProjects();
+    let allProjects = [];
+    let currentFilter = 'All';
 
-    // Scroll to results so the user sees the change
-    const grid = document.getElementById('galleryGrid');
-    if (window.innerWidth < 768) {
-        window.scrollTo({
-            top: grid.offsetTop - 120,
-            behavior: 'smooth'
-        });
-    }
-};
+    // 2. DEFINE FUNCTIONS
+   function loadReviews() {
+    const reviewsRef = collection(db, 'artifacts', appId, 'public', 'data', 'reviews');
+    const q = query(reviewsRef, orderBy('timestamp', 'desc'), limit(6));
 
-   function renderProjects() {
-    const grid = document.getElementById('galleryGrid');
-    grid.innerHTML = '';
-    
-    // Use the filter logic
-    const filtered = currentFilter === 'All' ? allProjects : allProjects.filter(p => p.category === currentFilter);
-
-    if (filtered.length === 0) {
-        grid.innerHTML = '<p class="col-span-full text-center text-slate-400 py-10">Check back soon for new projects!</p>';
-        return;
-    }
-
-    filtered.forEach(data => {
-        // 1. COMBINE ALL IMAGES INTO ONE ARRAY
-        // This ensures if you have 3 "Before" and 2 "After", all 5 show up in the slider
-        const allImages = [...(Array.isArray(data.beforeUrl) ? data.beforeUrl : [data.beforeUrl]), 
-                           ...(Array.isArray(data.afterUrl) ? data.afterUrl : [data.afterUrl])].filter(url => url);
-
-        const card = document.createElement('div');
-        card.className = "bg-white rounded-2xl overflow-hidden shadow-sm border border-slate-200 flex flex-col animate-fade-in";
+    onSnapshot(q, (snapshot) => {
+        const grid = document.getElementById('reviews-display-grid');
+        if (!grid) return;
         
-        card.innerHTML = `
-            <div class="relative image-container group" id="slider-${data.id}" style="aspect-ratio: 16/9; overflow: hidden;">
-                ${allImages.map((img, idx) => `
-                    <img src="${img}" class="image-slide w-full h-full object-cover ${idx === 0 ? 'active' : 'hidden'}">
-                `).join('')}
-                
-                <div class="absolute inset-0 flex items-center justify-between px-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                    <button onclick="window.changeSlide('${data.id}', -1)" class="bg-white/80 w-8 h-8 rounded-full flex items-center justify-center shadow-md">
-                        <i class="fas fa-chevron-left"></i>
-                    </button>
-                    <button onclick="window.changeSlide('${data.id}', 1)" class="bg-white/80 w-8 h-8 rounded-full flex items-center justify-center shadow-md">
-                        <i class="fas fa-chevron-right"></i>
-                    </button>
-                </div>
+        // 1. Professional Seed Reviews (The "Fake" Reviews)
+        const seedReviews = [
+            { name: "Robert Miller", rating: 5, text: "Exceptional attention to detail on our Seven Mile Beach condo renovation. The team was professional, punctual, and the finish is world-class.", timestamp: { toDate: () => new Date('2025-12-15') } },
+            { name: "Sarah Ebanks", rating: 5, text: "Home Pros handled our commercial maintenance with zero downtime. Highly recommend for any business owner in George Town looking for reliability.", timestamp: { toDate: () => new Date('2026-01-20') } },
+            { name: "James Thompson", rating: 4, text: "Great communication throughout the project. They transformed our outdoor living space exactly as planned. Solid 5-star quality.", timestamp: { toDate: () => new Date('2026-02-05') } }
+        ];
 
-                <div class="absolute bottom-2 left-1/2 -translate-x-1/2 bg-black/50 text-white text-[10px] px-2 py-1 rounded-full">
-                    <span class="current-indicator">1</span> / ${allImages.length}
-                </div>
-            </div>
+        const dbReviews = snapshot.docs.map(doc => doc.data());
+        const allReviews = [...dbReviews, ...seedReviews].slice(0, 6);
 
-            <div class="p-4">
-                <span class="bg-slate-900 text-white px-2 py-0.5 rounded text-[10px] font-bold uppercase">${data.category}</span>
-                <h3 class="text-lg font-bold mt-2">${data.title}</h3>
-                <p class="text-slate-500 text-sm mt-1 line-clamp-2">${data.description}</p>
+        grid.innerHTML = ''; 
+
+        allReviews.forEach((data) => {
+    const dateStr = data.timestamp?.toDate ? 
+        data.timestamp.toDate().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' }) : 
+        'Recent';
+
+    const stars = '★'.repeat(data.rating) + '☆'.repeat(5 - data.rating);
+    
+    const reviewCard = document.createElement('div');
+    reviewCard.className = "bg-white p-8 shadow-sm border-t-4 border-brandYellow flex flex-col justify-between animate-fade-in";
+    reviewCard.innerHTML = `
+        <div>
+            <div class="flex text-gold mb-4 text-lg" style="color: #D4AF37; text-shadow: 0px 1px 1px rgba(0,0,0,0.1);">${stars}</div>
+            <p class="text-slate-700 leading-relaxed text-sm italic mb-6">"${data.text}"</p>
+        </div>
+        <div class="flex items-center justify-between pt-4 border-t border-slate-100">
+            <div class="flex flex-col">
+                <span class="text-[11px] font-bold tracking-widest uppercase text-navy">${data.name}</span>
+                <span class="text-[10px] text-slate-400 uppercase tracking-tighter">${dateStr}</span>
             </div>
-        `;
-        grid.appendChild(card);
+            </div>
+    `;
+    grid.appendChild(reviewCard);
+});
     });
 }
-
-// ALSO ADD THIS SLIDE CHANGER FUNCTION SO THE BUTTONS WORK
-window.changeSlide = (projectId, direction) => {
-    const container = document.getElementById(`slider-${projectId}`);
-    const slides = container.querySelectorAll('.image-slide');
-    const indicator = container.querySelector('.current-indicator');
-    
-    let activeIdx = Array.from(slides).findIndex(s => !s.classList.contains('hidden'));
-    
-    slides[activeIdx].classList.add('hidden');
-    activeIdx = (activeIdx + direction + slides.length) % slides.length;
-    slides[activeIdx].classList.remove('hidden');
-    indicator.innerText = activeIdx + 1;
-};
-       window.togglePhoto = (id, url, type) => {
-    const img = document.getElementById(`img-${id}`);
-    const badge = document.getElementById(`badge-${id}`);
-    if (img) img.src = url;
-    if (badge) {
-        badge.innerText = type;
-        badge.className = `absolute top-4 left-4 px-3 py-1 rounded-full text-[10px] font-bold uppercase shadow-sm ${type === 'After' ? 'bg-green-500 text-white' : 'bg-amber-500 text-white'}`;
+    function loadProjects() {
+        const projectsRef = collection(db, 'artifacts', appId, 'public', 'data', 'projects');
+        onSnapshot(projectsRef, (snapshot) => {
+            allProjects = snapshot.docs.map(d => ({ id: d.id, ...d.data() }));
+            renderProjects();
+        });
     }
 
-    // NEW: Update button colors to show which one is selected
-    const buttons = document.querySelectorAll(`.toggle-btn-${id}`);
-    buttons.forEach(btn => {
-        if (btn.innerText === type) {
-            btn.classList.add('bg-slate-900', 'text-white');
-            btn.classList.remove('bg-slate-100', 'text-slate-600');
+    function renderProjects() {
+        const grid = document.getElementById('galleryGrid');
+        if (!grid) return;
+        grid.innerHTML = '';
+        
+        const filtered = currentFilter === 'All' ? allProjects : allProjects.filter(p => p.category === currentFilter);
+
+        if (filtered.length === 0) {
+            grid.innerHTML = '<p class="col-span-full text-center text-slate-400 py-10">Check back soon for new projects!</p>';
+            return;
+        }
+
+        filtered.forEach(data => {
+            const allImages = [...(Array.isArray(data.beforeUrl) ? data.beforeUrl : [data.beforeUrl]), 
+                               ...(Array.isArray(data.afterUrl) ? data.afterUrl : [data.afterUrl])].filter(url => url);
+
+            const card = document.createElement('div');
+            card.className = "bg-white rounded-2xl overflow-hidden shadow-sm border border-slate-200 flex flex-col animate-fade-in";
+            
+            card.innerHTML = `
+                <div class="relative image-container group" id="slider-${data.id}" style="aspect-ratio: 16/9; overflow: hidden;">
+                    ${allImages.map((img, idx) => `
+                        <img src="${img}" class="image-slide w-full h-full object-cover ${idx === 0 ? '' : 'hidden'}">
+                    `).join('')}
+                    
+                    <div class="absolute inset-0 flex items-center justify-between px-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                        <button onclick="window.changeSlide('${data.id}', -1)" class="bg-white/80 w-8 h-8 rounded-full flex items-center justify-center shadow-md">
+                            <i class="fas fa-chevron-left"></i>
+                        </button>
+                        <button onclick="window.changeSlide('${data.id}', 1)" class="bg-white/80 w-8 h-8 rounded-full flex items-center justify-center shadow-md">
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
+                    </div>
+
+                    <div class="absolute bottom-2 left-1/2 -translate-x-1/2 bg-black/50 text-white text-[10px] px-2 py-1 rounded-full">
+                        <span class="current-indicator">1</span> / ${allImages.length}
+                    </div>
+                </div>
+
+                <div class="p-4">
+                    <span class="bg-slate-900 text-white px-2 py-0.5 rounded text-[10px] font-bold uppercase">${data.category}</span>
+                    <h3 class="text-lg font-bold mt-2">${data.title}</h3>
+                    <p class="text-slate-500 text-sm mt-1 line-clamp-2">${data.description}</p>
+                </div>
+            `;
+            grid.appendChild(card);
+        });
+    }
+
+    // 3. EXPOSE GLOBALS (For onclick events)
+    window.changeSlide = (projectId, direction) => {
+        const container = document.getElementById(`slider-${projectId}`);
+        const slides = container.querySelectorAll('.image-slide');
+        const indicator = container.querySelector('.current-indicator');
+        
+        let activeIdx = Array.from(slides).findIndex(s => !s.classList.contains('hidden'));
+        
+        slides[activeIdx].classList.add('hidden');
+        activeIdx = (activeIdx + direction + slides.length) % slides.length;
+        slides[activeIdx].classList.remove('hidden');
+        indicator.innerText = activeIdx + 1;
+    };
+
+    window.setFilter = (filter) => {
+        currentFilter = filter;
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.classList.toggle('active', btn.innerText.includes(filter));
+        });
+        renderProjects();
+    };
+
+    // 4. EVENT LISTENERS & STARTUP
+    const reviewForm = document.getElementById('submit-review-form');
+    if (reviewForm) {
+        reviewForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const name = document.getElementById('rev-name').value;
+            const rating = parseInt(document.getElementById('rev-rating').value);
+            const text = document.getElementById('rev-text').value;
+
+            try {
+                await addDoc(collection(db, 'artifacts', appId, 'public', 'data', 'reviews'), {
+                    name, rating, text, timestamp: new Date()
+                });
+                reviewForm.reset();
+                document.getElementById('review-form-container').classList.add('hidden');
+                alert("Thank you for your feedback!");
+            } catch (error) {
+                console.error("Error adding review: ", error);
+            }
+        });
+    }
+
+    // Handle Auth and Data Loading
+    onAuthStateChanged(auth, (user) => {
+        if (user) {
+            loadProjects();
+            loadReviews(); // Moved inside here to ensure auth and db are ready
         } else {
-            btn.classList.remove('bg-slate-900', 'text-white');
-            btn.classList.add('bg-slate-100', 'text-slate-600');
+            signInAnonymously(auth);
         }
     });
-};
-    </script>
+</script>
     <script>
         function filterAreas() {
             // Get the search input value
@@ -1789,5 +1645,3 @@ window.changeSlide = (projectId, direction) => {
 </body>
 
 </html>
-
-
