@@ -7,19 +7,19 @@
     <title>Home Pros Cayman | Home Maintenance & Electrical Services</title>
     <link rel="icon" type="png" href="favicon.png" sizes="32x32">
     <link rel="apple-touch-icon" href="favicon.png">
-
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+<script src="firebase.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
     <meta name="description"
         content="Professional home maintenance, electrical solutions, and renovation services in West Bay, George Town, and across the Cayman Islands. Get a free quote today!">
     <meta name="keywords"
         content="home maintenance Cayman, electrical services George Town, handyman West Bay, Home Pros Cayman">
-
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <meta property="og:title" content="Home Pros Cayman | Professional Home Services">
     <meta property="og:description" content="Expert home maintenance and electrical solutions in the Cayman Islands.">
     <meta property="og:image" content="logo.png">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
@@ -28,256 +28,196 @@
             theme: {
                 extend: {
                     colors: {
-                        brandBlue: '#007BFF', // Matches your new logo
+                        brandBlue: '#007BFF',
                         brandDark: '#0056b3',
                     }
                 }
             }
         }
     </script>
-    <script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "HomeAndConstructionBusiness",
-  "name": "Home Pros Cayman",
-  "image": "logo.png",
-  "address": {
-    "@type": "PostalAddress",
-    "addressLocality": "George Town",
-    "addressCountry": "KY"
-  },
-  "geo": {
-    "@type": "GeoCoordinates",
-    "latitude": 19.3034,
-    "longitude": -81.3863
-  },
-  "url": "https://homeproscayman.com",
-  "telephone": "+1345XXXXXXX",
-  "priceRange": "$$",
-  "areaServed": ["West Bay", "George Town", "South Sound", "Prospect", "Savannah", "Bodden Town", "North Side", "East End"]
-}
-</script>
-    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
 
-    <script>
-        const firebaseConfig = {
-            apiKey: "AIzaSyDnqS3uT0TAwzxNUySLqvu5Ue6xGupoxUo",
-            authDomain: "homepros-b4889.firebaseapp.com",
-            projectId: "homepros-b4889",
-            storageBucket: "homepros-b4889.firebasestorage.app",
-            messagingSenderId: "841597604762",
-            appId: "1:841597604762:web:477a5eacc09294feeda023"
-        };
-        firebase.initializeApp(firebaseConfig);
-        const auth = firebase.auth();
-
-
-    </script>
-
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: { extend: { colors: { brandBlue: '#007BFF', brandDark: '#0056b3' } } }
-        }
-    </script>
     <style>
-        /* 1. Force everything to calculate height the same way */
-input, select, textarea {
-    box-sizing: border-box; /* Includes padding in the total height */
-    height: 50px;           /* Fixed height for alignment */
-    width: 100%;
-    padding: 12px 16px;
-    background: #ffffff;
-    border: 2px solid #e2e8f0;
-    border-radius: 8px;
-    font-size: 1rem;
-    font-family: inherit;   /* Prevents font-size mismatch */
-    outline: none;
-    transition: all 0.3s ease;
-}
+        input, select, textarea {
+            box-sizing: border-box;
+            height: 50px;
+            width: 100%;
+            padding: 12px 16px;
+            background: #ffffff;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-family: inherit;
+            outline: none;
+            transition: all 0.3s ease;
+        }
 
-/* 2. Reset Textarea because it SHOULD be taller than 50px */
-textarea {
-    height: auto;           /* Allow it to be taller */
-    min-height: 120px;
-}
+        textarea {
+            height: auto;
+            min-height: 120px;
+        }
 
-/* 3. Fix the 'Subject' dropdown height specifically */
-select {
-    appearance: none;       /* Removes default browser styling */
-    line-height: 1.2;       /* Centers text vertically */
-    cursor: pointer;
-}
+        select {
+            appearance: none;
+            line-height: 1.2;
+            cursor: pointer;
+        }
 
-/* 4. Refine the Row alignment */
-.row {
-    display: flex;
-    gap: 20px;
-    align-items: flex-end; /* Ensures labels align if one is longer */
-    margin-bottom: 15px;
-}
+        .row {
+            display: flex;
+            gap: 20px;
+            align-items: flex-end;
+            margin-bottom: 15px;
+        }
 
-.input-group {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-}
- /* --- UPDATED RESPONSIVE CONTACT SECTION --- */
-.contact-container {
-    display: flex;
-    flex-direction: row; /* Default side-by-side */
-    width: 100%;
-    max-width: 1000px;
-    margin: 40px auto;
-    background: #fff;
-    border-radius: 10px;
-    overflow: hidden;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-}
+        .input-group {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
 
-/* Sidebar Styling */
-.sidebar {
-    background-color: #007bff;
-    color: white;
-    padding: 40px;
-    width: 40%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
+        .contact-container {
+            display: flex;
+            flex-direction: row;
+            width: 100%;
+            max-width: 1000px;
+            margin: 40px auto;
+            background: #fff;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
 
-.sidebar h2 {
-    font-size: 1.5rem;
-    margin-bottom: 20px;
-    line-height: 1.2;
-}
+        .sidebar {
+            background-color: #007bff;
+            color: white;
+            padding: 40px;
+            width: 40%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
 
-.sidebar p {
-    font-size: 0.9rem;
-    line-height: 1.6;
-    margin-bottom: 30px;
-    opacity: 0.9;
-}
+        .sidebar h2 {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
 
-.info-item {
-    display: flex;
-    align-items: center;
-    margin-bottom: 20px;
-}
+        .sidebar p {
+            font-size: 0.9rem;
+            line-height: 1.6;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
 
-.info-item i {
-    margin-right: 15px;
-    font-size: 1.2rem;
-    width: 25px;
-    text-align: center;
-}
+        .info-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
 
-.info-item span {
-    display: block;
-    font-size: 0.7rem;
-    letter-spacing: 1px;
-    opacity: 0.8;
-    text-transform: uppercase;
-}
+        .info-item i {
+            margin-right: 15px;
+            font-size: 1.2rem;
+            width: 25px;
+            text-align: center;
+        }
 
-.info-item strong {
-    font-size: 1rem;
-    display: block;
-}
+        .info-item span {
+            display: block;
+            font-size: 0.7rem;
+            letter-spacing: 1px;
+            opacity: 0.8;
+            text-transform: uppercase;
+        }
 
-/* Form Area Styling */
-.form-area {
-    padding: 40px;
-    width: 60%;
-}
+        .info-item strong {
+            font-size: 1rem;
+            display: block;
+        }
 
-.form-area h3 {
-    color: #007bff;
-    font-size: 1.2rem;
-    margin-bottom: 25px;
-}
+        .form-area {
+            padding: 40px;
+            width: 60%;
+        }
 
-.form-area h3 span {
-    font-weight: 800;
-}
+        .form-area h3 {
+            color: #007bff;
+            font-size: 1.2rem;
+            margin-bottom: 25px;
+        }
 
-.row {
-    display: flex;
-    gap: 20px;
-    flex-wrap: wrap; /* Allows wrapping on small screens */
-}
+        .form-area h3 span {
+            font-weight: 800;
+        }
 
-.input-group {
-    margin-bottom: 15px;
-    flex: 1;
-    min-width: 200px; /* Forces stack when narrow */
-}
-/* --- PROFESSIONAL INPUT STYLING --- */
-label {
-    display: block;
-    font-size: 0.75rem;
-    font-weight: 700;
-    color: #475569; /* Slate-600 for a more modern look */
-    margin-bottom: 6px;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    transition: color 0.3s ease;
-    
-}
+        .row {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
 
-/* Professional Focus State */
-input:focus, select:focus, textarea:focus {
-    border-color: #007bff; /* Brand Blue */
-    background-color: #fff;
-    box-shadow: 0 0 0 4px rgba(0, 123, 255, 0.15); /* Soft outer glow */
-    transform: translateY(-1px); /* Slight lift effect */
-}
+        .input-group {
+            margin-bottom: 15px;
+            flex: 1;
+            min-width: 200px;
+        }
 
-/* Hover Effect */
-input:hover, select:hover, textarea:hover {
-    border-color: #cbd5e1;
-}
+        label {
+            display: block;
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: #475569;
+            margin-bottom: 6px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            transition: color 0.3s ease;
+        }
 
-/* Label color change on focus */
-.input-group:focus-within label {
-    color: #007bff;
-}
+        input:focus, select:focus, textarea:focus {
+            border-color: #007bff;
+            background-color: #fff;
+            box-shadow: 0 0 0 4px rgba(0, 123, 255, 0.15);
+            transform: translateY(-1px);
+        }
 
-/* Refined Textarea */
+        input:hover, select:hover, textarea:hover {
+            border-color: #cbd5e1;
+        }
 
+        .input-group:focus-within label {
+            color: #007bff;
+        }
 
+        @media (max-width: 992px) {
+            .contact-container {
+                width: 95%;
+            }
+        }
 
-/* RESPONSIVE BREAKPOINTS */
-@media (max-width: 992px) {
-    .contact-container {
-        width: 95%;
-    }
-}
+        @media (max-width: 768px) {
+            .contact-container {
+                flex-direction: column;
+            }
+            
+            .sidebar, .form-area {
+                width: 100%;
+                padding: 30px 20px;
+            }
 
-@media (max-width: 768px) {
-    .contact-container {
-        flex-direction: column; /* Stacks sidebar on top of form */
-    }
-    
-    .sidebar, .form-area {
-        width: 100%;
-        padding: 30px 20px;
-    }
+            .sidebar {
+                text-align: center;
+            }
 
-    .sidebar {
-        text-align: center;
-    }
-
-    .info-item {
-        justify-content: center;
-        text-align: left;
-    }
-    
-    .row {
-        gap: 0;
-    }
-}
+            .info-item {
+                justify-content: center;
+                text-align: left;
+            }
+            
+            .row {
+                gap: 0;
+            }
+        }
 
         @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Open+Sans:wght@400;600&display=swap');
 
@@ -285,13 +225,9 @@ input:hover, select:hover, textarea:hover {
             overflow-x: hidden;
             font-family: 'Open Sans', sans-serif;
             max-width: 100%;
-            overflow-x: hidden; /* Prevents horizontal scrolling */
         }
 
-        h1,
-        h2,
-        h3,
-        .nav-link {
+        h1, h2, h3, .nav-link {
             font-family: 'Montserrat', sans-serif;
             font-weight: 700;
         }
@@ -305,7 +241,6 @@ input:hover, select:hover, textarea:hover {
             box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
             z-index: 50;
             border-top: 4px solid #007BFF;
-            ;
         }
 
         .services-hover:hover .mega-menu {
@@ -313,19 +248,13 @@ input:hover, select:hover, textarea:hover {
         }
 
         .hero-gradient {
-            /* Layer 1: Dark Overlay (Black at 50% opacity) */
-            /* Layer 2: The Image */
             background:
                 linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
                 url('background.jpeg');
-
-            /* Background Scaling */
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
             background-attachment: scroll;
-
-            /* Layout */
             width: 100%;
             min-height: 60vh;
             display: flex;
@@ -333,11 +262,9 @@ input:hover, select:hover, textarea:hover {
             justify-content: center;
         }
 
-        /* Mobile Specific Adjustments */
         @media (max-width: 768px) {
             .hero-gradient {
                 min-height: 50vh;
-                /* Slightly shorter on mobile phones */
             }
         }
 
@@ -348,24 +275,22 @@ input:hover, select:hover, textarea:hover {
 
         .bg-navy {
             background-color: #007BFF;
-            ;
         }
 
         .text-navy {
             color: #007BFF;
-            ;
         }
 
         .border-navy {
             border-color: #007BFF;
-            ;
         }
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-        /* NEW PROFESSIONAL MOBILE MENU STYLES */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         #mobile-sidebar {
             transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
@@ -405,7 +330,6 @@ input:hover, select:hover, textarea:hover {
                 opacity: 0;
                 transform: translateY(10px);
             }
-
             to {
                 opacity: 1;
                 transform: translateY(0);
@@ -426,7 +350,6 @@ input:hover, select:hover, textarea:hover {
             border-color: #1e293b;
         }
 
-        /* Prevent layout shift */
         .image-container {
             aspect-ratio: 16/9;
         }
@@ -441,14 +364,9 @@ input:hover, select:hover, textarea:hover {
 
         .service-areas-section h2 {
             color: #007BFF;
-            ;
             margin-bottom: 25px;
             font-size: 2rem;
             font-weight: bolder;
-        }
-
-        .search-container {
-            margin-bottom: 30px;
         }
 
         .areas-grid {
@@ -512,91 +430,17 @@ input:hover, select:hover, textarea:hover {
                 transform: scale(0.9);
                 opacity: 0;
             }
-
             to {
                 transform: scale(1);
                 opacity: 1;
             }
         }
-
-        /* Animation Base States */
-        .reveal {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .reveal.active {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* Stagger delay for grids */
-        .reveal-delay-1 {
-            transition-delay: 0.1s;
-        }
-
-        .reveal-delay-2 {
-            transition-delay: 0.2s;
-        }
-
-        .reveal-delay-3 {
-            transition-delay: 0.3s;
-        }
-
-        /* Slide from Left for images */
-        .reveal-left {
-            opacity: 0;
-            transform: translateX(-50px);
-            transition: all 0.8s ease-out;
-        }
-
-        .reveal-left.active {
-            opacity: 1;
-            transform: translateX(0);
-        }
-
-        .text-outline {
-            -webkit-text-stroke: 1px white;
-            color: transparent;
-        }
-        /* Hide scrollbar for Chrome, Safari and Opera */
-
-
-/* Hide scrollbar for IE, Edge and Firefox */
-.no-scrollbar {
-    -ms-overflow-style: none;  /* IE and Edge */
-    scrollbar-width: none;  /* Firefox */
-}
-/* Custom Scrollbar for the Filter Container */
-#filterContainer::-webkit-scrollbar {
-    height: 4px; /* Height of the horizontal scrollbar */
-}
-
-#filterContainer::-webkit-scrollbar-track {
-    background: #e2e8f0; /* Color of the track (bg-slate-200) */
-    border-radius: 10px;
-}
-
-#filterContainer::-webkit-scrollbar-thumb {
-    background: #64748b; /* Color of the sliding handle (bg-slate-500) */
-    border-radius: 10px;
-}
-
-/* Ensure the container has enough padding to show the bar */
-#filterContainer {
-    scrollbar-width: thin; /* For Firefox */
-    scrollbar-color: #64748b #e2e8f0; /* For Firefox */
-    padding-bottom: 12px; 
-}
     </style>
-
 </head>
 
 <body class="bg-white text-navy sidebar-closed">
 
-    <div
-        class="bg-navy sticky top-0 z-50 shadow-md text-white py-2 px-4 text-sm hidden md:block border-b border-brandDark/20">
+    <div class="bg-navy sticky top-0 z-50 shadow-md text-white py-2 px-4 text-sm hidden md:block border-b border-brandDark/20">
         <div class="container mx-auto flex justify-between">
             <div class="flex space-x-6">
                 <span><i class="fas fa-phone mr-2 text-brandYellow"></i> 9391668</span>
@@ -625,88 +469,58 @@ input:hover, select:hover, textarea:hover {
                 <a href="#about" class="nav-link hover:text-brandYellow transition">About Us</a>
 
                 <div class="services-hover h-20 flex items-center cursor-pointer">
-                    <span class="nav-link hover:text-brandYellow transition">Services <i
-                            class="fas fa-chevron-down text-[10px] ml-1"></i></span>
+                    <span class="nav-link hover:text-brandYellow transition">Services <i class="fas fa-chevron-down text-[10px] ml-1"></i></span>
                     <div class="mega-menu top-20">
                         <div class="container mx-auto p-10 grid grid-cols-4 gap-10">
                             <div>
-                                <h3 class="text-navy border-b-2 border-brandDark pb-2 mb-4 text-sm uppercase">Home
-                                    Services</h3>
+                                <h3 class="text-navy border-b-2 border-brandDark pb-2 mb-4 text-sm uppercase">Home Services</h3>
                                 <ul class="space-y-2 text-xs text-slate-600 font-semibold uppercase tracking-tight">
-                                    <li class="hover:text-brandYellow transition"><a href="#services">- Window
-                                            Cleaning</a></li>
-                                    <li class="hover:text-brandYellow transition"><a href="#services">- Solar Panel
-                                            Cleaning</a></li>
-                                    <li class="hover:text-brandYellow transition"><a href="#services">- Gutter & Eaves
-                                            Cleaning</a></li>
-                                    <li class="hover:text-brandYellow transition"><a href="#services">- Roof
-                                            Cleaning</a></li>
-                                    <li class="hover:text-brandYellow transition"><a href="#services">- Exterior
-                                            Pressure Washing</a></li>
-                                    <li class="hover:text-brandYellow transition"><a href="#services">- Interior &
-                                            Exterior Painting</a></li>
+                                    <li class="hover:text-brandYellow transition"><a href="#services">- Window Cleaning</a></li>
+                                    <li class="hover:text-brandYellow transition"><a href="#services">- Solar Panel Cleaning</a></li>
+                                    <li class="hover:text-brandYellow transition"><a href="#services">- Gutter & Eaves Cleaning</a></li>
+                                    <li class="hover:text-brandYellow transition"><a href="#services">- Roof Cleaning</a></li>
+                                    <li class="hover:text-brandYellow transition"><a href="#services">- Exterior Pressure Washing</a></li>
+                                    <li class="hover:text-brandYellow transition"><a href="#services">- Interior & Exterior Painting</a></li>
                                 </ul>
                             </div>
                             <div>
-                                <h3 class="text-navy border-b-2 border-brandDark pb-2 mb-4 text-sm uppercase">Property
-                                    Maintenance</h3>
+                                <h3 class="text-navy border-b-2 border-brandDark pb-2 mb-4 text-sm uppercase">Property Maintenance</h3>
                                 <ul class="space-y-2 text-xs text-slate-600 font-semibold uppercase tracking-tight">
-                                    <li class="hover:text-brandYellow transition"><a href="#services">- Lawn Care</a>
-                                    </li>
-                                    <li class="hover:text-brandYellow transition"><a href="#services">- Material
-                                            Rearrangements</a></li>
-                                    <li class="hover:text-brandYellow transition"><a href="#services">- Removals &
-                                            Hauling</a></li>
-                                    <li class="hover:text-brandYellow transition"><a href="#services">- General Laborer
-                                            Services</a></li>
-                                    <li class="hover:text-brandYellow transition"><a href="#services">- Property
-                                            Cleanups</a></li>
+                                    <li class="hover:text-brandYellow transition"><a href="#services">- Lawn Care</a></li>
+                                    <li class="hover:text-brandYellow transition"><a href="#services">- Material Rearrangements</a></li>
+                                    <li class="hover:text-brandYellow transition"><a href="#services">- Removals & Hauling</a></li>
+                                    <li class="hover:text-brandYellow transition"><a href="#services">- General Laborer Services</a></li>
+                                    <li class="hover:text-brandYellow transition"><a href="#services">- Property Cleanups</a></li>
                                 </ul>
                             </div>
                             <div>
-                                <h3 class="text-navy border-b-2 border-brandDark pb-2 mb-4 text-sm uppercase">Electrical
-                                    Services</h3>
+                                <h3 class="text-navy border-b-2 border-brandDark pb-2 mb-4 text-sm uppercase">Electrical Services</h3>
                                 <ul class="space-y-2 text-xs text-slate-600 font-semibold uppercase tracking-tight">
-                                    <li class="hover:text-brandYellow transition"><a href="#services">- Residential
-                                            Electrical</a></li>
-                                    <li class="hover:text-brandYellow transition"><a href="#services">- Lighting
-                                            Installation</a></li>
-                                    <li class="hover:text-brandYellow transition"><a href="#services">- Small Electrical
-                                            Repairs</a></li>
-                                    <li class="hover:text-brandYellow transition"><a href="#services">-
-                                            Troubleshooting</a></li>
+                                    <li class="hover:text-brandYellow transition"><a href="#services">- Residential Electrical</a></li>
+                                    <li class="hover:text-brandYellow transition"><a href="#services">- Lighting Installation</a></li>
+                                    <li class="hover:text-brandYellow transition"><a href="#services">- Small Electrical Repairs</a></li>
+                                    <li class="hover:text-brandYellow transition"><a href="#services">- Troubleshooting</a></li>
                                 </ul>
                             </div>
                             <div class="bg-navy p-6 rounded text-white">
                                 <h3 class="text-brandYellow font-bold text-sm uppercase">Car & Specialty</h3>
                                 <br>
-                                <p class="text-[10px] text-white leading-relaxed">CAR DETAILING, CUSTOM PROJECTS, AND
-                                    ONE-TIME JOBS IN CAYMAN.</p>
-                                <br> <a href="#quote"
-                                    class="inline-block bg-white text-navy text-[10px] px-4 py-2 rounded font-black uppercase tracking-widest hover:bg-brandBlue hover:text-white transition">Contact
-                                    us Now</a>
+                                <p class="text-[10px] text-white leading-relaxed">CAR DETAILING, CUSTOM PROJECTS, AND ONE-TIME JOBS IN CAYMAN.</p>
+                                <br> <a href="#quote" class="inline-block bg-white text-navy text-[10px] px-4 py-2 rounded font-black uppercase tracking-widest hover:bg-brandBlue hover:text-white transition">Contact us Now</a>
                             </div>
                         </div>
                     </div>
                 </div>
 
                 <a href="#gallery" class="nav-link hover:text-brandYellow transition">Our Work</a>
-                <a href="#quote"
-                    class="bg-brandYellow text-navy px-8 py-3 rounded font-black hover:bg-navy hover:text-brandBlue border-2 border-white transition shadow-md">Contact
-                    us Now</a>
-                <a href="login.html"
-                    class="bg-brandBlue text-white px-5 py-3 rounded border-2 border-white transition shadow-md">
-                    Admin Portal
-                </a>
-
+                <a href="#quote" class="bg-brandYellow text-navy px-8 py-3 rounded font-black hover:bg-navy hover:text-brandBlue border-2 border-white transition shadow-md">Contact us Now</a>
+                <a href="login.html" class="bg-brandBlue text-white px-5 py-3 rounded border-2 border-white transition shadow-md">Admin Portal</a>
             </div>
         </div>
     </nav>
 
     <div id="sidebar-overlay" class="fixed inset-0 bg-navy/80 backdrop-blur-sm z-[60] opacity-0"></div>
-    <div id="mobile-sidebar"
-        class="fixed top-0 left-0 h-full w-[80%] max-w-[350px] bg-white z-[70] shadow-2xl p-6 flex flex-col sidebar-closed">
-
+    <div id="mobile-sidebar" class="fixed top-0 left-0 h-full w-[80%] max-w-[350px] bg-white z-[70] shadow-2xl p-6 flex flex-col sidebar-closed">
         <div class="flex justify-between items-center mb-10">
             <div class="text-xl font-bold text-navy">
                 HOME <span class="text-brandYellow">PROS</span>
@@ -717,53 +531,22 @@ input:hover, select:hover, textarea:hover {
         </div>
 
         <nav class="flex flex-col space-y-1">
-            <a href="#"
-                class="mobile-link group flex items-center p-4 border-b gray-500 font-bold uppercase tracking-widest text-sm hover:bg-slate-50">
-                <i class="fas fa-home w-8 text-brandYellow"></i> Home
-            </a>
-            <a href="#about"
-                class="mobile-link group flex items-center p-4 border-b gray-500 font-bold uppercase tracking-widest text-sm hover:bg-slate-50">
-                <i class="fas fa-info-circle w-8 text-brandYellow"></i> About Us
-            </a>
-            <a href="#services"
-                class="mobile-link group flex items-center p-4 border-b gray-500 font-bold uppercase tracking-widest text-sm hover:bg-slate-50">
-                <i class="fas fa-cog w-8 text-brandYellow"></i> Services
-            </a>
-            <a href="#gallery"
-                class="mobile-link group flex items-center p-4 border-b gray-500 font-bold uppercase tracking-widest text-sm hover:bg-slate-50">
-                <i class="fas fa-images w-8 text-brandYellow"></i> Our Work
-            </a>
+            <a href="#" class="mobile-link group flex items-center p-4 border-b font-bold uppercase tracking-widest text-sm hover:bg-slate-50"><i class="fas fa-home w-8 text-brandYellow"></i> Home</a>
+            <a href="#about" class="mobile-link group flex items-center p-4 border-b font-bold uppercase tracking-widest text-sm hover:bg-slate-50"><i class="fas fa-info-circle w-8 text-brandYellow"></i> About Us</a>
+            <a href="#services" class="mobile-link group flex items-center p-4 border-b font-bold uppercase tracking-widest text-sm hover:bg-slate-50"><i class="fas fa-cog w-8 text-brandYellow"></i> Services</a>
+            <a href="#gallery" class="mobile-link group flex items-center p-4 border-b font-bold uppercase tracking-widest text-sm hover:bg-slate-50"><i class="fas fa-images w-8 text-brandYellow"></i> Our Work</a>
             <div class="pt-10">
-                <a href="#quote"
-                    class="block text-center bg-navy text-white font-black py-4 rounded-lg uppercase tracking-widest shadow-lg hover:bg-brandYellow hover:text-navy transition-all">
-                    Contact us Now
-                </a>
+                <a href="#quote" class="block text-center bg-navy text-white font-black py-4 rounded-lg uppercase tracking-widest shadow-lg hover:bg-brandYellow hover:text-navy transition-all">Contact us Now</a>
             </div>
-            <a href="login.html"
-                class="text-center bg-brandBlue text-white px-5 py-3 rounded border-2 border-white transition shadow-md">
-                Admin Portal
-            </a>
+            <a href="login.html" class="text-center bg-brandBlue text-white px-5 py-3 rounded border-2 border-white transition shadow-md">Admin Portal</a>
         </nav>
-
-        <div class="mt-auto pt-5 border-t border-brandDark">
-            <p class="text-[10px] uppercase font-bold text-white tracking-widest mb-4">Contact Info</p>
-            <div class="space-y-3">
-                <a href="tel:9391668" class="flex items-center text-sm font-bold text-navy">
-                    <i class="fas fa-phone-alt mr-3 text-brandYellow"></i> 939-1668
-                </a>
-                <a href="mailto:homeproscayman@gmail.com" class="flex items-center text-sm font-bold text-navy">
-                    <i class="fas fa-envelope mr-3 text-brandYellow"></i> homeproscayman@gmail.com
-                </a>
-            </div>
-        </div>
     </div>
 
     <section class="hero-gradient min-h-[85vh] flex items-center text-white px-4">
         <div class="container mx-auto">
             <div class="max-w-4xl">
                 <div class="flex items-center space-x-2 mt-8 mb-4">
-                    <span
-                        class="bg-brandYellow/90 backdrop-blur-sm text-white px-4 py-2 text-sm font-black uppercase tracking-widest shadow-lg">
+                    <span class="bg-brandYellow/90 backdrop-blur-sm text-white px-4 py-2 text-sm font-black uppercase tracking-widest shadow-lg">
                         Licensed & Insured
                     </span>
                     <span class="w-12 h-[2px] bg-white"></span>
@@ -771,18 +554,12 @@ input:hover, select:hover, textarea:hover {
                 <h1 class="text-3xl md:text-3xl lg:text-3xl mb-6 leading-[1.1] uppercase font-black tracking-tight">
                     Your Go-To Experts for <span class="text-brandYellow">Home Projects</span>, Maintenance & Electrical Solutions
                 </h1>
-
-                <p
-                    class="text-lg md:text-2xl text-slate-100 mb-10 max-w-2xl font-medium leading-relaxed drop-shadow-md">
-                    Dedicated Property Care, Maintenance, Electrical Solutions across all Grand Cayman
-                    districts.
+                <p class="text-lg md:text-2xl text-slate-100 mb-10 max-w-2xl font-medium leading-relaxed drop-shadow-md">
+                    Dedicated Property Care, Maintenance, Electrical Solutions across all Grand Cayman districts.
                 </p>
                 <div class="flex flex-col sm:flex-row gap-1">
-                    <a href="#quote"
-                        class="bg-brandYellow text-white px-5 py-3 font-black text-lg uppercase transition hover:bg-brandBlue border-2 border-white">Contact
-                        us Now</a>
-                    <a href="tel:9391668"
-                        class="bg-navy border-2 border-white text-white px-5 py-3 font-black text-lg uppercase transition hover:bg-brandYellow  hover:text-navy hover:border-brandDark justify-center">
+                    <a href="#quote" class="bg-brandYellow text-white px-5 py-3 font-black text-lg uppercase transition hover:bg-brandBlue border-2 border-white">Contact us Now</a>
+                    <a href="tel:9391668" class="bg-navy border-2 border-white text-white px-5 py-3 font-black text-lg uppercase transition hover:bg-brandYellow hover:text-navy hover:border-brandDark justify-center">
                         <i class="fas fa-phone mr-3"></i> Call Now: 939-1668
                     </a>
                 </div>
@@ -790,872 +567,1104 @@ input:hover, select:hover, textarea:hover {
         </div>
     </section>
 
-    <section class="py-24 bg-white">
-        <div class="container mx-auto px-4">
-            <div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-4">
-                <div class="max-w-xl">
-                    <h2 class="text-4xl uppercase mb-4 text-navy">Why Choose <span
-                            class="text-brandYellow font-bold">HomePros?</span></h2>
-                    <div class="hidden md:block h-[2px] flex-grow bg-brandYellow mb-4 mx-8 opacity-30"></div>
+  <!-- Why Choose HomePros Section - Bauhaus UI Redesign -->
+    <section class="py-24 bg-white font-sans relative overflow-hidden">
+        
+        <!-- Bauhaus Background Geometric Shapes -->
+        <div class="absolute top-0 left-0 w-32 h-32 bg-[#007BFF]/10 rounded-br-full pointer-events-none"></div>
+        <div class="absolute bottom-0 right-0 w-48 h-48 border-4 border-[#007BFF]/15 rounded-full -mr-16 -mb-16 pointer-events-none"></div>
 
-                    <p class="text-slate-600">Reliable and professional service for both Residential and Commercial
-                        properties.</p>
-                    <br>
-                </div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 relative z-10">
+            
+            <!-- Section Header -->
+            <div class="max-w-3xl mx-auto text-center mb-8">
+             
+                <h2 class="text-4xl sm:text-5xl font-black uppercase tracking-tight text-[#007BFF] mb-4">
+                    Why Choose HomePros?</span>
+                </h2>
+                <p class="text-black text-sm sm:text-base font-medium leading-relaxed">
+                    Reliable and professional service for both Residential and Commercial properties across Grand Cayman.
+                </p>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-0 border border-brandDark shadow-xl">
-                <div class="p-10 border-r border-b border-brandDark card-hover">
-                    <i class="fas fa-check-double text-4xl text-brandYellow mb-6"></i>
-                    <h3 class="text-lg uppercase mb-4 font-bold">Licensed & Insured</h3>
-                    <p class="text-sm text-gray-500 leading-relaxed">Fully qualified teams providing peace of mind for
-                        every project, small or large.</p>
+            <!-- Bauhaus Grid Cards Container -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                
+                <!-- Card 1: Licensed & Insured -->
+                <div class="bg-white p-8 border-4 border-[#007BFF] shadow-[6px_6px_0px_0px_#021838] flex flex-col justify-between hover:-translate-y-1 transition-transform duration-200 group">
+                    <div>
+                        <div class="w-12 h-12 bg-[#007BFF] text-white flex items-center justify-center font-black text-lg border-2 border-[#007BFF] shadow-[2px_2px_0px_0px_#021838] mb-6 group-hover:bg-white group-hover:text-[#007BFF] transition-colors">
+                            <i class="fas fa-check-double"></i>
+                        </div>
+                        <span class="inline-block font-mono font-bold text-[10px] uppercase text-[#007BFF] mb-1">01 / Secure</span>
+                        <h3 class="text-lg font-black uppercase text-[#007BFF] tracking-tight mb-3">Licensed & Insured</h3>
+                        <p class="text-black font-medium text-xs leading-relaxed">Fully qualified teams providing peace of mind for every project, small or large.</p>
+                    </div>
                 </div>
-                <div class="p-10 border-r border-b border-brandDark card-hover bg-navy text-white">
-                    <i class="fas fa-truck text-4xl text-white mb-6"></i>
-                    <h3 class="text-lg uppercase mb-4 font-bold">Owned Equipment</h3>
-                    <p class="text-sm text-white leading-relaxed">All equipment is owned and maintained by us. No
-                        rentals means zero delays for you.</p>
+
+                <!-- Card 2: Owned Equipment (Solid Royal Blue Inverted Bauhaus Block) -->
+                <div class="bg-[#007BFF] text-white p-8 border-4 border-[#007BFF] shadow-[6px_6px_0px_0px_#021838] flex flex-col justify-between hover:-translate-y-1 transition-transform duration-200 group">
+                    <div>
+                        <div class="w-12 h-12 bg-white text-[#007BFF] flex items-center justify-center font-black text-lg border-2 border-white shadow-[2px_2px_0px_0px_#021838] mb-6 group-hover:bg-[#007BFF] group-hover:text-white transition-colors">
+                            <i class="fas fa-truck"></i>
+                        </div>
+                        <span class="inline-block font-mono font-bold text-[10px] uppercase text-white/80 mb-1">02 / Ready</span>
+                        <h3 class="text-lg font-black uppercase text-white tracking-tight mb-3">Owned Equipment</h3>
+                        <p class="text-white/90 font-medium text-xs leading-relaxed">All equipment is owned and maintained by us. No rentals means zero delays for you.</p>
+                    </div>
                 </div>
-                <div class="p-10 border-r border-b border-brandDark card-hover">
-                    <i class="fas fa-map-marked-alt text-4xl text-brandBlue mb-6"></i>
-                    <h3 class="text-lg uppercase mb-4 font-bold">Local Offices</h3>
-                    <p class="text-sm text-gray-500 leading-relaxed">Offices in Bodden Town and George Town for
-                        lightning-fast response times.</p>
+
+                <!-- Card 3: Local Offices -->
+                <div class="bg-white p-8 border-4 border-[#007BFF] shadow-[6px_6px_0px_0px_#021838] flex flex-col justify-between hover:-translate-y-1 transition-transform duration-200 group">
+                    <div>
+                        <div class="w-12 h-12 bg-[#007BFF] text-white flex items-center justify-center font-black text-lg border-2 border-[#007BFF] shadow-[2px_2px_0px_0px_#021838] mb-6 group-hover:bg-white group-hover:text-[#007BFF] transition-colors">
+                            <i class="fas fa-map-marked-alt"></i>
+                        </div>
+                        <span class="inline-block font-mono font-bold text-[10px] uppercase text-[#007BFF] mb-1">03 / Nearby</span>
+                        <h3 class="text-lg font-black uppercase text-[#007BFF] tracking-tight mb-3">Local Offices</h3>
+                        <p class="text-black font-medium text-xs leading-relaxed">Offices in Bodden Town and George Town for lightning-fast response times.</p>
+                    </div>
                 </div>
-                <div class="p-10 border-b border-brandDark card-hover">
-                    <i class="fas fa-star text-4xl text-brandBlue mb-6"></i>
-                    <h3 class="text-lg uppercase mb-4 font-bold">Pro & Reliable</h3>
-                    <p class="text-sm text-gray-500 leading-relaxed">Residential & Commercial experts dedicated to
-                        high-quality craftsmanship.</p>
+
+                <!-- Card 4: Pro & Reliable -->
+                <div class="bg-white p-8 border-4 border-[#007BFF] shadow-[6px_6px_0px_0px_#021838] flex flex-col justify-between hover:-translate-y-1 transition-transform duration-200 group">
+                    <div>
+                        <div class="w-12 h-12 bg-[#007BFF] text-white flex items-center justify-center font-black text-lg border-2 border-[#007BFF] shadow-[2px_2px_0px_0px_#021838] mb-6 group-hover:bg-white group-hover:text-[#007BFF] transition-colors">
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <span class="inline-block font-mono font-bold text-[10px] uppercase text-[#007BFF] mb-1">04 / Expert</span>
+                        <h3 class="text-lg font-black uppercase text-[#007BFF] tracking-tight mb-3">Pro & Reliable</h3>
+                        <p class="text-black font-medium text-xs leading-relaxed">Residential & Commercial experts dedicated to high-quality craftsmanship.</p>
+                    </div>
                 </div>
+
             </div>
         </div>
     </section>
-    <section class="service-areas-section">
-        <h2>Our Service Areas</h2>
-        <div class="areas-grid" id="areasGrid">
-            <div class="area-card">West Bay</div>
-            <div class="area-card">George Town</div>
-            <div class="area-card">South Sound</div>
-            <div class="area-card">Prospect</div>
-            <div class="area-card">Savannah</div>
-            <div class="area-card">Bodden Town</div>
-            <div class="area-card">North Side</div>
-            <div class="area-card">East End</div>
+
+ <!-- Service Areas Section - Bauhaus UI Redesign -->
+    <section class="py-10 bg-white font-sans relative overflow-hidden">
+        
+        <!-- Bauhaus Background Geometric Shapes -->
+        <div class="absolute top-0 right-0 w-32 h-32 bg-blue-50 rounded-bl-full pointer-events-none"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 text-center relative z-10">
+            
+            <!-- Section Header -->
+            <div class="max-w-3xl mx-auto mb-6">
+               
+                <h2 class="text-4xl sm:text-5xl font-black uppercase tracking-tight text-navy mb-4">
+                    Our Service Areas
+                </h2>
+               <div class="absolute top-0 left-0 w-32 h-32 bg-[#0066cc]/10 rounded-br-full pointer-events-none"></div>
+    <div class="absolute bottom-0 right-0 w-48 h-48 border-4 border-[#0066cc]/15 rounded-full -mr-16 -mb-16 pointer-events-none"></div>
+    <div class="absolute top-1/2 right-12 w-12 h-12 bg-sky-200/50 rounded-full pointer-events-none hidden lg:block"></div>
+
+            </div>
+
+            <!-- Areas Grid (Bauhaus Geometric Cards) -->
+            <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6 max-w-5xl mx-auto" id="areasGrid">
+                
+                <!-- Area Card 1 -->
+                <div class="bg-slate-50 p-6 border-4 border-navy shadow-[6px_6px_0px_0px_#021838]  transition-all duration-200 group cursor-default">
+                    <div class="w-8 h-8 bg-navy text-white flex items-center justify-center font-mono font-bold text-xs mx-auto mb-3 border-2 border-navy transition-colors">
+                        01
+                    </div>
+                    <span class="font-black text-sm uppercase tracking-wider">West Bay</span>
+                </div>
+
+                <!-- Area Card 2 -->
+                <div class="bg-slate-50 p-6 border-4 border-navy shadow-[6px_6px_0px_0px_#021838]  transition-all duration-200 group cursor-default">
+                    <div class="w-8 h-8 bg-navy text-white  flex items-center justify-center font-mono font-bold text-xs mx-auto mb-3 border-2 border-navy transition-colors">
+                        02
+                    </div>
+                    <span class="font-black text-sm uppercase tracking-wider">George Town</span>
+                </div>
+
+                <!-- Area Card 3 -->
+                <div class="bg-slate-50 p-6 border-4 border-navy shadow-[6px_6px_0px_0px_#021838]  transition-all duration-200 group cursor-default">
+                    <div class="w-8 h-8 bg-navy text-white  flex items-center justify-center font-mono font-bold text-xs mx-auto mb-3 border-2 border-navy transition-colors">
+                        03
+                    </div>
+                    <span class="font-black text-sm uppercase tracking-wider">South Sound</span>
+                </div>
+
+                <!-- Area Card 4 -->
+                <div class="bg-slate-50 p-6 border-4 border-navy shadow-[6px_6px_0px_0px_#021838]  transition-all duration-200 group cursor-default">
+                    <div class="w-8 h-8 bg-navy text-white  flex items-center justify-center font-mono font-bold text-xs mx-auto mb-3 border-2 border-navy transition-colors">
+                        04
+                    </div>
+                    <span class="font-black text-sm uppercase tracking-wider">Prospect</span>
+                </div>
+
+                <!-- Area Card 5 -->
+                <div class="bg-slate-50 p-6 border-4 border-navy shadow-[6px_6px_0px_0px_#021838]  transition-all duration-200 group cursor-default">
+                    <div class="w-8 h-8 bg-navy text-white  flex items-center justify-center font-mono font-bold text-xs mx-auto mb-3 border-2 border-navy transition-colors">
+                        05
+                    </div>
+                    <span class="font-black text-sm uppercase tracking-wider">Savannah</span>
+                </div>
+
+                <!-- Area Card 6 -->
+                <div class="bg-slate-50 p-6 border-4 border-navy shadow-[6px_6px_0px_0px_#021838]  transition-all duration-200 group cursor-default">
+                    <div class="w-8 h-8 bg-navy text-white  flex items-center justify-center font-mono font-bold text-xs mx-auto mb-3 border-2 border-navy transition-colors">
+                        06
+                    </div>
+                    <span class="font-black text-sm uppercase tracking-wider">Bodden Town</span>
+                </div>
+
+                <!-- Area Card 7 -->
+                <div class="bg-slate-50 p-6 border-4 border-navy shadow-[6px_6px_0px_0px_#021838]  transition-all duration-200 group cursor-default">
+                    <div class="w-8 h-8 bg-navy text-white  flex items-center justify-center font-mono font-bold text-xs mx-auto mb-3 border-2 border-navy transition-colors">
+                        07
+                    </div>
+                    <span class="font-black text-sm uppercase tracking-wider">North Side</span>
+                </div>
+
+                <!-- Area Card 8 -->
+                <div class="bg-slate-50 p-6 border-4 border-navy shadow-[6px_6px_0px_0px_#021838]  transition-all duration-200 group cursor-default">
+                    <div class="w-8 h-8 bg-navy text-white  flex items-center justify-center font-mono font-bold text-xs mx-auto mb-3 border-2 border-navy transition-colors">
+                        08
+                    </div>
+                    <span class="font-black text-sm uppercase tracking-wider">East End</span>
+                </div>
+
+            </div>
         </div>
     </section>
 
-    <!-- Live Gallery Section -->
-    <section id="gallery" class="bg-gray-200 py-24">
-        <div class="max-w-6xl mx-auto px-6">
-          <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-12 gap-6">
-    <div>
-        <h2 class="text-2xl font-bold mb-2">Our Recent Projects</h2>
-        <p class="text-slate-500">Filter by service to see our expertise in action.</p>
+ <!-- Live Gallery Section - Clean Bauhaus UI -->
+    <section id="gallery" class="bg-white py-12 relative overflow-hidden font-sans">
+        
+        <!-- Subtle Bauhaus Background Geometry -->
+       <div class="absolute top-0 left-0 w-32 h-32 bg-[#0066cc]/10 rounded-br-full pointer-events-none"></div>
+    <div class="absolute bottom-0 right-0 w-48 h-48 border-4 border-[#0066cc]/15 rounded-full -mr-16 -mb-16 pointer-events-none"></div>
+    <div class="absolute top-1/2 right-12 w-12 h-12 bg-sky-200/50 rounded-full pointer-events-none hidden lg:block"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 relative z-10">
+            
+            <!-- Section Header (Zero lines or bottom borders) -->
+            <div class="flex flex-col md:flex-row justify-between text-center md:items-end mb-8 gap-4">
+             <div class="max-w-3xl mx-auto mb-6">
+               
+                <h2 class="text-4xl sm:text-5xl font-black uppercase tracking-tight text-navy">
+                    Our Recent Projects
+                </h2>
+               
+
+            </div>
+             
+            </div>
+
+            <!-- Filter Buttons -->
+            <div id="filterContainer" class="flex gap-3 overflow-x-auto w-full pb-2 mb-8 scrollbar-none">
+                <button class="filter-btn active whitespace-nowrap px-5 py-2.5 bg-[#007BFF] text-white font-bold text-xs uppercase tracking-widest border-2 border-[#007BFF] shadow-[3px_3px_0px_0px_#021838] hover:shadow-none hover:translate-x-[2px] hover:translate-y-[2px] transition-all duration-150" onclick="window.setFilter('All')">All Projects</button>
+                <button class="filter-btn whitespace-nowrap px-5 py-2.5 bg-white text-[#007BFF] font-bold text-xs uppercase tracking-widest border-2 border-[#007BFF] shadow-[3px_3px_0px_0px_#021838] hover:shadow-none hover:translate-x-[2px] hover:translate-y-[2px] transition-all duration-150" onclick="window.setFilter('Electrical')">Electrical</button>
+                <button class="filter-btn whitespace-nowrap px-5 py-2.5 bg-white text-[#007BFF] font-bold text-xs uppercase tracking-widest border-2 border-[#007BFF] shadow-[3px_3px_0px_0px_#021838] hover:shadow-none hover:translate-x-[2px] hover:translate-y-[2px] transition-all duration-150" onclick="window.setFilter('Maintenance')">Home Maintenance</button>
+                <button class="filter-btn whitespace-nowrap px-5 py-2.5 bg-white text-[#007BFF] font-bold text-xs uppercase tracking-widest border-2 border-[#007BFF] shadow-[3px_3px_0px_0px_#021838] hover:shadow-none hover:translate-x-[2px] hover:translate-y-[2px] transition-all duration-150" onclick="window.setFilter('Plumbing')">Plumbing</button>
+                <button class="filter-btn whitespace-nowrap px-5 py-2.5 bg-white text-[#007BFF] font-bold text-xs uppercase tracking-widest border-2 border-[#007BFF] shadow-[3px_3px_0px_0px_#021838] hover:shadow-none hover:translate-x-[2px] hover:translate-y-[2px] transition-all duration-150" onclick="window.setFilter('Remodel')">Remodel</button>
+                <button class="filter-btn whitespace-nowrap px-5 py-2.5 bg-white text-[#007BFF] font-bold text-xs uppercase tracking-widest border-2 border-[#007BFF] shadow-[3px_3px_0px_0px_#021838] hover:shadow-none hover:translate-x-[2px] hover:translate-y-[2px] transition-all duration-150" onclick="window.setFilter('Construction')">Construction</button>
+            </div>
+
+            <!-- Dynamic Project Cards Grid -->
+            <div id="galleryGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"></div>
+
+        </div>
+    </section>
+
+  <!-- WHO WE ARE - BAUHAUS UI SECTION -->
+<section id="about" class="bg-slate-50 py-20 px-4 sm:px-6 lg:px-12 text-slate-900 font-sans overflow-hidden relative ">
+    
+    <!-- Bauhaus Background Decorative Geometry -->
+    <div class="absolute top-0 left-0 w-32 h-32 bg-[#0066cc]/10 rounded-br-full pointer-events-none"></div>
+    <div class="absolute bottom-0 right-0 w-48 h-48 border-4 border-[#0066cc]/15 rounded-full -mr-16 -mb-16 pointer-events-none"></div>
+    <div class="absolute top-1/2 right-12 w-12 h-12 bg-sky-200/50 rounded-full pointer-events-none hidden lg:block"></div>
+
+    <div class="max-w-7xl mx-auto relative z-10">
+        
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+
+            <!-- LEFT COLUMN: Image with Bauhaus Layering -->
+            <div class="lg:col-span-6 relative">
+                
+                <!-- Bauhaus Decorative Geometric Frames -->
+                <!-- Big Ice Blue Circle Backing -->
+                <div class="absolute -top-8 -left-8 w-64 h-64 sm:w-80 sm:h-80 bg-sky-200/60 rounded-full -z-10"></div>
+                <!-- Offset Solid Royal Blue Border Block -->
+                <div class="absolute -bottom-4 -right-4 w-full h-full border-4 border-[#0066cc] bg-white -z-10 hidden sm:block"></div>
+
+                <!-- Main Image Container with Bold Bauhaus Border -->
+                <div class="relative rounded-none border-4 border-[#0066cc] bg-white shadow-[8px_8px_0px_0px_#0066cc] overflow-hidden group">
+                    <img 
+                        src="who.jpeg" 
+                        alt="Home Pros Cayman Property" 
+                        class="w-full h-[360px] sm:h-[440px] object-cover filter contrast-[1.03] group-hover:scale-105 transition-transform duration-500 ease-out"
+                    >
+                    <!-- Subtle Geometric Grid Overlay on Hover -->
+                    <div class="absolute inset-0 bg-[#0066cc]/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
+                </div>
+
+                <!-- Bauhaus Floating Stat Box (Solid Royal Blue & Sharp Corners) -->
+                <div class="absolute -bottom-6 right-4 sm:-bottom-8 sm:-right-6 bg-[#0066cc] text-white p-5 sm:p-6 border-4 border-white shadow-[6px_6px_0px_0px_#021838] z-20 max-w-[210px] sm:max-w-[240px]">
+                    <div class="flex items-center space-x-2 mb-1">
+                        <span class="text-2xl sm:text-3xl font-black tracking-tight font-mono">100%</span>
+                    </div>
+                    <p class="text-[11px] font-black uppercase tracking-wider leading-snug">
+                        Safety & Quality Commitment
+                    </p>
+                </div>
+
+            </div>
+
+            <!-- RIGHT COLUMN: Bauhaus Content Grid -->
+            <div class="lg:col-span-6 space-y-8">
+                
+                <!-- Main Heading -->
+                <div class="relative">
+                    <h2 class="text-4xl sm:text-5xl font-black uppercase tracking-tight text-[#0066cc] leading-none mb-3">
+                        Who We Are
+                    </h2>
+                    <!-- Geometric Accent Line -->
+                    <div class="flex items-center space-x-2">
+                        <div class="h-2 w-16 bg-[#0066cc]"></div>
+                        <div class="h-2 w-4 bg-sky-300"></div>
+                        <div class="h-2 w-2 bg-[#0066cc]"></div>
+                    </div>
+                </div>
+
+                <!-- Paragraph -->
+                <p class="text-slate-700 text-sm sm:text-base leading-relaxed font-medium bg-white p-6 border-l-4 border-[#0066cc] shadow-sm">
+                    <strong>Home Pros</strong> is a dedicated team of certified professionals based in Grand Cayman, committed to providing top-tier maintenance and electrical solutions. Our mission is to protect and enhance your most valuable assets, your home and business.
+                </p>
+
+                <!-- Mission & Quality Grid (Bauhaus Two-Card Grid) -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 pt-2">
+                    
+                    <!-- Card 1: Mission -->
+                    <div class="bg-white p-5 border-2 border-[#0066cc] shadow-[4px_4px_0px_0px_#0066cc] hover:-translate-y-1 transition-transform duration-200">
+                        <div class="w-8 h-8 bg-[#0066cc] text-white flex items-center justify-center font-mono font-bold text-xs mb-3">
+                            01
+                        </div>
+                        <h3 class="text-xs font-black uppercase tracking-widest text-[#0066cc] mb-2">
+                            Our Mission
+                        </h3>
+                        <p class="text-sm text-slate-600 leading-relaxed">
+                            To provide reliable, high-quality maintenance that Cayman residents can trust every single time.
+                        </p>
+                    </div>
+
+                    <!-- Card 2: Quality First -->
+                    <div class="bg-white p-5 border-2 border-[#0066cc] shadow-[4px_4px_0px_0px_#0066cc] hover:-translate-y-1 transition-transform duration-200">
+                        <div class="w-8 h-8 bg-[#0066cc] text-white flex items-center justify-center font-mono font-bold text-xs mb-3">
+                            02
+                        </div>
+                        <h3 class="text-xs font-black uppercase tracking-widest text-[#0066cc] mb-2">
+                            Quality First
+                        </h3>
+                        <p class="text-xs text-slate-600 leading-relaxed italic">
+                            We use only professional-grade materials and the latest safety protocols in all electrical work.
+                        </p>
+                    </div>
+
+                </div>
+
+                <!-- Call to Action Button -->
+                <div class="pt-4">
+                    <a href="#quote" class="inline-flex items-center space-x-3 bg-[#0066cc] text-white font-black text-xs sm:text-sm uppercase tracking-widest px-8 py-4 border-2 border-[#0066cc] shadow-[5px_5px_0px_0px_#021838] hover:shadow-none hover:translate-x-[3px] hover:translate-y-[3px] transition-all duration-200 group">
+                        <span>Work With Us</span>
+                        <i class="fas fa-arrow-right text-sm group-hover:translate-x-1.5 transition-transform"></i>
+                    </a>
+                </div>
+
+            </div>
+
+        </div>
     </div>
+</section>
+<!-- All Services Main Section Container (Centered & Constrained) -->
+    <section id="services" class="py-20 bg-white font-sans relative overflow-hidden">
+        
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 relative z-10">
 
-   
-</div>
-
-            <!-- Gallery Grid -->
-            <div id="galleryGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <div id="loader" class="col-span-full flex flex-col items-center justify-center py-20">
-                    <div class="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"></div>
+            <!-- Category 1: Home Services & Projects -->
+            <div class="mb-20">
+                <div class="flex items-center mb-8 pb-2 ">
+                    <div class="h-2 w-10 bg-[#007BFF] mr-4"></div>
+                    <h2 class="text-2xl sm:text-3xl font-black text-[#007BFF] uppercase tracking-tight">Home Services & Projects</h2>
                 </div>
-            </div><br>
-             <div id="filterContainer" class="flex gap-4 overflow-x-auto w-full pb-3 mt-4">
-    <button class="filter-btn active whitespace-nowrap px-6 py-2 rounded-full border border-slate-300 text-sm font-medium" onclick="window.setFilter('All')">All Projects</button>
-    <button class="filter-btn whitespace-nowrap px-6 py-2 rounded-full border border-slate-300 text-sm font-medium" onclick="window.setFilter('Electrical')">Electrical</button>
-    <button class="filter-btn whitespace-nowrap px-6 py-2 rounded-full border border-slate-300 text-sm font-medium" onclick="window.setFilter('Maintenance')">Home Maintenance</button>
-    <button class="filter-btn whitespace-nowrap px-6 py-2 rounded-full border border-slate-300 text-sm font-medium" onclick="window.setFilter('Plumbing')">Plumbing</button>
-    <button class="filter-btn whitespace-nowrap px-6 py-2 rounded-full border border-slate-300 text-sm font-medium" onclick="window.setFilter('Remodel')">Remodel</button>
-    <button class="filter-btn whitespace-nowrap px-6 py-2 rounded-full border border-slate-300 text-sm font-medium" onclick="window.setFilter('Construction')">Construction</button>
-</div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                    
+                    <div class="service-card bg-white p-6 border-2 border-[#007BFF] shadow-[4px_4px_0px_0px_#021838] hover:-translate-y-1 transition-all duration-200 cursor-pointer flex flex-col justify-between"
+                        onclick="openModal('Window Cleaning', 'window.jpeg')">
+                        <div>
+                            <i class="fas fa-broom text-[#007BFF] text-3xl mb-4"></i>
+                            <h3 class="text-lg font-black uppercase text-[#007BFF] tracking-tight mb-2">Window Cleaning</h3>
+                            <p class="text-black font-medium text-xs leading-relaxed mb-4">Sparkling clean windows for a brighter view.</p>
+                        </div>
+                        <span class="inline-flex items-center text-[11px] font-black uppercase tracking-wider text-[#007BFF] hover:underline">
+                            Click to See Our Work <i class="fas fa-arrow-right ml-1.5 text-xs"></i>
+                        </span>
+                    </div>
+
+                    <div class="service-card bg-white p-6 border-2 border-[#007BFF] shadow-[4px_4px_0px_0px_#021838] hover:-translate-y-1 transition-all duration-200 cursor-pointer flex flex-col justify-between"
+                        onclick="openModal('Solar Panel Cleaning', 'solar.jpeg')">
+                        <div>
+                            <i class="fas fa-sun text-[#007BFF] text-3xl mb-4"></i>
+                            <h3 class="text-lg font-black uppercase text-[#007BFF] tracking-tight mb-2">Solar Panel Cleaning</h3>
+                            <p class="text-black font-medium text-xs leading-relaxed mb-4">Maximize energy efficiency with clean panels.</p>
+                        </div>
+                        <span class="inline-flex items-center text-[11px] font-black uppercase tracking-wider text-[#007BFF] hover:underline">
+                            Click to See Our Work <i class="fas fa-arrow-right ml-1.5 text-xs"></i>
+                        </span>
+                    </div>
+
+                    <div class="service-card bg-white p-6 border-2 border-[#007BFF] shadow-[4px_4px_0px_0px_#021838] hover:-translate-y-1 transition-all duration-200 cursor-pointer flex flex-col justify-between"
+                        onclick="openModal('Gutter & Eaves', 'eaves.jpeg')">
+                        <div>
+                            <i class="fas fa-house-flood-water text-[#007BFF] text-3xl mb-4"></i>
+                            <h3 class="text-lg font-black uppercase text-[#007BFF] tracking-tight mb-2">Gutter & Eaves</h3>
+                            <p class="text-black font-medium text-xs leading-relaxed mb-4">Protect your foundation from water damage.</p>
+                        </div>
+                        <span class="inline-flex items-center text-[11px] font-black uppercase tracking-wider text-[#007BFF] hover:underline">
+                            Click to See Our Work <i class="fas fa-arrow-right ml-1.5 text-xs"></i>
+                        </span>
+                    </div>
+
+                    <div class="service-card bg-white p-6 border-2 border-[#007BFF] shadow-[4px_4px_0px_0px_#021838] hover:-translate-y-1 transition-all duration-200 cursor-pointer flex flex-col justify-between"
+                        onclick="openModal('Pressure Washing', 'pressue.jpeg')">
+                        <div>
+                            <i class="fas fa-faucet-drip text-[#007BFF] text-3xl mb-4"></i>
+                            <h3 class="text-lg font-black uppercase text-[#007BFF] tracking-tight mb-2">Pressure Washing</h3>
+                            <p class="text-black font-medium text-xs leading-relaxed mb-4">Powerful cleaning for siding and decks.</p>
+                        </div>
+                        <span class="inline-flex items-center text-[11px] font-black uppercase tracking-wider text-[#007BFF] hover:underline">
+                            Click to See Our Work <i class="fas fa-arrow-right ml-1.5 text-xs"></i>
+                        </span>
+                    </div>
+
+                    <div class="service-card bg-white p-6 border-2 border-[#007BFF] shadow-[4px_4px_0px_0px_#021838] hover:-translate-y-1 transition-all duration-200 cursor-pointer flex flex-col justify-between"
+                        onclick="openModal('Driveway Sealing', 'drive.jpeg')">
+                        <div>
+                            <i class="fas fa-road text-[#007BFF] text-3xl mb-4"></i>
+                            <h3 class="text-lg font-black uppercase text-[#007BFF] tracking-tight mb-2">Driveway Sealing</h3>
+                            <p class="text-black font-medium text-xs leading-relaxed mb-4">Long-lasting protection for your driveway.</p>
+                        </div>
+                        <span class="inline-flex items-center text-[11px] font-black uppercase tracking-wider text-[#007BFF] hover:underline">
+                            Click to See Our Work <i class="fas fa-arrow-right ml-1.5 text-xs"></i>
+                        </span>
+                    </div>
+
+                    <div class="service-card bg-white p-6 border-2 border-[#007BFF] shadow-[4px_4px_0px_0px_#021838] hover:-translate-y-1 transition-all duration-200 cursor-pointer flex flex-col justify-between"
+                        onclick="openModal('Roof Cleaning', 'paint.jpeg')">
+                        <div>
+                            <i class="fas fa-broom text-[#007BFF] text-3xl mb-4"></i>
+                            <h3 class="text-lg font-black uppercase text-[#007BFF] tracking-tight mb-2">Roof Cleaning</h3>
+                            <p class="text-black font-medium text-xs leading-relaxed mb-4">Deep cleaning for your roofs.</p>
+                        </div>
+                        <span class="inline-flex items-center text-[11px] font-black uppercase tracking-wider text-[#007BFF] hover:underline">
+                            Click to See Our Work <i class="fas fa-arrow-right ml-1.5 text-xs"></i>
+                        </span>
+                    </div>
+
+                    <div class="service-card bg-white p-6 border-2 border-[#007BFF] shadow-[4px_4px_0px_0px_#021838] hover:-translate-y-1 transition-all duration-200 cursor-pointer flex flex-col justify-between"
+                        onclick="openModal('Painting', 'expaint.jpeg')">
+                        <div>
+                            <i class="fas fa-pencil text-[#007BFF] text-3xl mb-4"></i>
+                            <h3 class="text-lg font-black uppercase text-[#007BFF] tracking-tight mb-2">Exterior Painting</h3>
+                            <p class="text-black font-medium text-xs leading-relaxed mb-4">Exterior professional painting.</p>
+                        </div>
+                        <span class="inline-flex items-center text-[11px] font-black uppercase tracking-wider text-[#007BFF] hover:underline">
+                            Click to See Our Work <i class="fas fa-arrow-right ml-1.5 text-xs"></i>
+                        </span>
+                    </div>
+
+                    <div class="service-card bg-white p-6 border-2 border-[#007BFF] shadow-[4px_4px_0px_0px_#021838] hover:-translate-y-1 transition-all duration-200 cursor-pointer flex flex-col justify-between"
+                        onclick="openModal('Painting', 'interior.jpeg')">
+                        <div>
+                            <i class="fas fa-paint-roller text-[#007BFF] text-3xl mb-4"></i>
+                            <h3 class="text-lg font-black uppercase text-[#007BFF] tracking-tight mb-2">Interior Painting</h3>
+                            <p class="text-black font-medium text-xs leading-relaxed mb-4">Interior professional painting.</p>
+                        </div>
+                        <span class="inline-flex items-center text-[11px] font-black uppercase tracking-wider text-[#007BFF] hover:underline">
+                            Click to See Our Work <i class="fas fa-arrow-right ml-1.5 text-xs"></i>
+                        </span>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Category 2: Property Maintenance -->
+            <div class="mb-20">
+                <div class="flex items-center mb-8 pb-2 ">
+                    <div class="h-2 w-10 bg-[#007BFF] mr-4"></div>
+                    <h2 class="text-2xl sm:text-3xl font-black text-[#007BFF] uppercase tracking-tight">Property Maintenance</h2>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                    
+                    <div class="service-card bg-white p-6 border-2 border-[#007BFF] shadow-[4px_4px_0px_0px_#021838] hover:-translate-y-1 transition-all duration-200 cursor-pointer flex flex-col justify-between"
+                        onclick="openModal('Lawn Care', 'lawn.jpeg')">
+                        <div>
+                            <i class="fas fa-leaf text-[#007BFF] text-3xl mb-4"></i>
+                            <h3 class="text-lg font-black uppercase text-[#007BFF] tracking-tight mb-2">Lawn Care</h3>
+                            <p class="text-black font-medium text-xs leading-relaxed mb-4">Precise mowing and professional care.</p>
+                        </div>
+                        <span class="inline-flex items-center text-[11px] font-black uppercase tracking-wider text-[#007BFF] hover:underline">
+                            Click to See Our Work <i class="fas fa-arrow-right ml-1.5 text-xs"></i>
+                        </span>
+                    </div>
+
+                    <div class="service-card bg-white p-6 border-2 border-[#007BFF] shadow-[4px_4px_0px_0px_#021838] hover:-translate-y-1 transition-all duration-200 cursor-pointer flex flex-col justify-between"
+                        onclick="openModal('Material Removal', 'remove.jpeg')">
+                        <div>
+                            <i class="fas fa-truck-ramp-box text-[#007BFF] text-3xl mb-4"></i>
+                            <h3 class="text-lg font-black uppercase text-[#007BFF] tracking-tight mb-2">Removals & Hauling</h3>
+                            <p class="text-black font-medium text-xs leading-relaxed mb-4">Clutter removal and heavy hauling services.</p>
+                        </div>
+                        <span class="inline-flex items-center text-[11px] font-black uppercase tracking-wider text-[#007BFF] hover:underline">
+                            Click to See Our Work <i class="fas fa-arrow-right ml-1.5 text-xs"></i>
+                        </span>
+                    </div>
+
+                    <div class="service-card bg-white p-6 border-2 border-[#007BFF] shadow-[4px_4px_0px_0px_#021838] hover:-translate-y-1 transition-all duration-200 cursor-pointer flex flex-col justify-between"
+                        onclick="openModal('General Labor', 'gle.jpeg')">
+                        <div>
+                            <i class="fas fa-hard-hat text-[#007BFF] text-3xl mb-4"></i>
+                            <h3 class="text-lg font-black uppercase text-[#007BFF] tracking-tight mb-2">General Laborer</h3>
+                            <p class="text-black font-medium text-xs leading-relaxed mb-4">Reliable help for any heavy-duty task.</p>
+                        </div>
+                        <span class="inline-flex items-center text-[11px] font-black uppercase tracking-wider text-[#007BFF] hover:underline">
+                            Click to See Our Work <i class="fas fa-arrow-right ml-1.5 text-xs"></i>
+                        </span>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Category 3: Electrical Services -->
+            <div>
+                <div class="flex items-center mb-8 pb-2 ">
+                    <div class="h-2 w-10 bg-[#007BFF] mr-4"></div>
+                    <h2 class="text-2xl sm:text-3xl font-black text-[#007BFF] uppercase tracking-tight">Electrical Services</h2>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                    
+                    <div class="service-card bg-white p-6 border-2 border-[#007BFF] shadow-[4px_4px_0px_0px_#021838] hover:-translate-y-1 transition-all duration-200 cursor-pointer flex flex-col justify-between"
+                        onclick="openModal('Lighting Install', 'light.jpeg')">
+                        <div>
+                            <i class="fas fa-lightbulb text-[#007BFF] text-3xl mb-4"></i>
+                            <h3 class="text-lg font-black uppercase text-[#007BFF] tracking-tight mb-2">Lighting Installation</h3>
+                            <p class="text-black font-medium text-xs leading-relaxed mb-4">Fixture replacement and new installations.</p>
+                        </div>
+                        <span class="inline-flex items-center text-[11px] font-black uppercase tracking-wider text-[#007BFF] hover:underline">
+                            Click to See Our Work <i class="fas fa-arrow-right ml-1.5 text-xs"></i>
+                        </span>
+                    </div>
+
+                    <div class="service-card bg-white p-6 border-2 border-[#007BFF] shadow-[4px_4px_0px_0px_#021838] hover:-translate-y-1 transition-all duration-200 cursor-pointer flex flex-col justify-between"
+                        onclick="openModal('Repairs', 'electrical.jpeg')">
+                        <div>
+                            <i class="fas fa-bolt text-[#007BFF] text-3xl mb-4"></i>
+                            <h3 class="text-lg font-black uppercase text-[#007BFF] tracking-tight mb-2">Small Repairs</h3>
+                            <p class="text-black font-medium text-xs leading-relaxed mb-4">Professional Maintenance and repairs.</p>
+                        </div>
+                        <span class="inline-flex items-center text-[11px] font-black uppercase tracking-wider text-[#007BFF] hover:underline">
+                            Click to See Our Work <i class="fas fa-arrow-right ml-1.5 text-xs"></i>
+                        </span>
+                    </div>
+
+                </div>
+            </div>
+
         </div>
     </section>
-    <section id="about" class="py-24 bg-slate-50 overflow-hidden">
-        <div class="container mx-auto px-4">
-            <div class="flex flex-col lg:flex-row items-center gap-16">
-                <div class="lg:w-1/2 relative">
-                    <div class="absolute -top-10 -left-10 w-80 h-80 bg-brandDark opacity-20 rounded-full"></div>
-                    <img src="who.jpeg" alt="Home Pros Team"
-                        class="relative z-10 rounded-lg shadow-2xl border-4 border-brandDark">
-                    <div class="absolute -bottom-6 -right-6 bg-brandDark text-white p-8 z-20 rounded-lg shadow-xl">
-                        <p class="text-3xl font-bold text-brandYellow italic">100%</p>
-                        <p class="text-xs uppercase tracking-widest font-bold">Safety Commitment</p>
-                    </div>
-                </div>
-                <div class="lg:w-1/2">
-                    <span class="text-brandYellow font-bold uppercase tracking-widest text-sm mb-4 block">Building Trust
-                        Since Day One</span>
-                    <h2 class="text-4xl uppercase mb-4 font-bold">Who We Are</h2>
-                    <div class="hidden md:block h-[2px] flex-grow bg-brandYellow mb-4 mx-8 opacity-30"></div>
+  <!-- Client Testimonials Section - Bauhaus UI Redesign -->
+    <section class="py-12 bg-navy text-white relative overflow-hidden">
+        
+        <!-- Bauhaus Background Geometric Accents -->
+        <div class="absolute top-0 right-0 w-48 h-48 bg-white/5 rounded-full -mr-24 -mt-24 pointer-events-none"></div>
+        <div class="absolute bottom-0 left-0 w-64 h-64 border-2 border-white/10 rounded-full -ml-32 -mb-32 pointer-events-none"></div>
 
-                    <p class="text-slate-600 mb-12 leading-relaxed"><br>Home Pros is a dedicated team of professionals
-                        based in Grand Cayman, committed to providing top-tier maintenance and electrical solutions. Our
-                        mission is to protect and enhance your most valuable assets—your home and business.</p>
-                    <div class="grid grid-cols-2 gap-8 mb-10">
-                        <div>
-                            <h4 class="font-bold text-navy uppercase mb-2">Our Mission</h4>
-                            <p class="text-xs text-gray-500 italic">To provide reliable, high-quality maintenance that
-                                Cayman residents can trust every single time.</p>
-                        </div>
-                        <div>
-                            <h4 class="font-bold text-navy uppercase mb-2">Quality First</h4>
-                            <p class="text-xs text-gray-500 italic">We use only professional-grade materials and the
-                                latest safety protocols in all electrical work.</p>
-                        </div>
+        <div class="container mx-auto px-4 relative z-10">
+            
+            <!-- Section Header -->
+            <div class="max-w-3xl mx-auto text-center mb-8">
+               
+                <h2 class="text-4xl sm:text-5xl font-black tracking-tight text-white uppercase leading-none mb-4">
+                    Trusted By Homeowners</span>
+                </h2>
+                <p class="text-white/90 text-sm sm:text-base leading-relaxed max-w-2xl mx-auto font-medium">
+                    Discover why homeowners and businesses across the Cayman Islands trust Home Pros for their property maintenance and renovation needs.
+                </p>
+
+                <!-- Write a Review Button (Bauhaus Style) -->
+                <button onclick="toggleReviewForm()" 
+                        class="mt-8 px-8 py-4 bg-white text-navy font-black text-xs uppercase tracking-widest border-2 border-white shadow-[5px_5px_0px_0px_#021838] hover:shadow-none hover:translate-x-[3px] hover:translate-y-[3px] transition-all duration-200 cursor-pointer">
+                    <i class="fas fa-pen mr-2"></i> Write a Review
+                </button>
+            </div>
+
+            <!-- Review Submission Form (Hidden by default, Bauhaus Styled) -->
+            <div id="review-form-container" class="hidden max-w-xl mx-auto bg-white p-8 sm:p-10 border-4 border-white shadow-[10px_10px_0px_0px_#021838] mb-16 text-slate-900 animate-fade-in relative">
+                <div class="absolute top-0 left-0 w-3 h-full bg-navy"></div>
+                <h3 class="text-2xl font-black uppercase tracking-tight text-navy mb-6">Submit Your Feedback</h3>
+                <form id="submit-review-form" class="space-y-5">
+                    <div>
+                        <label class="block text-xs font-black uppercase tracking-widest text-slate-700 mb-2">Full Name</label>
+                        <input type="text" id="rev-name" placeholder="Enter your name" class="w-full p-4 bg-slate-50 border-2 border-slate-300 rounded-none outline-none focus:border-navy font-medium text-slate-900" required>
                     </div>
-                    <a href="#quote"
-                        class="text-navy font-bold uppercase border-b-2 border-brandDark pb-2 hover:text-brandYellow transition">Work
-                        With Us <i class="fas fa-arrow-right ml-2"></i></a>
+                    <div>
+                        <label class="block text-xs font-black uppercase tracking-widest text-slate-700 mb-2">Rating</label>
+                      <select id="rev-rating" class="w-full p-4.5 bg-slate-50 border-2 border-slate-300 rounded-none outline-none focus:border-navy font-bold text-slate-900">
+    <option value="5">5 Stars - Excellent</option>
+    <option value="4">4 Stars - Very Good</option>
+    <option value="3">3 Stars - Average</option>
+    <option value="2">2 Stars - Poor</option>
+    <option value="1">1 Star - Very Poor</option>
+</select>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-black uppercase tracking-widest text-slate-700 mb-2">Your Review</label>
+                        <textarea id="rev-text" placeholder="Share your experience..." rows="4" class="w-full p-4 bg-slate-50 border-2 border-slate-300 rounded-none outline-none focus:border-navy font-medium text-slate-900 resize-none" required></textarea>
+                    </div>
+                    <button type="submit" class="w-full bg-navy text-white py-4 font-black text-xs uppercase tracking-widest border-2 border-navy shadow-[4px_4px_0px_0px_#021838] hover:shadow-none hover:translate-x-[2px] hover:translate-y-[2px] transition-all duration-200">
+                        Publish Review Live
+                    </button>
+                </form>
+            </div>
+
+            <!-- Dynamic User Reviews Grid -->
+            <div id="user-reviews-grid" class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-7xl mx-auto mb-8"></div>
+
+            <!-- Hardcoded Permanent Reviews Grid (Bauhaus Card Redesign) -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-7xl mx-auto">
+                
+                <!-- Review 1 -->
+                <div class="bg-white p-8 border-4 border-white shadow-[6px_6px_0px_0px_#021838] flex flex-col justify-between text-slate-900 hover:-translate-y-1 transition-transform duration-200">
+                    <div>
+                        <div class="flex mb-4 text-base tracking-widest text-amber-500">★★★★★</div>
+                        <p class="text-slate-700 leading-relaxed text-sm font-medium italic mb-6">"I had a great and seamless experience with Eli and his team! Having noticed that the cover for my outdoor dryer vent had gone missing, Eli’s team came by the next business day, communicated clearly on arrival time, and got the job done quickly. Everything looked perfect when they finished. I’m so pleased with the service, and would absolutely recommend them!"</p>
+                    </div>
+                    <div class="flex items-center justify-between pt-4 border-t-2 border-slate-100">
+                        <div class="flex flex-col">
+                            <span class="text-xs font-black tracking-widest uppercase text-navy">Addie A</span>
+                            <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">September 30, 2026</span>
+                        </div>
+                        <div class="w-6 h-6 bg-navy text-white flex items-center justify-center text-[10px] font-mono font-bold">✓</div>
+                    </div>
                 </div>
+
+                <!-- Review 2 -->
+                <div class="bg-white p-8 border-4 border-white shadow-[6px_6px_0px_0px_#021838] flex flex-col justify-between text-slate-900 hover:-translate-y-1 transition-transform duration-200">
+                    <div>
+                        <div class="flex mb-4 text-base tracking-widest text-amber-500">★★★★★</div>
+                        <p class="text-slate-700 leading-relaxed text-sm font-medium italic mb-6">"I recently had the pleasure of hiring Eli and his team from Home Pros Cayman to power wash our house, clean the windows, and clean the gutters. They did an outstanding job! Eli was thorough and paid great attention to detail, leaving everything sparkling clean. What impressed us the most was their willingness to accommodate extra tasks when requested, showcasing their dedication and professionalism. I highly recommend Eli for anyone looking for reliable and high-quality service."</p>
+                    </div>
+                    <div class="flex items-center justify-between pt-4 border-t-2 border-slate-100">
+                        <div class="flex flex-col">
+                            <span class="text-xs font-black tracking-widest uppercase text-navy">Eric</span>
+                            <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">September 8, 2026</span>
+                        </div>
+                        <div class="w-6 h-6 bg-navy text-white flex items-center justify-center text-[10px] font-mono font-bold">✓</div>
+                    </div>
+                </div>
+
+                <!-- Review 3 -->
+                <div class="bg-white p-8 border-4 border-white shadow-[6px_6px_0px_0px_#021838] flex flex-col justify-between text-slate-900 hover:-translate-y-1 transition-transform duration-200">
+                    <div>
+                        <div class="flex mb-4 text-base tracking-widest text-amber-500">★★★★★</div>
+                        <p class="text-slate-700 leading-relaxed text-sm font-medium italic mb-6">"Eli is reliable, punctual, and responsible qualities that are hard to come by these days. He and his team did a fantastic job cleaning our windows. We’re very happy with the results and would highly recommend them!"</p>
+                    </div>
+                    <div class="flex items-center justify-between pt-4 border-t-2 border-slate-100">
+                        <div class="flex flex-col">
+                            <span class="text-xs font-black tracking-widest uppercase text-navy">Regine</span>
+                            <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">August 30, 2026</span>
+                        </div>
+                        <div class="w-6 h-6 bg-navy text-white flex items-center justify-center text-[10px] font-mono font-bold">✓</div>
+                    </div>
+                </div>
+
+                <!-- Review 4 -->
+                <div class="bg-white p-8 border-4 border-white shadow-[6px_6px_0px_0px_#021838] flex flex-col justify-between text-slate-900 hover:-translate-y-1 transition-transform duration-200">
+                    <div>
+                        <div class="flex mb-4 text-base tracking-widest text-amber-500">★★★★★</div>
+                        <p class="text-slate-700 leading-relaxed text-sm font-medium italic mb-6">"We just had a great experience with Eli and his team. They showed up when they said they would and got the jobs done quickly. We will definitely use them again!"</p>
+                    </div>
+                    <div class="flex items-center justify-between pt-4 border-t-2 border-slate-100">
+                        <div class="flex flex-col">
+                            <span class="text-xs font-black tracking-widest uppercase text-navy">Carl B</span>
+                            <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">August 29, 2026</span>
+                        </div>
+                        <div class="w-6 h-6 bg-navy text-white flex items-center justify-center text-[10px] font-mono font-bold">✓</div>
+                    </div>
+                </div>
+
+                <!-- Review 5 -->
+                <div class="bg-white p-8 border-4 border-white shadow-[6px_6px_0px_0px_#021838] flex flex-col justify-between text-slate-900 hover:-translate-y-1 transition-transform duration-200">
+                    <div>
+                        <div class="flex mb-4 text-base tracking-widest text-amber-500">★★★★★</div>
+                        <p class="text-slate-700 leading-relaxed text-sm font-medium italic mb-6">"Eli and his team did a great job cleaning our home. They arrived exactly at the agreed on time and even pointed out several areas for cleaning that I wasn't even aware of. The end result was better than what I expected. Communication was great - something that can often be hard to find. I would recommend Home Pros"</p>
+                    </div>
+                    <div class="flex items-center justify-between pt-4 border-t-2 border-slate-100">
+                        <div class="flex flex-col">
+                            <span class="text-xs font-black tracking-widest uppercase text-navy">Andre O</span>
+                            <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">August 12, 2026</span>
+                        </div>
+                        <div class="w-6 h-6 bg-navy text-white flex items-center justify-center text-[10px] font-mono font-bold">✓</div>
+                    </div>
+                </div>
+
+                <!-- Review 6 -->
+                <div class="bg-white p-8 border-4 border-white shadow-[6px_6px_0px_0px_#021838] flex flex-col justify-between text-slate-900 hover:-translate-y-1 transition-transform duration-200">
+                    <div>
+                        <div class="flex mb-4 text-base tracking-widest text-amber-500">★★★★★</div>
+                        <p class="text-slate-700 leading-relaxed text-sm font-medium italic mb-6">"Eli and his team were extremely courteous, punctual and very professional. They also did an excellent job with cleaning the doors and windows of our home. It will be my pleasure to recommend them and will certainly be using their services again."</p>
+                    </div>
+                    <div class="flex items-center justify-between pt-4 border-t-2 border-slate-100">
+                        <div class="flex flex-col">
+                            <span class="text-xs font-black tracking-widest uppercase text-navy">AMD</span>
+                            <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">July 24, 2026</span>
+                        </div>
+                        <div class="w-6 h-6 bg-navy text-white flex items-center justify-center text-[10px] font-mono font-bold">✓</div>
+                    </div>
+                </div>
+
             </div>
         </div>
     </section>
 
-    <main class="max-w-7xl mx-auto px-4 py-12">
+    <!-- Estimate Contact Form Section -->
+<!-- Estimate Contact Form Section - Bauhaus UI Redesign -->
+    <section id="quote" class="py-24 bg-white text-navy font-sans relative overflow-hidden border-b-4 border-navy">
+        
+        <!-- Bauhaus Background Geometric Shapes -->
+        <div class="absolute top-0 right-0 w-64 h-64 bg-blue-50 rounded-bl-full pointer-events-none -z-0"></div>
+        <div class="absolute bottom-0 left-0 w-48 h-48 border-4 border-navy/10 rounded-full -ml-20 -mb-20 pointer-events-none -z-0"></div>
 
-        <!-- Category: Home Services -->
-        <section class="mb-16">
-            <div class="flex items-center mb-8">
-                <div class="h-1 w-12 bg-blue-600 mr-4"></div>
-                <h2 class="text-2xl font-bold text-gray-900 uppercase tracking-widest">Home Services & Projects</h2>
-            </div>
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                <!-- Service Cards -->
-                <div class="service-card bg-white p-6 rounded-2xl shadow-sm border border-brandDark"
-                    onclick="openModal('Window Cleaning', 'window.jpeg')">
-                    <i class="fas fa-broom text-blue-500 text-3xl mb-4"></i>
-                    <h3 class="text-xl font-bold mb-2">Window Cleaning</h3>
-                    <p class="text-gray-500">Sparkling clean windows for a brighter view.</p>
-                    <a href="#" class="flex items-center text-sm font-bold text-gray-400">
-                        <br>Click to See our work
-                    </a>
-                </div>
-                <div class="service-card bg-white p-6 rounded-2xl shadow-sm border border-brandDark"
-                    onclick="openModal('Solar Panel Cleaning', 'solar.jpeg')">
-                    <i class="fas fa-sun text-orange-500 text-3xl mb-4"></i>
-                    <h3 class="text-xl font-bold mb-2">Solar Panel Cleaning</h3>
-                    <p class="text-gray-500">Maximize energy efficiency with clean panels.</p>
-                    <a href="#" class="flex items-center text-sm font-bold text-gray-400">
-                        <br>Click to See our work
-                    </a>
-                </div>
-                <div class="service-card bg-white p-6 rounded-2xl shadow-sm border border-brandDark"
-                    onclick="openModal('Gutter & Eaves', 'eaves.jpeg')">
-                    <i class="fas fa-house-flood-water text-blue-500 text-3xl mb-4"></i>
-                    <h3 class="text-xl font-bold mb-2">Gutter & Eaves</h3>
-                    <p class="text-gray-500">Protect your foundation from water damage.</p>
-                    <a href="#" class="flex items-center text-sm font-bold text-gray-400">
-                        <br>Click to See our work
-                    </a>
-                </div>
-                <div class="service-card bg-white p-6 rounded-2xl shadow-sm border border-brandDark"
-                    onclick="openModal('Pressure Washing', 'pressue.jpeg')">
-                    <i class="fas fa-faucet-drip text-blue-400 text-3xl mb-4"></i>
-                    <h3 class="text-xl font-bold mb-2">Pressure Washing</h3>
-                    <p class="text-gray-500">Powerful cleaning for siding and decks.</p>
-                    <a href="#" class="flex items-center text-sm font-bold text-gray-400">
-                        <br>Click to See our work
-                    </a>
-                </div>
-                <div class="service-card bg-white p-6 rounded-2xl shadow-sm border border-brandDark"
-                    onclick="openModal('Driveway Sealing', 'drive.jpeg')">
-                    <i class="fas fa-road text-gray-800 text-3xl mb-4"></i>
-                    <h3 class="text-xl font-bold mb-2">Driveway Sealing</h3>
-                    <p class="text-gray-500">Long-lasting protection for your driveway.</p>
-                    <a href="#" class="flex items-center text-sm font-bold text-gray-400">
-                        <br>Click to See our work
-                    </a>
-                </div>
-                <div class="service-card bg-white p-6 rounded-2xl shadow-sm border border-brandDark"
-                    onclick="openModal('Roof Cleaning', 'paint.jpeg')">
-                    <i class="fas fa-broom icon text-[brown] text-3xl mb-4"></i>
-                    <h3 class="text-xl font-bold mb-2">Roof Cleaning</h3>
-                    <p class="text-gray-500">Deep cleaning for your roofs.</p>
-                    <a href="#" class="flex items-center text-sm font-bold text-gray-400">
-                        <br>Click to See our work
-                    </a>
-                </div>
-                <div class="service-card bg-white p-6 rounded-2xl shadow-sm border border-brandDark"
-                    onclick="openModal('Painting', 'expaint.jpeg')">
-                    <i class="fas fa-pencil text-[green] text-3xl mb-4"></i>
-                    <h3 class="text-xl font-bold mb-2">Exterior Painting</h3>
-                    <p class="text-gray-500">Exterior professional painting.</p>
-                    <a href="#" class="flex items-center text-sm font-bold text-gray-400">
-                        <br>Click to See our work
-                    </a>
-                </div>
-                <div class="service-card bg-white p-6 rounded-2xl shadow-sm border border-brandDark"
-                    onclick="openModal('Painting', 'interior.jpeg')">
-                    <i class="fas fa-paint-roller text-pink-500 text-3xl mb-4"></i>
-                    <h3 class="text-xl font-bold mb-2">Interior Painting</h3>
-                    <p class="text-gray-500">Interior professional painting.</p>
-                    <a href="#" class="flex items-center text-sm font-bold text-gray-400">
-                        <br>Click to See our work
-                    </a>
-                </div>
-            </div>
-        </section>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 relative z-10">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-stretch">
 
-        <!-- Category: Property Maintenance -->
-        <section class="mb-16">
-            <div class="flex items-center mb-8">
-                <div class="h-1 w-12 bg-green-600 mr-4"></div>
-                <h2 class="text-2xl font-bold text-gray-900 uppercase tracking-widest text-green-700">Property
-                    Maintenance</h2>
-            </div>
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                <div class="service-card bg-white p-6 rounded-2xl shadow-sm border border-brandDark"
-                    onclick="openModal('Lawn Care', 'lawn.jpeg')">
-                    <i class="fas fa-leaf text-green-500 text-3xl mb-4"></i>
-                    <h3 class="text-xl font-bold mb-2">Lawn Care</h3>
-                    <p class="text-gray-500">Precise mowing and professional care.</p>
-                    <a href="#" class="flex items-center text-sm font-bold text-gray-400">
-                        <br>Click to See our work
-                    </a>
-                </div>
-                <div class="service-card bg-white p-6 rounded-2xl shadow-sm border border-brandDark"
-                    onclick="openModal('Material Removal', 'remove.jpeg')">
-                    <i class="fas fa-truck-ramp-box text-orange-600 text-3xl mb-4"></i>
-                    <h3 class="text-xl font-bold mb-2">Removals & Hauling</h3>
-                    <p class="text-gray-500">Clutter removal and heavy hauling services.</p>
-                    <a href="#" class="flex items-center text-sm font-bold text-gray-400">
-                        <br>Click to See our work
-                    </a>
-                </div>
-                <div class="service-card bg-white p-6 rounded-2xl shadow-sm border border-brandDark"
-                    onclick="openModal('General Labor', 'gle.jpeg')">
-                    <i class="fas fa-hard-hat text-yellow-500 text-3xl mb-4"></i>
-                    <h3 class="text-xl font-bold mb-2">General Laborer</h3>
-                    <p class="text-gray-500">Reliable help for any heavy-duty task.</p>
-                    <a href="#" class="flex items-center text-sm font-bold text-gray-400">
-                        <br>Click to See our work
-                    </a>
-                </div>
-            </div>
-        </section>
+                <!-- Sidebar Column (Bauhaus Solid Royal Blue Card) -->
+                <div class="lg:col-span-5 bg-navy text-white p-8 sm:p-10 border-4 border-navy shadow-[8px_8px_0px_0px_#021838] flex flex-col justify-between relative overflow-hidden">
+                    <!-- Geometric Accent Stripe -->
+                    <div class="absolute top-0 left-0 w-full h-2 bg-white"></div>
 
-        <!-- Category: Electrical -->
-        <section class="mb-16">
-            <div class="flex items-center mb-8">
-                <div class="h-1 w-12 bg-yellow-500 mr-4"></div>
-                <h2 class="text-2xl font-bold text-gray-900 uppercase tracking-widest text-yellow-700">Electrical
-                    Services</h2>
-            </div>
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                <div class="service-card bg-white p-6 rounded-2xl shadow-sm border border-brandDark"
-                    onclick="openModal('Lighting Install', 'light.jpeg')">
-                    <i class="fas fa-lightbulb text-yellow-400 text-3xl mb-4"></i>
-                    <h3 class="text-xl font-bold mb-2">Lighting Installation</h3>
-                    <p class="text-gray-500">Fixture replacement and new installations.</p>
-                    <a href="#" class="flex items-center text-sm font-bold text-gray-400">
-                        <br>Click to See our work
-                    </a>
-                </div>
-                <div class="service-card bg-white p-6 rounded-2xl shadow-sm border border-brandDark"
-                    onclick="openModal('Repairs', 'electrical.jpeg')">
-                    <i class="fas fa-bolt text-yellow-600 text-3xl mb-4"></i>
-                    <h3 class="text-xl font-bold mb-2">Small Repairs</h3>
-                    <p class="text-gray-500">Professional Maintenance.</p>
-                    <a href="#" class="flex items-center text-sm font-bold text-gray-400">
-                        <br>Click to See our work
-                    </a>
-                </div>
-            </div>
-        </section>
+                    <div>
+                        <div class="inline-block bg-white text-navy font-black text-xs uppercase tracking-widest px-4 py-1.5 border-2 border-white shadow-[3px_3px_0px_0px_#021838] mb-6">
+                            Get In Touch
+                        </div>
 
+                        <h2 class="text-3xl sm:text-4xl font-black tracking-tight text-white uppercase leading-tight mb-4">
+                            Have a project or issue in mind?
+                        </h2>
 
-    </main>
-
-    <!-- Modal Pop-up Structure -->
-    <div id="serviceModal" class="modal">
-        <div class="modal-content relative overflow-hidden shadow-2xl">
-            <!-- Close Button -->
-            <button onclick="closeModal()"
-                class="absolute top-4 right-4 bg-black/50 text-white w-10 h-10 rounded-full hover:bg-black/70 transition flex items-center justify-center z-10">
-                <i class="fas fa-times"></i>
-            </button>
-
-            <div class="p-8">
-                <div class="mb-6">
-                    <span class="text-blue-600 font-bold tracking-widest text-xs uppercase mb-2 block">Our Work In
-                        Action</span>
-                    <h2 id="modalTitle" class="text-3xl font-black text-gray-900">Service Name</h2>
-                </div>
-
-                <!-- The Merged Before & After Image -->
-                <div
-                    class="rounded-xl overflow-hidden border-4 border-brandDark mb-8 bg-gray-50 min-h-[300px] flex items-center justify-center">
-                    <img id="modalImage" src="" alt="Before and After Result" class="w-full h-auto object-cover">
-                </div>
-
-                <div
-                    class="flex flex-col sm:flex-row gap-4 items-center justify-between bg-blue-50 p-6 rounded-xl border border-blue-100">
-                    <div class="text-center sm:text-left">
-                        <p class="text-blue-900 font-bold text-lg">Have a project or issue in mind?</p>
-                        <p class="text-blue-700 text-sm">Get a free estimate.</p>
+                        <p class="text-white/90 text-sm leading-relaxed mb-8 font-medium">
+                            Contact <strong class="text-white font-bold">Home Pros</strong> today for professional, reliable service and certified solutions at your doorstep in Grand Cayman.
+                        </p>
                     </div>
-                    <div class="flex gap-3">
-                        <a href="tel:9391668"
-                            class="bg-blue-600 text-white px-8 py-4 rounded-xl font-bold text-lg hover:bg-blue-700 shadow-lg shadow-blue-200 transition-all flex items-center">
-                            <i class="fas fa-phone-alt mr-2"></i>Call us Now
+
+                    <!-- Contact Info Cards (Bauhaus Nested Blocks) -->
+                    <div class="space-y-4 pt-6 border-t-2 border-white/20">
+                        <!-- Phone Link Card -->
+                        <a href="tel:9391668" class="group flex items-center space-x-4 p-4 bg-white/5 border-2 border-white/20 hover:border-white hover:bg-white/15 transition-all duration-200">
+                            <div class="w-12 h-12 bg-white text-navy flex items-center justify-center font-black shrink-0 border-2 border-white">
+                                <i class="fas fa-phone-alt text-base"></i>
+                            </div>
+                            <div>
+                                <span class="block text-[10px] font-black uppercase tracking-widest text-white/70">Click To Call</span>
+                                <strong class="text-lg font-black text-white tracking-tight">939-1668</strong>
+                            </div>
+                        </a>
+
+                        <!-- Email Link Card -->
+                        <a href="mailto:homeproscayman@gmail.com" class="group flex items-center space-x-4 p-4 bg-white/5 border-2 border-white/20 hover:border-white hover:bg-white/15 transition-all duration-200">
+                            <div class="w-12 h-12 bg-white text-navy flex items-center justify-center font-black shrink-0 border-2 border-white">
+                                <i class="fas fa-envelope text-base"></i>
+                            </div>
+                            <div class="overflow-hidden">
+                                <span class="block text-[10px] font-black uppercase tracking-widest text-white/70">Email Us</span>
+                                <strong class="text-xs sm:text-sm font-black text-white truncate block tracking-tight">homeproscayman@gmail.com</strong>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Form Area Column (Bauhaus High-Contrast White & Navy Box) -->
+                <div class="lg:col-span-7 bg-white p-8 sm:p-12 border-4 border-navy shadow-[10px_10px_0px_0px_#0056b3] flex flex-col justify-center relative">
+                    <!-- Corner Accent -->
+                    <div class="absolute top-0 right-0 w-16 h-16 bg-navy/5 pointer-events-none"></div>
+
+                    <div class="mb-8">
+                        <h3 class="text-2xl sm:text-3xl font-black uppercase text-navy tracking-tight">
+                            Request Your <span class="underline decoration-navy decoration-4 underline-offset-8">Free Estimate</span>
+                        </h3>
+                        <p class="text-slate-600 text-xs sm:text-sm mt-3 font-medium">
+                            Fill out the form below and our certified team will get back to you promptly.
+                        </p>
+                    </div>
+
+                    <form id="estimate-form" action="https://formspree.io/f/mwvnvppa" method="POST" class="space-y-6">
+                        <!-- Row: Name & Email -->
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                            <div class="space-y-2">
+                                <label class="block text-xs font-black uppercase tracking-widest text-navy">Your Name <span class="text-red-600">*</span></label>
+                                <input 
+                                    type="text" 
+                                    name="name" 
+                                    required 
+                                    placeholder="e.g. John Doe"
+                                    class="w-full bg-slate-50 border-2 border-slate-300 rounded-none px-4 py-4 text-sm font-medium text-slate-900 placeholder-slate-400 focus:outline-none focus:border-navy focus:bg-white transition-all duration-200"
+                                >
+                            </div>
+                            <div class="space-y-2">
+                                <label class="block text-xs font-black uppercase tracking-widest text-navy">Email Address <span class="text-red-600">*</span></label>
+                                <input 
+                                    type="email" 
+                                    name="email" 
+                                    required 
+                                    placeholder="name@example.com"
+                                    class="w-full bg-slate-50 border-2 border-slate-300 rounded-none px-4 py-4 text-sm font-medium text-slate-900 placeholder-slate-400 focus:outline-none focus:border-navy focus:bg-white transition-all duration-200"
+                                >
+                            </div>
+                        </div>
+
+                        <!-- Phone Input -->
+                        <div class="space-y-2">
+                            <label class="block text-xs font-black uppercase tracking-widest text-navy">Phone Number</label>
+                            <input 
+                                type="tel" 
+                                name="phone" 
+                                placeholder="e.g. 939-1668"
+                                class="w-full bg-slate-50 border-2 border-slate-300 rounded-none px-4 py-4 text-sm font-medium text-slate-900 placeholder-slate-400 focus:outline-none focus:border-navy focus:bg-white transition-all duration-200"
+                            >
+                        </div>
+
+                        <!-- Message Area -->
+                        <div class="space-y-2">
+                            <label class="block text-xs font-black uppercase tracking-widest text-navy">Your Message</label>
+                            <textarea 
+                                name="message" 
+                                rows="4" 
+                                placeholder="Describe your project, maintenance, or electrical needs..." 
+                                class="w-full bg-slate-50 border-2 border-slate-300 rounded-none px-4 py-4 text-sm font-medium text-slate-900 placeholder-slate-400 focus:outline-none focus:border-navy focus:bg-white transition-all duration-200 resize-none"
+                            ></textarea>
+                        </div>
+
+                        <!-- Submit Button (Bauhaus Offset Button) -->
+                        <button 
+                            type="submit" 
+                            id="submit-btn" 
+                            class="w-full group flex items-center justify-center space-x-3 bg-navy hover:bg-blue-600 text-white font-black py-4 px-8 rounded-none uppercase tracking-widest text-xs sm:text-sm border-2 border-navy shadow-[6px_6px_0px_0px_#021838] hover:shadow-none hover:translate-x-[3px] hover:translate-y-[3px] transition-all duration-200 cursor-pointer"
+                        >
+                            <span>Request Free Estimate</span>
+                            <i class="fas fa-paper-plane text-xs group-hover:translate-x-1 transition-transform"></i>
+                        </button>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </section>
+<footer class="bg-navy text-white pt-16 pb-8 px-6 lg:px-12 border-t border-white/10 font-sans">
+    <div class="max-w-7xl mx-auto">
+        <!-- Main Footer Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-12 pb-12 border-b border-white/20">
+            
+            <!-- Brand Column -->
+            <div class="lg:col-span-4 space-y-5">
+                <div class="flex items-center space-x-2">
+                    <h3 class="text-2xl font-black tracking-tight italic">
+                        HOME <span class="text-brandYellow">PROS</span>
+                    </h3>
+                </div>
+                <p class="text-white text-xs sm:text-sm leading-relaxed max-w-sm">
+                    Your trusted experts for professional home projects, property maintenance, and certified electrical solutions across Grand Cayman.
+                </p>
+                <!-- Location Badge -->
+                <div class="inline-flex items-center space-x-2 text-xs text-white bg-white/10 border border-white/20 rounded-full px-3 py-1.5">
+                    <i class="fas fa-map-marker-alt text-brandYellow"></i>
+                    <span>Grand Cayman, Cayman Islands</span>
+                </div>
+            </div>
+
+            <!-- Mobile Row Container for Quick Links & Services + Socials -->
+            <div class="lg:col-span-5 grid grid-cols-2 gap-8">
+                <!-- Quick Links -->
+                <div>
+                    <h4 class="text-xs uppercase font-bold tracking-widest text-brandYellow mb-5">Quick Links</h4>
+                    <ul class="space-y-3 text-xs sm:text-sm text-white font-medium">
+                        <li>
+                            <a href="#" class="inline-flex items-center hover:text-brandYellow hover:translate-x-1 transition-all duration-200">
+                                <span>- Home</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#about" class="inline-flex items-center hover:text-brandYellow hover:translate-x-1 transition-all duration-200">
+                                <span>- About Us</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#gallery" class="inline-flex items-center hover:text-brandYellow hover:translate-x-1 transition-all duration-200">
+                                <span>- Gallery</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#contact" class="inline-flex items-center hover:text-brandYellow hover:translate-x-1 transition-all duration-200">
+                                <span>- Contact</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Services & Social Links in same row on mobile -->
+                <div>
+                    <h4 class="text-xs uppercase font-bold tracking-widest text-brandYellow mb-5">Our Services</h4>
+                    <ul class="space-y-3 text-xs sm:text-sm text-white font-medium mb-6">
+                        <li class="flex items-center space-x-2">
+                            <span>- Home Maintenance</span>
+                        </li>
+                        <li class="flex items-center space-x-2">
+                            <span>- Property Maintenance</span>
+                        </li>
+                        <li class="flex items-center space-x-2">
+                            <span>- Electrical Repairs</span>
+                        </li>
+                    </ul>
+
+                    <!-- Social Icons -->
+                    <div class="flex space-x-2 pt-1">
+                        <a href="#" aria-label="Facebook" class="w-8 h-8 rounded-full bg-white/10 border border-white/20 flex items-center justify-center text-white hover:text-brandYellow hover:bg-white/20 transition-all duration-300">
+                            <i class="fab fa-facebook-f text-xs"></i>
+                        </a>
+                        <a href="#" aria-label="Instagram" class="w-8 h-8 rounded-full bg-white/10 border border-white/20 flex items-center justify-center text-white hover:text-brandYellow hover:bg-white/20 transition-all duration-300">
+                            <i class="fab fa-instagram text-xs"></i>
+                        </a>
+                        <a href="#" aria-label="WhatsApp" class="w-8 h-8 rounded-full bg-white/10 border border-white/20 flex items-center justify-center text-white hover:text-brandYellow hover:bg-white/20 transition-all duration-300">
+                            <i class="fab fa-whatsapp text-xs"></i>
                         </a>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-<section class="py-24 bg-navy text-white">
-    <div class="container mx-auto px-4">
-        <div class="max-w-3xl mx-auto text-center mb-16">
-            <h2 class="text-3xl md:text-4xl font-light tracking-tight mb-4">
-                Client Testimonials
-            </h2>
-            <div class="h-1 w-20 bg-brandYellow mx-auto mb-6"></div>
-            <p class="text-white leading-relaxed max-w-3xl mx-auto">
-                Discover why homeowners and businesses across the Cayman Islands trust Home Pros for their property maintenance and renovation needs.
-            </p>
-            <button onclick="document.getElementById('review-form-container').classList.toggle('hidden')" 
-                    class="mt-8 px-8 py-2.5 border border-white text-white hover:bg-white hover:text-[navy] transition-all duration-300 text-sm font-semibold tracking-wide uppercase">
-                Write a Review
-            </button>
-        </div>
 
-        <div id="review-form-container" class="hidden max-w-xl mx-auto bg-white p-10 shadow-2xl mb-20">
-            <h3 class="text-xl font-semibold mb-6 text-navy">Submit Your Feedback</h3>
-            <form id="submit-review-form" class="space-y-5">
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <input type="text" id="rev-name" placeholder="Full Name" 
-                           class="w-full border-slate-200 p-3 text-sm focus:ring-1 focus:ring-navy outline-none border text-slate-900" required>
-                   <select id="rev-rating" class="w-full border-slate-200 p-3 text-sm focus:ring-1 focus:ring-navy outline-none border text-slate-900 bg-white">
-    <option value="5">★★★★★ (5 Stars - Excellent)</option>
-    <option value="4">★★★★☆ (4 Stars - Very Good)</option>
-    <option value="3">★★★☆☆ (3 Stars - Average)</option>
-    <option value="2">★★☆☆☆ (2 Stars - Poor)</option>
-    <option value="1">★☆☆☆☆ (1 Star - Very Poor)</option>
-</select>
-                </div>
-                <textarea id="rev-text" placeholder="Share your experience..." 
-                          class="w-full border-slate-200 p-3 text-sm focus:ring-1 focus:ring-navy outline-none border text-slate-900" rows="4" required></textarea>
-                <button type="submit" class="w-full bg-navy text-white py-3 font-bold text-xs uppercase tracking-widest hover:bg-slate-800 transition">
-                    Publish Review
-                </button>
-            </form>
-        </div>
-
-        <div id="reviews-display-grid" class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-7xl mx-auto">
-            <div class="col-span-full text-center text-white italic">
-                Gathering recent client feedback...
-            </div>
-        </div>
-    </div>
-</section>
-
-   <div id="quote" class="contact-container">
-    <div class="sidebar">
-        <h2>HAVE A PROJECT OR ISSUE IN MIND?</h2>
-        <p>Contact Home Pros today for professional, reliable service at your doorstep.</p>
-        
-        <div class="contact-info">
-            <div class="info-item">
-                <i class="fas fa-phone-alt"></i>
-                <div>
-                    <span>CLICK TO CALL</span>
-                    <strong>939-1668</strong>
-                </div>
-            </div>
-            <div class="info-item">
-                <i class="fas fa-envelope"></i>
-                <div>
-                    <span>EMAIL US</span>
-                    <strong>homeproscayman@gmail.com</strong>
-                </div>
-            </div>
-            <div class="info-item">
-                <i class="fas fa-clock"></i>
-                <div>
-                    <span>BUSINESS HOURS</span>
-                    <strong>Sunday-Friday: 8:00 AM - 7:00 PM</strong>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="form-area">
-        <h3>REQUEST YOUR <span>FREE ESTIMATE</span></h3>
-        
-        <form id="estimate-form" action="https://formspree.io/f/mwvnvppa" method="POST">
-            <div class="row">
-                <div class="input-group">
-                    <label>YOUR NAME</label>
-                    <input type="text" name="name" required>
-                </div>
-                <div class="input-group">
-                    <label>EMAIL ADDRESS</label>
-                    <input type="email" name="email" placeholder="  example@mail.com" required>
-                </div>
-            </div>
-
-            <div class="input-group">
-               <label>PHONE NUMBER</label>
-                <input type="tel" name="phone" placeholder="  +1 (555) 000-0000">
-            </div>
-
-            <div class="input-group">
-                <label>SERVICE NEEDED</label>
-                <select name="service">
-                    <option value="General Inquiry">&nbsp;&nbsp;General Inquiry</option>
-                    <option value="Plumbing">Plumbing</option>
-                    <option value="Electrical">Electrical</option>
-                    <option value="Maintenance">Property Maintenance</option>
-                    <option value="Maintenance">Home Projects</option>
-                    <option value="Maintenance">Construction</option>
-                </select>
-            </div>
-
-            <div class="input-group">
-                <label>YOUR MESSAGE</label>
-                <textarea name="message" rows="5"></textarea>
-            </div>
-
-            <button type="submit" id="submit-btn" class="block text-center bg-navy text-white font-black py-4 rounded-lg uppercase tracking-widest shadow-lg hover:bg-brandYellow hover:text-navy transition-all">&nbsp;&nbsp;REQUEST FREE ESTIMATE&nbsp;&nbsp;</button>
-            <div id="status-message" class="hidden block text-center bg-[green] text-white font-black py-4 rounded-lg uppercase tracking-widest shadow-lg hover:bg-brandYellow hover:text-navy transition-all">REQUEST SENT SUCCESSFULLY!</div>
-        </form>
-    </div>
-</div>
-
-
-  <footer class="bg-navy text-white pt-20 pb-10 px-4">
-        <div
-            class="container max-w-5xl mx-auto grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-12 border-b border-brandDark/20 pb-16">
-            <div>
-                <h3 class="text-2xl font-black mb-6 italic">HOME <span class="text-brandYellow">PROS</span></h3>
-                <p class="text-white text-xs leading-relaxed mb-6">Your go-to experts for professional home projects,
-                    property maintenance, and certified electrical solutions in Grand Cayman.</p>
-                <div class="flex space-x-4">
-                    <a href="#"
-                        class="w-8 h-8 rounded-full border border-brandDark flex items-center justify-center text-brandYellow hover:bg-brandYellow hover:text-navy transition"><i
-                            class="fab fa-facebook-f text-xs"></i></a>
-                    <a href="https://www.instagram.com/homeproscayman?igsh=enNncDd5MWllam41&utm_source=qr"
-                        class="w-8 h-8 rounded-full border border-brandDark flex items-center justify-center text-brandYellow hover:bg-brandYellow hover:text-navy transition"><i
-                            class="fab fa-instagram text-xs"></i></a>
-                    <a href="https://wa.me/17867271557" 
-   target="_blank"
-   class="w-8 h-8 rounded-full border border-brandDark flex items-center justify-center text-brandYellow hover:bg-brandYellow hover:text-navy transition">
-   <i class="fab fa-whatsapp text-xs"></i>
-</a>
-                </div>
-            </div>
-            <div>
-                <h4 class="text-xs uppercase font-bold tracking-[0.2em] mb-8 text-brandYellow">Quick Links</h4>
-                <ul class="text-white text-xs space-y-4 font-bold uppercase tracking-tight">
-                    <li><a href="#" class="hover:text-brandYellow transition">- Home</a></li>
-                    <li><a href="#about" class="hover:text-brandYellow transition">- About Us</a></li>
-                    <li><a href="#services" class="hover:text-brandYellow transition">- Our Services</a></li>
-                    <li><a href="#gallery" class="hover:text-brandYellow transition">- Gallery</a></li>
-                </ul>
-            </div>
-            <div>
-                <h4 class="text-xs uppercase font-bold tracking-[0.2em] mb-8 text-brandYellow">Services</h4>
-                <ul class="text-white text-xs space-y-4 font-bold uppercase tracking-tight">
-                    <li>- Home Maintenance</li>
-                    <li>- Property Maintenance</li>
-                    <li>- Lawn Care & Hauling</li>
-                    <li>- Electrical Repairs</li>
-                    <li>- Car Detailing</li>
-                    <li>- Construction</li>
-                </ul>
-            </div>
-            <div>
-                <h4 class="text-xs uppercase font-bold tracking-[0.2em] mb-8 text-brandYellow">Contact</h4>
-                <div class="space-y-4 text-xs font-bold uppercase">
-                    <a href="tel:9391668" class="flex items-center text-sm font-bold text-white">
-                        <i class="fas fa-phone-alt mr-3 text-brandYellow"></i> 939-1668
-                    </a>
-                    <a href="mailto:homeproscayman@gmail.com"
-                        class="flex items-center text-[10px] font-bold text-white">
-                        <i class="fas fa-envelope mr-3 text-brandYellow"></i> homeproscayman@gmail.com
-                    </a>
-                    <a href="https://maps.app.goo.gl/WQcrr1UrwEmiH9Wd9"
-                        class="flex items-center text-[10px] font-bold text-white">
-                        <i class="fas fa-warehouse mr-2 text-brandYellow"></i> Bodden Town & George Town
-                    </a>
-                </div>
-            </div>
-        </div>
-
-        <!-- Bottom Bar with Portfolio & Contact Link -->
-        <div class="container mx-auto mt-10 flex flex-col md:flex-row justify-between items-center text-[10px] text-white font-bold uppercase tracking-widest gap-4">
-            <p>&copy; <span id="year"></span> Home Pros. All rights reserved.</p>
-            
-            <p class="text-center">
-                Professional Home & Electrical Solutions
-            </p>
-            
-            <p>
-                Website by 
-                <a href="https://k-s-info-desk.vercel.app/" target="_blank" class="text-brandYellow hover:underline transition">
-                    K&S Desk
-                </a> 
-                — 
-                <a href="https://k-s-info-desk.vercel.app/" target="_blank" class="hover:text-brandYellow transition">
-                    Let's Build Yours
+            <!-- Contact Column -->
+            <div class="lg:col-span-3 space-y-4">
+                <h4 class="text-xs uppercase font-bold tracking-widest text-brandYellow mb-5">Get In Touch</h4>
+                
+                <a href="tel:9391668" class="group flex items-center space-x-3 p-3 rounded-lg bg-white/10 border border-white/20 hover:border-brandYellow/60 transition-all duration-300">
+                    <div class="w-8 h-8 rounded-md bg-brandYellow/20 flex items-center justify-center text-brandYellow group-hover:bg-brandYellow group-hover:text-navy transition-colors">
+                        <i class="fas fa-phone-alt text-xs"></i>
+                    </div>
+                    <div>
+                        <p class="text-[10px] uppercase font-semibold text-white/70 tracking-wider">Call Us</p>
+                        <p class="text-sm font-bold text-white group-hover:text-brandYellow transition-colors">939-1668</p>
+                    </div>
                 </a>
-            </p>
+
+                <a href="mailto:homeproscayman@gmail.com" class="group flex items-center space-x-3 p-3 rounded-lg bg-white/10 border border-white/20 hover:border-brandYellow/60 transition-all duration-300">
+                    <div class="w-8 h-8 rounded-md bg-brandYellow/20 flex items-center justify-center text-brandYellow group-hover:bg-brandYellow group-hover:text-navy transition-colors">
+                        <i class="fas fa-envelope text-xs"></i>
+                    </div>
+                    <div class="overflow-hidden">
+                        <p class="text-[10px] uppercase font-semibold text-white/70 tracking-wider">Email Us</p>
+                        <p class="text-xs font-bold text-white truncate group-hover:text-brandYellow transition-colors">homeproscayman@gmail.com</p>
+                    </div>
+                </a>
+            </div>
+
         </div>
-    </footer>
-    <div class="fixed bottom-6 right-6 lg:hidden flex flex-col space-y-3 z-50">
-        <a href="tel:9391668"
-            class="bg-brandBlue text-white w-12 h-12 rounded-full shadow-2xl flex items-center justify-center border-2">
-            <i class="fas fa-phone"></i>
-        </a>
-        <a href="#quote"
-            class="bg-navy text-white w-12 h-12 rounded-full shadow-2xl flex items-center justify-center border-2 border-brandDark">
-            <i class="fas fa-calendar-alt"></i>
-        </a>
+
+        <!-- Bottom Copyright Bar -->
+        <div class="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-white">
+            <p>&copy; <span id="year">2026</span> Home Pros Cayman. All rights reserved.</p>
+        </div>
     </div>
+</footer>
+    <!-- JavaScript Handlers -->
+  <!-- JavaScript Handlers -->
     <script>
-    const mobileToggle = document.getElementById('mobile-toggle');
-    const mobileClose = document.getElementById('mobile-close');
-    const mobileSidebar = document.getElementById('mobile-sidebar');
-    const sidebarOverlay = document.getElementById('sidebar-overlay');
-    const body = document.body;
+        // Global function to toggle image slides (Before / After)
+        window.changeCardSlide = (projectId, direction) => {
+            const container = document.getElementById(`card-img-container-${projectId}`);
+            if (!container) return;
 
-    // Function to open sidebar
-    mobileToggle.addEventListener('click', () => {
-        body.classList.remove('sidebar-closed');
-        body.classList.add('sidebar-open');
-        mobileSidebar.classList.remove('sidebar-closed');
-    });
+            const slides = container.querySelectorAll('.project-slide');
+            if (slides.length <= 1) return;
 
-    // Function to close sidebar
-    const closeSidebar = () => {
-        body.classList.remove('sidebar-open');
-        body.classList.add('sidebar-closed');
-        mobileSidebar.classList.add('sidebar-closed');
-    };
+            let activeIndex = Array.from(slides).findIndex(s => !s.classList.contains('hidden'));
+            slides[activeIndex].classList.add('hidden');
 
-    mobileClose.addEventListener('click', closeSidebar);
-    sidebarOverlay.addEventListener('click', closeSidebar);
+            activeIndex += direction;
+            if (activeIndex >= slides.length) activeIndex = 0;
+            if (activeIndex < 0) activeIndex = slides.length - 1;
 
-    // Close sidebar when clicking a link
-    const mobileLinks = document.querySelectorAll('.mobile-link');
-    mobileLinks.forEach(link => {
-        link.addEventListener('click', closeSidebar);
-    });
-    const form = document.getElementById('estimate-form');
-const submitBtn = document.getElementById('submit-btn');
-const statusMsg = document.getElementById('status-message');
+            slides[activeIndex].classList.remove('hidden');
 
-form.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    
-    const data = new FormData(form);
-    
-    try {
-        const response = await fetch(form.action, {
-            method: 'POST',
-            body: data,
-            headers: { 'Accept': 'application/json' }
-        });
-
-        if (response.ok) {
-            // Success: Hide button, show green bar
-            submitBtn.classList.add('hidden');
-            statusMsg.classList.remove('hidden');
-            form.reset();
-        } else {
-            alert("Oops! There was a problem submitting your form");
-        }
-    } catch (error) {
-        alert("Error connecting to the server.");
-    }
-});
-</script>
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            const observerOptions = {
-                threshold: 0.15 // Triggers when 15% of the element is visible
-            };
-
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('active');
-                        // Optional: stop observing after animation is done
-                        // observer.unobserve(entry.target); 
-                    }
-                });
-            }, observerOptions);
-
-            // Target all elements with reveal classes
-            const revealElements = document.querySelectorAll('.reveal, .reveal-left');
-            revealElements.forEach((el) => observer.observe(el));
-        });
-        async function fetchProjects() {
-    const loader = document.getElementById('loader');
-    const grid = document.getElementById('galleryGrid');
-    
-    try {
-        // Fetch projects from Firebase
-        const snapshot = await db.collection('projects').orderBy('createdAt', 'desc').get();
-        const projects = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-        
-        if (loader) loader.remove();
-        renderProjects(projects);
-    } catch (error) {
-        console.error("Error fetching projects: ", error);
-        if (loader) loader.innerHTML = "Error loading projects.";
-    }
-}
-    </script>
-    <script>
-        const modal = document.getElementById('serviceModal');
-        const modalTitle = document.getElementById('modalTitle');
-        const modalImage = document.getElementById('modalImage');
-
-        function openModal(title, imagePath) {
-            modalTitle.innerText = title;
-            modalImage.src = imagePath;
-            modal.style.display = 'block';
-            document.body.style.overflow = 'hidden'; // Prevent scroll
-        }
-
-        function closeModal() {
-            modal.style.display = 'none';
-            document.body.style.overflow = 'auto'; // Restore scroll
-        }
-
-        // Close when clicking outside the box
-        window.onclick = function (event) {
-            if (event.target == modal) {
-                closeModal();
+            // Update image counter badge
+            const badge = container.querySelector('.slide-count-badge');
+            if (badge) {
+                badge.innerText = `${activeIndex + 1} / ${slides.length}`;
             }
-        }
-    </script>
-   
-    <script>
-        // This script checks if the user is allowed to be here
+        };
 
-        // Add this inside your existing <script> tag in index.html
-        function secureLogout() {
-            auth.signOut().then(() => {
-                // Clear history and force return to login
-                window.location.replace("index.html");
-            });
-        }
-    </script>
-   <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-app.js";
-    import { 
-        initializeFirestore, 
-        collection, 
-        onSnapshot, 
-        persistentLocalCache, 
-        persistentMultipleTabManager,
-        addDoc, 
-        query, 
-        orderBy, 
-        limit 
-    } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-firestore.js";
-    import { getAuth, signInAnonymously, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-auth.js";
+       async function renderMainProjects(filter = 'All') {
+    const grid = document.getElementById('galleryGrid');
+    if (!grid) return;
 
-    // 1. INITIALIZE FIREBASE FIRST
-    const firebaseConfig = {
-        apiKey: "AIzaSyDnqS3uT0TAwzxNUySLqvu5Ue6xGupoxUo",
-        projectId: "homepros-b4889",
-        appId: "1:841597604762:web:477a5eacc09294feeda023"
-    };
-
-    const app = initializeApp(firebaseConfig);
-    const auth = getAuth(app);
-    const db = initializeFirestore(app, {
-        localCache: persistentLocalCache({ tabManager: persistentMultipleTabManager() })
-    });
-    const appId = 'home-pros-app';
-
-    let allProjects = [];
-    let currentFilter = 'All';
-
-    // 2. DEFINE FUNCTIONS
-   function loadReviews() {
-    const reviewsRef = collection(db, 'artifacts', appId, 'public', 'data', 'reviews');
-    const q = query(reviewsRef, orderBy('timestamp', 'desc'), limit(6));
-
-    onSnapshot(q, (snapshot) => {
-        const grid = document.getElementById('reviews-display-grid');
-        if (!grid) return;
-        
-        // 1. Professional Seed Reviews (The "Fake" Reviews)
-        const seedReviews = [
-            { name: "Robert Miller", rating: 5, text: "Exceptional attention to detail on our Seven Mile Beach condo renovation. The team was professional, punctual, and the finish is world-class.", timestamp: { toDate: () => new Date('2025-12-15') } },
-            { name: "Sarah Ebanks", rating: 5, text: "Home Pros handled our commercial maintenance with zero downtime. Highly recommend for any business owner in George Town looking for reliability.", timestamp: { toDate: () => new Date('2026-01-20') } },
-            { name: "James Thompson", rating: 4, text: "Great communication throughout the project. They transformed our outdoor living space exactly as planned. Solid 5-star quality.", timestamp: { toDate: () => new Date('2026-02-05') } }
-        ];
-
-        const dbReviews = snapshot.docs.map(doc => doc.data());
-        const allReviews = [...dbReviews, ...seedReviews].slice(0, 6);
-
-        grid.innerHTML = ''; 
-
-        allReviews.forEach((data) => {
-    const dateStr = data.timestamp?.toDate ? 
-        data.timestamp.toDate().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' }) : 
-        'Recent';
-
-    const stars = '★'.repeat(data.rating) + '☆'.repeat(5 - data.rating);
-    
-    const reviewCard = document.createElement('div');
-    reviewCard.className = "bg-white p-8 shadow-sm border-t-4 border-brandYellow flex flex-col justify-between animate-fade-in";
-    reviewCard.innerHTML = `
-        <div>
-            <div class="flex text-gold mb-4 text-lg" style="color: #D4AF37; text-shadow: 0px 1px 1px rgba(0,0,0,0.1);">${stars}</div>
-            <p class="text-slate-700 leading-relaxed text-sm italic mb-6">"${data.text}"</p>
-        </div>
-        <div class="flex items-center justify-between pt-4 border-t border-slate-100">
-            <div class="flex flex-col">
-                <span class="text-[11px] font-bold tracking-widest uppercase text-navy">${data.name}</span>
-                <span class="text-[10px] text-slate-400 uppercase tracking-tighter">${dateStr}</span>
-            </div>
-            </div>
-    `;
-    grid.appendChild(reviewCard);
-});
-    });
-}
-    function loadProjects() {
-        const projectsRef = collection(db, 'artifacts', appId, 'public', 'data', 'projects');
-        onSnapshot(projectsRef, (snapshot) => {
-            allProjects = snapshot.docs.map(d => ({ id: d.id, ...d.data() }));
-            renderProjects();
-        });
-    }
-
-    function renderProjects() {
-        const grid = document.getElementById('galleryGrid');
-        if (!grid) return;
-        grid.innerHTML = '';
-        
-        const filtered = currentFilter === 'All' ? allProjects : allProjects.filter(p => p.category === currentFilter);
+    try {
+        const snapshot = await db.collection('projects').orderBy('createdAt', 'desc').get();
+        const projects = snapshot.docs.map(doc => doc.data());
+        const filtered = filter === 'All' ? projects : projects.filter(p => p.category === filter);
 
         if (filtered.length === 0) {
-            grid.innerHTML = '<p class="col-span-full text-center text-slate-400 py-10">Check back soon for new projects!</p>';
+            grid.innerHTML = `
+                <div class="col-span-full bg-white p-12 text-center border-2 border-[#007BFF] shadow-[3px_3px_0px_0px_#021838]">
+                    <p class="text-black font-bold uppercase tracking-widest text-sm">No projects uploaded in this category yet.</p>
+                </div>
+            `;
             return;
         }
 
+        grid.innerHTML = '';
         filtered.forEach(data => {
-            const allImages = [...(Array.isArray(data.beforeUrl) ? data.beforeUrl : [data.beforeUrl]), 
-                               ...(Array.isArray(data.afterUrl) ? data.afterUrl : [data.afterUrl])].filter(url => url);
+            const beforeImgs = data.beforeUrl || [];
+            const afterImgs = data.afterUrl || [];
+            const allImages = [...beforeImgs, ...afterImgs];
 
             const card = document.createElement('div');
-            card.className = "bg-white rounded-2xl overflow-hidden shadow-sm border border-slate-200 flex flex-col animate-fade-in";
-            
+            card.className = "bg-white flex flex-col justify-between animate-fade-in hover:-translate-y-1 transition-all duration-200 overflow-hidden";
+
+            let slidesHtml = '';
+            if (allImages.length === 0) {
+                slidesHtml = `<div class="w-full h-full bg-slate-100 flex items-center justify-center text-black font-bold text-xs uppercase">No Image Available</div>`;
+            } else {
+                allImages.forEach((img, idx) => {
+                    slidesHtml += `<img src="${img}" class="project-slide w-full h-full object-cover ${idx === 0 ? '' : 'hidden'}">`;
+                });
+            }
+
+            const showControls = allImages.length > 1;
+
             card.innerHTML = `
-                <div class="relative image-container group" id="slider-${data.id}" style="aspect-ratio: 16/9; overflow: hidden;">
-                    ${allImages.map((img, idx) => `
-                        <img src="${img}" class="image-slide w-full h-full object-cover ${idx === 0 ? '' : 'hidden'}">
-                    `).join('')}
-                    
-                    <div class="absolute inset-0 flex items-center justify-between px-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                        <button onclick="window.changeSlide('${data.id}', -1)" class="bg-white/80 w-8 h-8 rounded-full flex items-center justify-center shadow-md">
-                            <i class="fas fa-chevron-left"></i>
+                <div class="relative image-container group bg-slate-900" id="card-img-container-${data.id}" style="aspect-ratio: 16/9; overflow: hidden;">
+                    ${slidesHtml}
+                    ${showControls ? `
+                        <button onclick="window.changeCardSlide('${data.id}', -1)" aria-label="Previous Image" class="absolute left-3 top-1/2 -translate-y-1/2 text-white/85 hover:text-white p-2 transition-all drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] z-20 hover:scale-110">
+                            <i class="fas fa-chevron-left text-xl"></i>
                         </button>
-                        <button onclick="window.changeSlide('${data.id}', 1)" class="bg-white/80 w-8 h-8 rounded-full flex items-center justify-center shadow-md">
-                            <i class="fas fa-chevron-right"></i>
+                        <button onclick="window.changeCardSlide('${data.id}', 1)" aria-label="Next Image" class="absolute right-3 top-1/2 -translate-y-1/2 text-white/85 hover:text-white p-2 transition-all drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] z-20 hover:scale-110">
+                            <i class="fas fa-chevron-right text-xl"></i>
                         </button>
-                    </div>
-
-                    <div class="absolute bottom-2 left-1/2 -translate-x-1/2 bg-black/50 text-white text-[10px] px-2 py-1 rounded-full">
-                        <span class="current-indicator">1</span> / ${allImages.length}
-                    </div>
+                        <span class="slide-count-badge absolute bottom-3 right-3 bg-black/60 backdrop-blur-sm text-white text-[10px] font-mono font-bold px-2 py-0.5 rounded-sm z-20">
+                            1 / ${allImages.length}
+                        </span>
+                    ` : ''}
                 </div>
-
-                <div class="p-4">
-                    <span class="bg-slate-900 text-white px-2 py-0.5 rounded text-[10px] font-bold uppercase">${data.category}</span>
-                    <h3 class="text-lg font-bold mt-2">${data.title}</h3>
-                    <p class="text-slate-500 text-sm mt-1 line-clamp-2">${data.description}</p>
+                <div class="p-5 flex flex-col justify-between flex-grow bg-white">
+                    <div>
+                        <span class="inline-block bg-[#007BFF] text-white px-2.5 py-0.5 font-bold text-[10px] uppercase tracking-widest mb-2">${data.category}</span>
+                        <h3 class="text-lg font-black uppercase text-[#007BFF] tracking-tight mb-1.5">${data.title}</h3>
+                        <p class="text-black font-medium text-xs line-clamp-2 leading-relaxed">${data.description}</p>
+                    </div>
                 </div>
             `;
             grid.appendChild(card);
         });
+    } catch (err) {
+        console.error("Error loading projects:", err);
     }
+}
 
-    // 3. EXPOSE GLOBALS (For onclick events)
-    window.changeSlide = (projectId, direction) => {
-        const container = document.getElementById(`slider-${projectId}`);
-        const slides = container.querySelectorAll('.image-slide');
-        const indicator = container.querySelector('.current-indicator');
-        
-        let activeIdx = Array.from(slides).findIndex(s => !s.classList.contains('hidden'));
-        
-        slides[activeIdx].classList.add('hidden');
-        activeIdx = (activeIdx + direction + slides.length) % slides.length;
-        slides[activeIdx].classList.remove('hidden');
-        indicator.innerText = activeIdx + 1;
-    };
+async function loadUserReviews() {
+    const userGrid = document.getElementById('user-reviews-grid');
+    if (!userGrid) return;
 
-    window.setFilter = (filter) => {
-        currentFilter = filter;
-        document.querySelectorAll('.filter-btn').forEach(btn => {
-            btn.classList.toggle('active', btn.innerText.includes(filter));
+    try {
+        const snapshot = await db.collection('reviews').orderBy('createdAt', 'desc').get();
+        const userReviews = snapshot.docs.map(doc => doc.data());
+        userGrid.innerHTML = '';
+
+        userReviews.forEach(data => {
+            const stars = '★'.repeat(data.rating) + '☆'.repeat(5 - data.rating);
+            const reviewCard = document.createElement('div');
+            reviewCard.className = "bg-white p-8 border-4 border-white shadow-[6px_6px_0px_0px_#021838] flex flex-col justify-between text-slate-900 animate-fade-in hover:-translate-y-1 transition-transform duration-200";
+            reviewCard.innerHTML = `
+                <div>
+                    <div class="flex mb-4 text-base tracking-widest text-amber-500">${stars}</div>
+                    <p class="text-slate-700 leading-relaxed text-sm font-medium italic mb-6">"${data.text}"</p>
+                </div>
+                <div class="flex items-center justify-between pt-4 border-t-2 border-slate-100">
+                    <div class="flex flex-col">
+                        <span class="text-xs font-black tracking-widest uppercase text-navy">${data.name}</span>
+                        <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">${data.date}</span>
+                    </div>
+                    <div class="w-6 h-6 bg-navy text-white flex items-center justify-center text-[10px] font-mono font-bold">✓</div>
+                </div>
+            `;
+            userGrid.appendChild(reviewCard);
         });
-        renderProjects();
-    };
-
-    // 4. EVENT LISTENERS & STARTUP
-    const reviewForm = document.getElementById('submit-review-form');
-    if (reviewForm) {
-        reviewForm.addEventListener('submit', async (e) => {
-            e.preventDefault();
-            const name = document.getElementById('rev-name').value;
-            const rating = parseInt(document.getElementById('rev-rating').value);
-            const text = document.getElementById('rev-text').value;
-
-            try {
-                await addDoc(collection(db, 'artifacts', appId, 'public', 'data', 'reviews'), {
-                    name, rating, text, timestamp: new Date()
-                });
-                reviewForm.reset();
-                document.getElementById('review-form-container').classList.add('hidden');
-                alert("Thank you for your feedback!");
-            } catch (error) {
-                console.error("Error adding review: ", error);
-            }
-        });
+    } catch (err) {
+        console.error("Error loading reviews:", err);
     }
+}
 
-    // Handle Auth and Data Loading
-    onAuthStateChanged(auth, (user) => {
-        if (user) {
-            loadProjects();
-            loadReviews(); // Moved inside here to ensure auth and db are ready
-        } else {
-            signInAnonymously(auth);
+const reviewForm = document.getElementById('submit-review-form');
+if (reviewForm) {
+    reviewForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const name = document.getElementById('rev-name').value;
+        const rating = parseInt(document.getElementById('rev-rating').value);
+        const text = document.getElementById('rev-text').value;
+        const date = new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+
+        try {
+            await db.collection('reviews').add({
+                name,
+                rating,
+                text,
+                date,
+                createdAt: firebase.firestore.FieldValue.serverTimestamp()
+            });
+
+            reviewForm.reset();
+            toggleReviewForm();
+            loadUserReviews();
+            alert("Thank you! Your review has been published live.");
+        } catch (err) {
+            alert("Failed to submit review.");
         }
     });
-</script>
-    <script>
-        function filterAreas() {
-            // Get the search input value
-            let input = document.getElementById('areaSearch').value.toLowerCase();
-            // Get all area cards
-            let cards = document.getElementsByClassName('area-card');
+}
+        // Mobile Nav Controls
+        const mobileToggle = document.getElementById('mobile-toggle');
+        const mobileClose = document.getElementById('mobile-close');
+        const mobileSidebar = document.getElementById('mobile-sidebar');
 
-            for (let i = 0; i < cards.length; i++) {
-                let areaName = cards[i].innerText.toLowerCase();
-
-                // If the name matches the search, show it; otherwise, hide it
-                if (areaName.includes(input)) {
-                    cards[i].style.display = "block";
-                } else {
-                    cards[i].style.display = "none";
-                }
-            }
+        if (mobileToggle && mobileSidebar) {
+            mobileToggle.addEventListener('click', () => {
+                document.body.classList.remove('sidebar-closed');
+                document.body.classList.add('sidebar-open');
+            });
         }
+
+        if (mobileClose && mobileSidebar) {
+            mobileClose.addEventListener('click', () => {
+                document.body.classList.remove('sidebar-open');
+                document.body.classList.add('sidebar-closed');
+            });
+        }
+
+        // Initialize on page load
+        loadUserReviews();
+        renderMainProjects();
+        // Toggle Review Form Function
+function toggleReviewForm() {
+    const container = document.getElementById('review-form-container');
+    if (container) {
+        container.classList.toggle('hidden');
+        if (!container.classList.contains('hidden')) {
+            container.scrollIntoView({ behavior: 'smooth' });
+        }
+    }
+}
     </script>
 </body>
-
 </html>
